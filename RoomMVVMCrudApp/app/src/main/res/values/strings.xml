@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">RoomMVVMCrudApp</string>
+    <string name="count_update">Count Update: %s</string>
+</resources>
