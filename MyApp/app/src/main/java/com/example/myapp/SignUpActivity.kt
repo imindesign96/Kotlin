@@ -1,11 +1,9 @@
-package com.example.loginandsignup
+package com.example.myapp
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log.i
 import android.widget.Toast
-import com.example.loginandsignup.databinding.ActivityMainBinding
 import com.example.loginandsignup.databinding.ActivitySignUpBinding
 import com.google.firebase.auth.FirebaseAuth
 
