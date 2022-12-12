@@ -14,15 +14,12 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.TextView
 import android.widget.Toast
-import com.example.loginandsignup.R
-import com.example.loginandsignup.databinding.ActivityMainBinding
-import com.example.loginandsignup.databinding.ActivityOtpactivityBinding
-import com.example.loginandsignup.databinding.ActivityPhoneBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
 import java.util.concurrent.TimeUnit
 
+@Suppress("DEPRECATION")
 class OTPActivity : AppCompatActivity() {
 
     private lateinit var auth: FirebaseAuth
@@ -92,7 +89,7 @@ class OTPActivity : AppCompatActivity() {
         resendTV.visibility = View.INVISIBLE
         resendTV.isEnabled = false
 
-        Handler(Looper.myLooper()!!).postDelayed(Runnable {
+        Handler(Looper.myLooper()!!).postDelayed({
             resendTV.visibility = View.VISIBLE
             resendTV.isEnabled = true
         }, 60000)
@@ -161,7 +158,7 @@ class OTPActivity : AppCompatActivity() {
                     // Sign in failed, display a message and update the UI
                     Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     if (task.exception is FirebaseAuthInvalidCredentialsException) {
-                        // The verification code entered was invalid
+                        Log.d("TAG", "signInWithPhoneAuthCredential: ${task.exception.toString()}")
                     }
                     // Update UI
                 }

@@ -6,11 +6,11 @@ plugins {
 }
 
 android {
-    namespace 'com.example.loginandsignup'
+    namespace 'com.example.myapp'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.example.loginandsignup"
+        applicationId "com.example.myapp"
         minSdk 33
         targetSdk 33
         versionCode 1
@@ -49,4 +49,5 @@ dependencies {
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.4'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.5.0'
+
 }

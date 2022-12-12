@@ -9,7 +9,8 @@ import android.widget.EditText
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.example.loginandsignup.databinding.ActivityPhoneBinding
+import com.example.myapp.databinding.ActivityPhoneBinding
+import com.example.myapp.databinding.ActivitySignInBinding
 import com.google.firebase.FirebaseException
 import com.google.firebase.FirebaseTooManyRequestsException
 import com.google.firebase.auth.*
@@ -17,7 +18,7 @@ import java.util.concurrent.TimeUnit
 
 class SignInWithPhone : AppCompatActivity() {
 
-    private lateinit var binding: ActivityPhoneBinding
+    private lateinit var binding : ActivityPhoneBinding
     private lateinit var sendOTPBtn : Button
     private lateinit var phoneNumberET : EditText
     private lateinit var auth : FirebaseAuth
