@@ -3,13 +3,7 @@ package com.example.myapp.admin
 
 import android.os.Bundle
 import android.view.View
-import android.widget.LinearLayout
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import androidx.cardview.widget.CardView
-import androidx.transition.AutoTransition
-import androidx.transition.TransitionManager
-
 import com.example.myapp.databinding.ActivityAdminBinding
 
 
@@ -24,18 +18,18 @@ class AdminActivity : AppCompatActivity() {
         binding.cardView1?.setOnClickListener {
             // If the CardView is already expanded, set its visibility
             // to gone and change the expand less icon to expand more.
-            if (binding.hiddenView!!.visibility === View.GONE) {
-                binding.cardView2!!.visibility = View.GONE
-                binding.hiddenView!!.visibility = View.VISIBLE
+            if (binding.hiddenView.visibility === View.GONE) {
+                binding.cardView2.visibility = View.GONE
+                binding.hiddenView.visibility = View.VISIBLE
             }
 
         }
-        binding.hiddenView.setOnClickListener {
-            if (binding.hiddenView!!.visibility === View.VISIBLE) {
-                binding.cardView2!!.visibility = View.VISIBLE
-                binding.hiddenView!!.visibility = View.GONE
-            }
-        }
+        //click anywhere searchView
+        binding.searchViewInventory.setOnClickListener(View.OnClickListener {
+            binding.searchViewInventory.setIconified(
+                false
+            )
+        })
 
 
     }

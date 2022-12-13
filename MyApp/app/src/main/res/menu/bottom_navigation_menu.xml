@@ -4,8 +4,6 @@
         android:id="@+id/navi_smile"
         android:icon="@drawable/ic_baseline_insert_chart_24"
         android:title="Inventories"
-
-
         />
     <item
         android:id="@+id/navi_pets"
