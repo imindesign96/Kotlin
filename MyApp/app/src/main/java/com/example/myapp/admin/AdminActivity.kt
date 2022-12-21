@@ -1,14 +1,11 @@
 package com.example.myapp.admin
 
 
-import android.app.ProgressDialog.show
-import android.content.ClipData.Item
 import android.os.Bundle
-import android.util.Log
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-
+import com.example.myapp.R
+import com.example.myapp.admin.total.FragmentSimTotal
 import com.example.myapp.databinding.ActivityAdminBinding
 
 
@@ -19,11 +16,9 @@ class AdminActivity : AppCompatActivity() {
     private fun replaceFragment(fragment : Fragment){
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().apply {
-            replace(com.example.myapp.R.id.frame1, fragment)
+            replace(R.id.frame1, fragment)
             commit()
         }
-
-
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -31,18 +26,25 @@ class AdminActivity : AppCompatActivity() {
         binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-       replaceFragment(FragmentInventory())
+
+
+       replaceFragment(FragmentSimTotal())
        binding.bottomNavigationView.setOnItemSelectedListener {
            when(it.itemId){
-               com.example.myapp.R.id.navi_smile -> replaceFragment(FragmentInventory())
-               com.example.myapp.R.id.navi_pets -> replaceFragment(FragmentSales())
-               com.example.myapp.R.id.navi_sun -> replaceFragment(FragmentUsers())
+               R.id.navi_home -> replaceFragment(HomeFragment())
+               R.id.navi_smile -> replaceFragment(FragmentInventory())
+               R.id.navi_pets -> replaceFragment(FragmentSales())
+               R.id.navi_sun -> replaceFragment(FragmentUsers())
                else -> {
 
                }
            }
            true
        }
+
+
+
+
 
 
 

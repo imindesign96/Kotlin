@@ -1,8 +1,9 @@
 {
   "project_info": {
-    "project_number": "656478380428",
-    "project_id": "test-dba86",
-    "storage_bucket": "test-dba86.appspot.com"
+    "project_number": "689528397098",
+    "firebase_url": "https://teak-digit-371103-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "teak-digit-371103",
+    "storage_bucket": "teak-digit-371103.appspot.com"
   },
   "client": [
     {

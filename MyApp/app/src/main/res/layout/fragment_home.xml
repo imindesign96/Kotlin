@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f7f7f7"
+    android:layout_marginBottom="80dp"
+    tools:viewBindingIgnore="true"
+    tools:context="com.example.myapp.admin.AdminActivity">
+
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="574dp"
+        android:background="#FFFFFF"
+        android:theme="@style/AppTheme.AppBarOverlay"
+        app:elevation="0dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:popupTheme="@style/AppTheme.PopupOverlay"
+            app:theme="@style/AppTheme.Toolbar">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="16dp"
+                    android:layout_marginBottom="8dp">
+
+                    <TextView
+                        android:id="@+id/textWelcome"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/calibri"
+                        android:text="@string/welcome"
+                        android:textColor="#000000"
+                        android:textSize="24sp"
+                        android:textStyle="bold"
+                        tools:ignore="RelativeOverlap" />
+
+                    <ImageView
+                        android:id="@+id/userInf"
+                        android:layout_width="36dp"
+                        android:layout_height="36dp"
+                        android:layout_alignParentTop="true"
+                        android:layout_alignParentEnd="true"
+                        android:src="@drawable/icons8_user_male"
+                        android:contentDescription="@string/todo"
+                        tools:ignore="ContentDescription" />
+
+                </RelativeLayout>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="16dp"
+                    android:orientation="horizontal"
+                    android:weightSum="100">
+
+                    <EditText
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="80"
+                        android:background="@drawable/gray_rounded_shape"
+                        android:drawableLeft="@drawable/ic_search_gray_24dp"
+                        android:drawablePadding="8dp"
+                        android:textColor="#9ea1b0"
+                        android:fontFamily="@font/calibri"
+                        android:hint="キーワードをご入力ください"
+                        android:padding="10dp"
+                        android:textColorHint="#9ea1b0"
+                        android:autofillHints=""
+                        />
+
+                    <ImageView
+                        android:layout_width="0dp"
+                        android:layout_height="28dp"
+                        android:layout_gravity="center"
+                        android:layout_weight="20"
+                        android:src="@drawable/filter_icon" />
+
+                </LinearLayout>
+            </LinearLayout>
+
+
+        </androidx.appcompat.widget.Toolbar>
+
+        <com.google.android.material.tabs.TabLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:tabGravity="fill"
+            app:tabSelectedTextColor="@color/sales_primary"
+            app:tabTextColor="#9ea1b0">
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="料金・サービス" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="製品" />
+
+            <com.google.android.material.tabs.TabItem
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="お客様サポート" />
+
+
+        </com.google.android.material.tabs.TabLayout>
+
+    </com.google.android.material.appbar.AppBarLayout>
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <include layout="@layout/data_usage"/>
+                    <include layout="@layout/barcode"/>
+                    </LinearLayout>
+
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:padding="8dp">
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="4dp"
+                            app:cardElevation="4dp"
+                            app:cardUseCompatPadding="true"
+                            app:contentPadding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100">
+
+                                    <TextView
+                                        android:layout_width="231dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="90"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="Rakuten UN-LIMIT VII"
+                                        android:textColor="#E30FAE"
+                                        android:textSize="34sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="12"
+                                        android:drawableRight="@drawable/ic_star_yellow_24dp"
+                                        android:fontFamily="@font/calibri"
+                                        android:padding="7dp"
+                                        android:text="5"
+                                        android:textAlignment="textEnd"
+                                        android:textColor="#ffc32d"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="100">
+
+                                    <TextView
+                                        android:id="@+id/textMuseigen"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="無制限"
+                                        android:textColor="#FF9100"
+                                        android:textSize="60sp"
+                                        android:textStyle="bold" />
+
+
+                                </RelativeLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:src="@drawable/super_offer" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="100">
+
+                                    <TextView
+                                        android:id="@+id/textView"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="2,980円"
+                                        android:textColor="#3f9dff"
+                                        android:textSize="34sp"
+                                        android:textStyle="bold" />
+
+                                    <TextView
+
+
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignEnd="@+id/textView"
+                                        android:layout_alignRight="@id/textView"
+                                        android:layout_marginEnd="-35dp"
+                                        android:layout_marginRight="-35dp"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="/月"
+                                        android:textColor="#8ac3ff"
+                                        android:textSize="24sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:background="@drawable/blue_rounded_shape"
+                                        android:fontFamily="@font/calibri"
+                                        android:padding="8dp"
+                                        android:text="申し込み"
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="16sp" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+
+                        <androidx.cardview.widget.CardView
+                            android:layout_width="300dp"
+                            android:layout_height="wrap_content"
+                            app:cardCornerRadius="4dp"
+                            app:cardElevation="4dp"
+                            app:cardUseCompatPadding="true"
+                            app:contentPadding="16dp">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:orientation="vertical">
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="8dp"
+                                    android:orientation="horizontal"
+                                    android:weightSum="100">
+
+                                    <TextView
+                                        android:layout_width="231dp"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="90"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="Rakuten UN-LIMIT VII"
+                                        android:textColor="#E30FAE"
+                                        android:textSize="34sp"
+                                        android:textStyle="bold" />
+
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="12"
+                                        android:drawableRight="@drawable/ic_star_yellow_24dp"
+                                        android:fontFamily="@font/calibri"
+                                        android:padding="7dp"
+                                        android:text="5"
+                                        android:textAlignment="textEnd"
+                                        android:textColor="#ffc32d"
+                                        android:textSize="20sp"
+                                        android:textStyle="bold" />
+
+                                </LinearLayout>
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="100">
+
+                                    <TextView
+                                        android:id="@+id/textMuseigen2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="20GBまで"
+                                        android:textColor="#FF9100"
+                                        android:textSize="60sp"
+                                        android:textStyle="bold" />
+
+
+
+                                </RelativeLayout>
+
+                                <ImageView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="80dp"
+                                    android:layout_marginBottom="10dp"
+                                    android:src="@drawable/super_offer" />
+
+                                <RelativeLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_weight="100">
+
+                                    <TextView
+                                        android:id="@+id/textView2"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="1,980円"
+                                        android:textColor="#3f9dff"
+                                        android:textSize="34sp"
+                                        android:textStyle="bold" />
+                                    <TextView
+
+
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignEnd="@+id/textView2"
+                                        android:layout_alignRight="@id/textView2"
+                                        android:layout_marginEnd="-35dp"
+                                        android:layout_marginRight="-35dp"
+                                        android:fontFamily="@font/calibri"
+                                        android:text="/月"
+                                        android:textColor="#8ac3ff"
+                                        android:textSize="24sp" />
+
+                                    <TextView
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_alignParentRight="true"
+                                        android:background="@drawable/blue_rounded_shape"
+                                        android:fontFamily="@font/calibri"
+                                        android:padding="8dp"
+                                        android:text="申し込み"
+                                        android:textColor="#FFFFFF"
+                                        android:textSize="16sp" />
+
+                                </RelativeLayout>
+
+                            </LinearLayout>
+
+
+                        </androidx.cardview.widget.CardView>
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginBottom="8dp"
+                    android:fontFamily="@font/calibri"
+                    android:text="Trending Categories"
+                    android:textColor="#000000"
+                    android:textSize="18sp"
+                    android:textStyle="bold" />
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="110dp"
+                    android:layout_marginBottom="8dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="110dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="220dp"
+                            android:layout_height="110dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="4dp"
+                            android:src="@drawable/promotion1" />
+
+                        <ImageView
+                            android:layout_width="220dp"
+                            android:layout_height="110dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="8dp"
+                            android:src="@drawable/promotion1" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+                <HorizontalScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"
+                    android:scrollbars="none">
+
+                    <LinearLayout
+                        android:layout_width="220dp"
+                        android:layout_height="110dp"
+                        android:orientation="horizontal">
+
+                        <ImageView
+                            android:layout_width="220dp"
+                            android:layout_height="110dp"
+                            android:layout_marginLeft="8dp"
+                            android:layout_marginRight="4dp"
+                            android:src="@drawable/promotion1" />
+
+                        <ImageView
+
+                            android:layout_width="220dp"
+                            android:layout_height="110dp"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginEnd="8dp"
+                            android:src="@drawable/promotion1" />
+
+                    </LinearLayout>
+
+                </HorizontalScrollView>
+
+
+
+
+            </LinearLayout>
+
+
+        </ScrollView>
+    </LinearLayout>
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
