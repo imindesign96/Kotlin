@@ -23,7 +23,7 @@
 
         <LinearLayout
             android:id="@+id/rowPhoneNumber"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:orientation="horizontal"
@@ -32,19 +32,19 @@
             >
 
             <TextView
-                android:id="@+id/phoneNumber"
+                android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="番号："
+                android:text="    氏名："
                 android:textColor="@color/sales_primary_text"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/tvPhoneNumber"
-                android:layout_width="wrap_content"
+                android:id="@+id/tvUserName"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="電話番号をご入力ください"
+                android:hint="氏名をご入力ください"
                 android:inputType="textPersonName"
                 android:clickable="true"
                 android:drawableRight="@drawable/ic_baseline_edit_16"
@@ -64,19 +64,19 @@
             >
 
             <TextView
-                android:id="@+id/codeSim"
+                android:id="@+id/userStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="コード："
+                android:text="登録日："
                 android:textColor="@color/sales_primary_text"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/tvCodeSim"
+                android:id="@+id/tvUserStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="Simコードをご入力ください"
+                android:hint="登録日をご入力ください"
                 android:inputType="textPersonName"
                 android:drawableRight="@drawable/ic_baseline_edit_16"
                 android:drawablePadding="10dp"
@@ -96,19 +96,19 @@
             >
 
             <TextView
-                android:id="@+id/rowSimPrice"
+                android:id="@+id/userSimCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="単価："
+                android:text="コード："
                 android:textColor="@color/sales_primary_text"
                 android:textSize="25sp"
                 android:textStyle="bold" />
 
             <EditText
-                android:id="@+id/tvPriceSim"
+                android:id="@+id/tvUserSimCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="単価をご入力ください"
+                android:hint="コードをご入力ください"
                 android:inputType="textPersonName"
                 android:drawableRight="@drawable/ic_baseline_edit_16"
                 android:drawablePadding="10dp"
@@ -118,62 +118,55 @@
 
 
         </LinearLayout>
+        <LinearLayout
+            android:id="@+id/rowUserStatus"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:paddingTop="2dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginBottom="10dp"
+            android:orientation="horizontal"
+            >
+
+            <TextView
+                android:id="@+id/userStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="お支払い状況："
+                android:textColor="@color/sales_primary_text"
+                android:textSize="25sp"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/tvUserStatus"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:text="未支払い"
+                android:textColor="@color/white"
+                android:backgroundTint="#80b918"
+                android:layout_marginEnd="10dp"
+                android:layout_marginTop="-5dp"
+                />
+
+
+        </LinearLayout>
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <Button
             android:id="@+id/UpdateSimDetail"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Update"
+            android:text="詳細情報"
             android:textColor="#001d3d"
+            android:textSize="18sp"
             android:textStyle="bold"
             android:backgroundTint="@color/colorPrimary"
             android:layout_marginEnd="10dp"
             />
-        <Button
-            android:id="@+id/deleteSimDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Delete"
-            android:textColor="#001d3d"
-            android:textStyle="bold"
-            android:layout_marginEnd="10dp"/>
     </LinearLayout>
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/showQrCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Show QrCode"
-                android:textColor="#001d3d"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp"
-                android:visibility="visible"/>
 
-            <Button
-                android:id="@+id/hideQrCode"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:backgroundTint="#001d3d"
-                android:text="Hide QrCode"
-                android:textColor="@color/colorAccent"
-                android:textStyle="bold"
-                android:layout_marginEnd="10dp"
-                android:visibility="gone"/>
-
-        </LinearLayout>
-        <ImageView
-            android:id="@+id/imageViewQRcodeSim"
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:layout_gravity="center_horizontal"
-            />
 
     </LinearLayout>
 

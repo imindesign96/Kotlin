@@ -12,7 +12,7 @@
     <View
         android:id="@+id/viewHeaderBackground"
         android:layout_width="match_parent"
-        android:layout_height="125dp"
+        android:layout_height="90dp"
         android:background="@color/sales_primary"
         app:layout_constraintTop_toTopOf="parent"
 
@@ -22,48 +22,26 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:drawableLeft="@drawable/ic_baseline_star_24"
-        android:drawableTint="@color/white"
+        android:drawableTint="@color/colorPrimaryDark"
         android:drawablePadding="2dp"
-        android:text="List Users"
+        android:text="ユーザー情報"
         android:textSize="20sp"
         android:textStyle="bold"
         android:padding="10dp"
-        android:textColor="@color/white"
+        android:layout_marginBottom="5dp"
+        android:textColor="@color/colorPrimaryDark"
         tools:ignore="MissingConstraints" />
 
-    <!--    <androidx.appcompat.widget.AppCompatImageView-->
-    <!--        android:layout_width="40dp"-->
-    <!--        android:layout_height="40dp"-->
-    <!--        android:paddingTop="10dp"-->
-    <!--        android:src="@drawable/ic_round_search_24"-->
-    <!--        android:tint="@color/white"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent"-->
-    <!--        app:layout_constraintTop_toTopOf="parent"-->
-    <!--        tools:layout_editor_absoluteY="20dp" />-->
 
-    <SearchView
-        android:id="@+id/search_view_inventory"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:queryHint="Search Sim card number"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:autofillHints="Search"
-        android:background="#4BFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardHeader"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         app:cardBackgroundColor="@color/sales_card_background"
-        app:cardCornerRadius="10dp"
-        tools:ignore="MissingConstraints"
+        app:cardCornerRadius="8dp"
         app:layout_constraintTop_toBottomOf="@+id/viewHeaderBackground"
         app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBackground"
         >
@@ -71,18 +49,8 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="15dp">
+            android:padding="5dp">
 
-            <TextView
-                android:id="@+id/textViews"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Shot Views"
-                android:textColor="@color/sales_primary_text"
-                android:textStyle="bold"
-
-
-                />
 
             <LinearLayout
                 android:id="@+id/layoutG1"
@@ -103,17 +71,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="G1 Package"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="10sp" />
+                    android:text="総合登録者"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
 
                 <TextView
                     android:id="@+id/G1Count"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="121"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -138,17 +106,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="G2 Package"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="10sp" />
+                    android:text="未支払い"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/CLientsCount"
+                    android:id="@+id/unPaidCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="230"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -161,9 +129,8 @@
                 android:orientation="vertical"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/layoutG2"
-                app:layout_constraintTop_toBottomOf="@+id/textViews"
 
-                >
+                tools:ignore="MissingConstraints">
 
                 <androidx.appcompat.widget.AppCompatImageView
                     android:layout_width="36dp"
@@ -173,17 +140,17 @@
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="G3 Package"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="10sp" />
+                    android:text="支払完了"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="15sp" />
 
                 <TextView
-                    android:id="@+id/G2Count"
+                    android:id="@+id/paidCount"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="225"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="16sp"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textSize="18sp"
                     android:textStyle="bold" />
             </LinearLayout>
 
@@ -191,38 +158,37 @@
 
     </com.google.android.material.card.MaterialCardView>
 
-    <ScrollView
-        android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:padding="16sp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardHeader"
-        >
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/materialCardView"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="12dp"
+        android:layout_marginTop="-7dp"
+        app:cardUseCompatPadding="true"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardHeader">
 
-        <LinearLayout
+        <androidx.appcompat.widget.SearchView
+            android:id="@+id/searchView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical">
+            app:iconifiedByDefault="false"
+            app:queryBackground="@android:color/transparent"
+            app:queryHint="検索 ..." />
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/userList"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="65dp"
+            android:layout_marginBottom="65dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:listitem="@layout/users_item"/>
+    </com.google.android.material.card.MaterialCardView>
 
-            <include layout="@layout/sales_item_1"/>
-
-            <include layout="@layout/sales_item_2"/>
-
-            <include layout="@layout/sales_item_3"/>
-
-            <include layout="@layout/sales_item_4"/>
-
-            <include layout="@layout/sales_item_1"/>
-
-            <include layout="@layout/sales_item_2"/>
-
-            <include layout="@layout/sales_item_3"/>
-
-            <include layout="@layout/sales_item_4"/>
-        </LinearLayout>
-    </ScrollView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

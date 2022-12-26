@@ -1,4 +1,7 @@
 package com.example.myapp.admin.total
 
-
-data class SimData(var phoneNumber : String ?= null,var simCode : String ?= null,var simPrice : Int ?= null)
+data class SimData(
+    val key: Long? = null,
+    val phoneNumber: Long? = null,
+    val simCode:String? = null,
+    val simPrice: Long? = null)
