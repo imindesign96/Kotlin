@@ -33,7 +33,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         var builder: NotificationCompat.Builder =
             NotificationCompat.Builder(applicationContext, channelId)
-                .setSmallIcon(R.drawable.filter_icon)
+                .setSmallIcon(R.drawable.icons8_user_male)
                 .setContentTitle(remoteMessage.notification?.title)
                 .setContentTitle(remoteMessage.notification?.body)
                 .setAutoCancel(true)
@@ -51,7 +51,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
 
         with(NotificationManagerCompat.from(applicationContext)) {
-            notify(1, builder.build())
+            notify(0, builder.build())
         }
     }
 }

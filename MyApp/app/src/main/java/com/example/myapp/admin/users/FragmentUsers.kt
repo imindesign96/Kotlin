@@ -1,17 +1,28 @@
 package com.example.myapp.admin.users
 
+import android.app.NotificationChannel
+import android.app.NotificationManager
+import android.content.Context
+import android.content.Context.NOTIFICATION_SERVICE
+import android.icu.util.Calendar
+import android.os.Build
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.DatePicker
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
+import androidx.core.content.ContextCompat.getSystemServiceName
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
+import com.google.android.material.datepicker.MaterialDatePicker.Builder.datePicker
 import com.google.firebase.database.*
 
 
@@ -21,7 +32,7 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
     private lateinit var usersArrayList : ArrayList<UsersData>
     private lateinit var usersRecyclerView : RecyclerView
     private lateinit var adapter: UsersAdapter
-
+    private lateinit var pickedDay : String
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -84,46 +95,40 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
             val builder = NotificationCompat.Builder(it.context,"ID")
                 .setSmallIcon(R.drawable.filter_icon)
                 .setContentTitle("MyApp notification")
+                .setContentInfo(pickedDay)
                 .setContentText(textNotify.toString())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setStyle(NotificationCompat.BigTextStyle()
-                    .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc"))
-
+                    .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc ${pickedDay}"))
 
             with(NotificationManagerCompat.from(it.context)) {
                 // notificationId is a unique int for each notification that you must define
-                notify(1, builder.build())
+                notify(0, builder.build())
+
 
                 view.findViewById<View>(R.id.notify).visibility = if(view.findViewById<View>(R.id.notify).visibility == View.VISIBLE) View.GONE else View.VISIBLE
                 view.findViewById<View>(R.id.blackBackground).visibility = if(view.findViewById<View>(R.id.blackBackground).visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
             }
         }
+        view.findViewById<Button>(R.id.setDay).setOnClickListener {
+
+                view.findViewById<DatePicker>(R.id.datePicker1).visibility = if(view.findViewById<View>(R.id.datePicker1).visibility == View.GONE) View.VISIBLE else View.GONE
+        }
+        val datePicker = view.findViewById<DatePicker>(R.id.datePicker1)
+        val today = Calendar.getInstance()
+        datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
+            today.get(Calendar.DAY_OF_MONTH)
+
+        ) { view, year, month, day ->
+            val month = month + 1
+            pickedDay = "You Selected: $day/$month/$year"
+            Toast.makeText(context, pickedDay, Toast.LENGTH_SHORT).show()
+        }
+
         return view
     }
 
-//    private fun myWorkManager(){
-//        val constraints = Constraints.Builder()
-//            .setRequiresCharging(false)
-//            .setRequiredNetworkType((NetworkType.NOT_REQUIRED))
-//            .setRequiresCharging(false)
-//            .setRequiresBatteryNotLow(true)
-//            .build()
-//
-//        val myRequest = PeriodicWorkRequest.Builder(
-//            MyWorker::class.java,
-//            15,
-//            TimeUnit.MINUTES
-//        ).setConstraints(constraints).build()
-//
-//        WorkManager.getInstance(requireContext())
-//            .enqueueUniquePeriodicWork(
-//                "ID",
-//                ExistingPeriodicWorkPolicy.KEEP,
-//                myRequest
-//            )
-//
-//    }
 
     }
