@@ -32,7 +32,7 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
     private lateinit var usersArrayList : ArrayList<UsersData>
     private lateinit var usersRecyclerView : RecyclerView
     private lateinit var adapter: UsersAdapter
-    private lateinit var pickedDay : String
+    private lateinit var today:Calendar
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -95,12 +95,11 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
             val builder = NotificationCompat.Builder(it.context,"ID")
                 .setSmallIcon(R.drawable.filter_icon)
                 .setContentTitle("MyApp notification")
-                .setContentInfo(pickedDay)
                 .setContentText(textNotify.toString())
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setStyle(NotificationCompat.BigTextStyle()
-                    .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc ${pickedDay}"))
+                    .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc , Ngay gui: ${today}"))
 
             with(NotificationManagerCompat.from(it.context)) {
                 // notificationId is a unique int for each notification that you must define
@@ -117,13 +116,13 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
                 view.findViewById<DatePicker>(R.id.datePicker1).visibility = if(view.findViewById<View>(R.id.datePicker1).visibility == View.GONE) View.VISIBLE else View.GONE
         }
         val datePicker = view.findViewById<DatePicker>(R.id.datePicker1)
-        val today = Calendar.getInstance()
+        today = Calendar.getInstance()
         datePicker.init(today.get(Calendar.YEAR), today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)
 
         ) { view, year, month, day ->
             val month = month + 1
-            pickedDay = "You Selected: $day/$month/$year"
+            val pickedDay = "You Selected: $day/$month/$year"
             Toast.makeText(context, pickedDay, Toast.LENGTH_SHORT).show()
         }
 
