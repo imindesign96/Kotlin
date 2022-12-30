@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="@color/white"
-    app:cardCornerRadius="10dp"
+    app:cardCornerRadius="12dp"
     app:cardElevation="5dp"
     android:layout_margin="10dp"
 
@@ -12,15 +12,27 @@
 
     <LinearLayout
 
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginVertical="6dp"
-        android:layout_marginStart="16dp"
+        android:layout_marginVertical="16dp"
+        android:layout_marginStart="10dp"
         android:orientation="vertical"
+        android:paddingRight="10dp"
+        android:paddingLeft="10dp"
         android:clickable="true"
         >
 
-
+        <ImageView
+            android:id="@+id/avatar_image_view"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:src="@drawable/icons8_user_male"
+            android:scaleType="centerCrop"
+            android:background="@drawable/avatar_background"
+            android:layout_gravity="center"
+            android:visibility="gone"
+            />
+<!--        row name-->
         <LinearLayout
             android:id="@+id/rowPhoneNumber"
             android:layout_width="match_parent"
@@ -31,29 +43,68 @@
 
             >
 
+
+
             <TextView
                 android:id="@+id/userName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="    氏名："
                 android:textColor="@color/sales_primary_text"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/tvUserName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="氏名をご入力ください"
                 android:inputType="textPersonName"
                 android:clickable="true"
-                android:drawableRight="@drawable/ic_baseline_edit_16"
-                android:drawablePadding="10dp"
                 android:textColor="@color/sales_primary_text"
                 android:textSize="20sp" />
 
 
         </LinearLayout>
+<!--        row address-->
+        <LinearLayout
+            android:id="@+id/rowAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:orientation="horizontal"
+            android:clickable="true"
+            android:visibility="gone"
+            >
+
+
+
+            <TextView
+                android:id="@+id/userAddress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="    住所："
+                android:textColor="@color/sales_primary_text"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tvUserAddress"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="住所をご入力ください"
+                android:ellipsize="none"
+                android:maxLines="2"
+                android:scrollHorizontally="false"
+                android:inputType="textMultiLine"
+                android:clickable="true"
+                android:textColor="@color/sales_primary_text"
+                android:textSize="20sp"
+                />
+
+
+        </LinearLayout>
+<!--        row date-->
         <LinearLayout
             android:id="@+id/rowCodeSim"
             android:layout_width="wrap_content"
@@ -69,17 +120,16 @@
                 android:layout_height="wrap_content"
                 android:text="登録日："
                 android:textColor="@color/sales_primary_text"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/tvUserStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="登録日をご入力ください"
                 android:inputType="textPersonName"
-                android:drawableRight="@drawable/ic_baseline_edit_16"
-                android:drawablePadding="10dp"
+
                 android:clickable="true"
                 android:textColor="@color/sales_primary_text"
                 android:textSize="20sp" />
@@ -101,17 +151,16 @@
                 android:layout_height="wrap_content"
                 android:text="コード："
                 android:textColor="@color/sales_primary_text"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
 
-            <EditText
+            <TextView
                 android:id="@+id/tvUserSimCode"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:hint="コードをご入力ください"
                 android:inputType="textPersonName"
-                android:drawableRight="@drawable/ic_baseline_edit_16"
-                android:drawablePadding="10dp"
+
                 android:clickable="true"
                 android:textColor="@color/sales_primary_text"
                 android:textSize="20sp" />
@@ -124,7 +173,6 @@
             android:layout_height="40dp"
             android:paddingTop="2dp"
             android:layout_gravity="center_vertical"
-            android:layout_marginBottom="10dp"
             android:orientation="horizontal"
             >
 
@@ -134,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:text="お支払い状況："
                 android:textColor="@color/sales_primary_text"
-                android:textSize="25sp"
+                android:textSize="20sp"
                 android:textStyle="bold" />
             <Button
                 android:id="@+id/tvUserStatus"
@@ -149,12 +197,51 @@
 
 
         </LinearLayout>
-    <LinearLayout
+
+        <LinearLayout
+            android:id="@+id/rowPayInfo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="2dp"
+            android:layout_gravity="center_vertical"
+            android:orientation="vertical"
+            android:visibility="gone"
+            >
+
+
+            <TextView
+                android:id="@+id/userPay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="お支払方法："
+                android:textColor="@color/sales_primary_text"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <TextView
+                android:id="@+id/payCredit"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="クレジットカード(Visa xxxxx 2712 )"
+                android:textColor="@color/sales_primary_text"
+                android:textSize="15sp"
+                android:textStyle="bold" />
+            <Button
+                android:id="@+id/paySettingBtn"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="お支払方法設定"
+                android:textColor="@color/white"
+                android:backgroundTint="@color/colorPrimaryDark"
+                />
+
+        </LinearLayout>
+
+        <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal">
         <Button
-            android:id="@+id/UpdateSimDetail"
+            android:id="@+id/updateUserDetail"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="詳細情報"
@@ -163,7 +250,21 @@
             android:textStyle="bold"
             android:backgroundTint="@color/colorPrimary"
             android:layout_marginEnd="10dp"
+            android:visibility="visible"
             />
+            <Button
+                android:id="@+id/updateUserDetailClose"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="閉じる"
+                android:textColor="#001d3d"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:backgroundTint="@color/colorPrimary"
+                android:layout_marginEnd="10dp"
+                android:visibility="gone"
+                />
+
     </LinearLayout>
 
 

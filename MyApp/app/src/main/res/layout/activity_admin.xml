@@ -5,7 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#F1EFEF"
-
     tools:context="com.example.myapp.admin.AdminActivity">
 
     <FrameLayout
@@ -17,16 +16,12 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         android:layout_above="@+id/bottomNavigationView">
-
     </FrameLayout>
-
-
-
     <com.google.android.material.bottomnavigation.BottomNavigationView
         android:id="@+id/bottomNavigationView"
         android:layout_width="0dp"
         android:layout_height="80dp"
-        android:background="?android:attr/windowBackground"
+        android:background="@color/colorPrimaryDark"
         app:itemBackground="@color/bgBottomNavigation"
         app:itemIconSize="40dp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -34,6 +29,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:menu="@menu/bottom_navigation_menu">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 
 
 

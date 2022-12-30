@@ -10,4 +10,6 @@
     <string name="name">氏名をご入力ください</string>
     <string name="phonenumber">電話番号をご入力ください</string>
     <string name="mail">メールアドレスをご入力ください</string>
+    <string name="channel_name">Channel Name</string>
+    <string name="channel_description">Description </string>
 </resources>

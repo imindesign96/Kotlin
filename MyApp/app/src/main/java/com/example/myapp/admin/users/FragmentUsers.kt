@@ -1,22 +1,17 @@
 package com.example.myapp.admin.users
 
-import android.content.ClipData
 import android.os.Bundle
-import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
-import android.view.Menu
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.TextView
-import android.widget.Toast
-import androidx.appcompat.widget.SearchView
+import androidx.core.app.NotificationCompat
+import androidx.core.app.NotificationManagerCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
-import com.example.myapp.admin.total.SimData
-import com.google.firebase.FirebaseOptions
-
 import com.google.firebase.database.*
 
 
@@ -27,12 +22,6 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
     private lateinit var usersRecyclerView : RecyclerView
     private lateinit var adapter: UsersAdapter
 
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -48,36 +37,15 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
         usersRecyclerView.adapter = adapter
 
 
-//        view.findViewById<SearchView>(R.id.searchView).
-//        setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-//            override fun onQueryTextSubmit(query: String?): Boolean {
-//                return false
-//            }
-//
-//            override fun onQueryTextChange(newText: String?): Boolean {
-//                val newQuery = FirebaseDatabase.getInstance().reference.child("UsersList")
-//                    .orderByChild("userName")
-//                    .startAt(newText)
-//                    .endAt(newText + "\uf8ff")
-//                if (newQuery != null) {
-//                    val filteredList = ArrayList<SimData>()
-//                    for (i in usersArrayList) {
-//                        if (i.userName.toString().contains(newQuery) == true) {
-//                            filteredList.add(i)
-//                        }
-//                    }
-//                    if (filteredList.isEmpty()) {
-//                        Toast.makeText(context, "No Data found", Toast.LENGTH_SHORT).show()
-//                    } else {
-//                        adapter.setFilteredList(filteredList)
-//                    }
-//                }
-//                adapter.setFilteredList(newQuery)
-//                return true
-//            }
-//
-//
-//        })
+
+        view.findViewById<Button>(R.id.notifyBtn).setOnClickListener {
+            view.findViewById<View>(R.id.notify).visibility = if(view.findViewById<View>(R.id.notify).visibility == View.GONE) View.VISIBLE else View.GONE
+            view.findViewById<View>(R.id.blackBackground).visibility = if(view.findViewById<View>(R.id.blackBackground).visibility == View.GONE) View.VISIBLE else View.GONE
+
+            }
+
+
+
 
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
 
@@ -108,17 +76,54 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
             }
         })
 
+        val textNotify = view.findViewById<TextView>(R.id.textNotify).editableText
+
+        ///When lick to send a notify
+        view.findViewById<Button>(R.id.sendNotify).setOnClickListener {
+            // Create the notification
+            val builder = NotificationCompat.Builder(it.context,"ID")
+                .setSmallIcon(R.drawable.filter_icon)
+                .setContentTitle("MyApp notification")
+                .setContentText(textNotify.toString())
+                .setPriority(NotificationCompat.PRIORITY_HIGH)
+                .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
+                .setStyle(NotificationCompat.BigTextStyle()
+                    .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc"))
 
 
+            with(NotificationManagerCompat.from(it.context)) {
+                // notificationId is a unique int for each notification that you must define
+                notify(1, builder.build())
 
+                view.findViewById<View>(R.id.notify).visibility = if(view.findViewById<View>(R.id.notify).visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                view.findViewById<View>(R.id.blackBackground).visibility = if(view.findViewById<View>(R.id.blackBackground).visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
-
-
+            }
+        }
         return view
     }
 
+//    private fun myWorkManager(){
+//        val constraints = Constraints.Builder()
+//            .setRequiresCharging(false)
+//            .setRequiredNetworkType((NetworkType.NOT_REQUIRED))
+//            .setRequiresCharging(false)
+//            .setRequiresBatteryNotLow(true)
+//            .build()
+//
+//        val myRequest = PeriodicWorkRequest.Builder(
+//            MyWorker::class.java,
+//            15,
+//            TimeUnit.MINUTES
+//        ).setConstraints(constraints).build()
+//
+//        WorkManager.getInstance(requireContext())
+//            .enqueueUniquePeriodicWork(
+//                "ID",
+//                ExistingPeriodicWorkPolicy.KEEP,
+//                myRequest
+//            )
+//
+//    }
 
-
-
-
-}
+    }

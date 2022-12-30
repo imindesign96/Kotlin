@@ -1,5 +1,6 @@
 package com.example.myapp.admin.total
 
+import android.app.AlertDialog
 import android.graphics.Bitmap
 import android.graphics.Color
 import android.view.LayoutInflater
@@ -16,10 +17,12 @@ import com.google.zxing.BarcodeFormat
 import com.google.zxing.qrcode.QRCodeWriter
 
 
+
 class SimAdapter(private var simList : ArrayList<SimData>) : RecyclerView.Adapter<SimAdapter.MyViewHolder> () {
     var database = FirebaseDatabase.getInstance()
     var databaseReference = database.getReference("User")
 
+    //Create Qrcode
     private fun generateQRCode(data: String): Bitmap? {
         val qrCodeWriter = QRCodeWriter()
         try {
@@ -41,8 +44,6 @@ class SimAdapter(private var simList : ArrayList<SimData>) : RecyclerView.Adapte
         }
         return null
     }
-
-
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
 
@@ -85,7 +86,7 @@ class SimAdapter(private var simList : ArrayList<SimData>) : RecyclerView.Adapte
         }
 
 
-
+        //Update Sim
         holder.itemView.findViewById<Button>(R.id.UpdateSimDetail).setOnClickListener {
 
 
@@ -98,11 +99,22 @@ class SimAdapter(private var simList : ArrayList<SimData>) : RecyclerView.Adapte
             val bitmapQr = generateQRCode(code)
             imageViewQRcode.setImageBitmap(bitmapQr)
 
-            databaseReference.child(key).setValue(data)
+            databaseReference.child("SimData").child(key).setValue(data)
 
         }
-
+        //Delete Sim
         holder.itemView.findViewById<Button>(R.id.deleteSimDetail).setOnClickListener {
+            val builder = AlertDialog.Builder(it.context)
+            builder.setTitle("確認")
+            builder.setMessage("データを削除いたします。よろしいでしょうか。?")
+            builder.setPositiveButton("Yes") { _, _ ->
+                // Perform the action here
+            }
+            builder.setNegativeButton("No") { _, _ ->
+                // Do nothing
+            }
+            val dialog = builder.create()
+            dialog.show()
             deleteRecord(key.toLong())
         }
         }
@@ -111,8 +123,9 @@ class SimAdapter(private var simList : ArrayList<SimData>) : RecyclerView.Adapte
         this.simList = simList
     }
 
+    //Delete function
     private fun deleteRecord(key: Long) {
-        val dbRef = FirebaseDatabase.getInstance().getReference("User").child(key.toString())
+        val dbRef = FirebaseDatabase.getInstance().getReference("User").child("SimData").child(key.toString())
         dbRef.removeValue()
     }
 

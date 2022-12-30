@@ -1,22 +1,17 @@
 package com.example.myapp.admin.users
 
-import android.graphics.Bitmap
-import android.graphics.Color
+
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
-import com.google.firebase.database.FirebaseDatabase
-
 
 
 class UsersAdapter(private var usersList : ArrayList<UsersData>) : RecyclerView.Adapter<UsersAdapter.MyViewHolder> () {
-    var database = FirebaseDatabase.getInstance()
-    var databaseReference = database.getReference("User").child("Employees")
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -37,56 +32,45 @@ class UsersAdapter(private var usersList : ArrayList<UsersData>) : RecyclerView.
         holder.simCode.text = currentItem.simCode
         holder.status.text = currentItem.status.toString()
         holder.startDay.text = currentItem.startDay
-        val key = currentItem.key.toString()
+        holder.address.text = currentItem.userAddress
 
-        //Update information
-//        holder.itemView.findViewById<Button>(R.id.UpdateSimDetail).setOnClickListener {
-//
-//
-//            val phone = holder.itemView.findViewById<EditText>(R.id.tvPhoneNumber).text.toString().toLong()
-//            val code = holder.itemView.findViewById<EditText>(R.id.tvCodeSim).text.toString()
-//            val price = holder.itemView.findViewById<EditText>(R.id.tvPriceSim).text.toString().toLong()
-//            val getKey = key.toLong()
-//            val data = SimData(getKey,phone,code,price)
-//
-//            val bitmapQr = generateQRCode(code)
-//            imageViewQRcode.setImageBitmap(bitmapQr)
-//
-//            databaseReference.child(key).setValue(data)
-//
-//        }
+        holder.button.setOnClickListener {
+            holder.avatarImage.visibility = if(holder.avatarImage.visibility == View.GONE) View.VISIBLE else View.GONE
+            holder.rowAddress.visibility = if (holder.rowAddress.visibility == View.GONE) View.VISIBLE else View.GONE
+            holder.rowPayInfo.visibility = if (holder.rowPayInfo.visibility == View.GONE) View.VISIBLE else View.GONE
+            if(holder.rowPayInfo.visibility == View.VISIBLE)
+                holder.button.text = "閉じる"
+            else
+                holder.button.text = "詳細情報"
+        }
 
-//        holder.itemView.findViewById<Button>(R.id.deleteSimDetail).setOnClickListener {
-//            deleteRecord(key.toLong())
-//        }
+    }
+
+        //    searchView
+        fun setFilteredList(usersList: ArrayList<UsersData>) {
+            this.usersList = usersList
         }
 
 
-//    searchView
-    fun setFilteredList(usersList: ArrayList<UsersData>){
-        this.usersList = usersList
-    }
-//
-//    private fun deleteRecord(key: Long) {
-//        val dbRef = FirebaseDatabase.getInstance().getReference("User").child(key.toString())
-//        dbRef.removeValue()
-//    }
+        override fun getItemCount(): Int {
 
+            return usersList.size
+        }
 
-    override fun getItemCount(): Int {
+    inner class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        return usersList.size
-    }
-
-    inner  class MyViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView){
-
-        val usersName : TextView = itemView.findViewById(R.id.tvUserName)
-        val startDay : TextView= itemView.findViewById(R.id.tvUserStart)
+        val usersName: TextView = itemView.findViewById(R.id.tvUserName)
+        val startDay: TextView = itemView.findViewById(R.id.tvUserStart)
         val simCode: TextView = itemView.findViewById(R.id.tvUserSimCode)
-        val status : Button = itemView.findViewById(R.id.tvUserStatus)
+        val status: Button = itemView.findViewById(R.id.tvUserStatus)
+        val address : TextView = itemView.findViewById(R.id.tvUserAddress)
+        val button = itemView.findViewById<Button>(R.id.updateUserDetail)
+        val rowAddress = itemView.findViewById<View>(R.id.rowAddress)
+        val rowPayInfo = itemView.findViewById<View>(R.id.rowPayInfo)
+        val avatarImage = itemView.findViewById<ImageView>(R.id.avatar_image_view)
 
     }
+
 
 }
-
 

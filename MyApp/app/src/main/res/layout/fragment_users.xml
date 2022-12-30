@@ -17,7 +17,15 @@
         app:layout_constraintTop_toTopOf="parent"
 
         />
-    <TextView
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:layout_marginTop="-5dp"
+        android:backgroundTint="#000000">
+
+
+       <TextView
         android:id="@+id/textTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -31,6 +39,20 @@
         android:layout_marginBottom="5dp"
         android:textColor="@color/colorPrimaryDark"
         tools:ignore="MissingConstraints" />
+
+        <Button
+            android:id="@+id/notifyBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="お支払いのお知らせ"
+            android:textColor="@color/white"
+            android:backgroundTint="#d62828"
+            android:layout_marginLeft="30dp"
+            >
+        </Button>
+
+        </LinearLayout>
+
 
 
 
@@ -49,7 +71,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="5dp">
+            android:padding="3.5dp">
 
 
             <LinearLayout
@@ -158,17 +180,21 @@
 
     </com.google.android.material.card.MaterialCardView>
 
+
+
+
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/materialCardView"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         app:cardCornerRadius="8dp"
-        app:cardElevation="12dp"
-        android:layout_marginTop="-7dp"
-        app:cardUseCompatPadding="true"
+        android:layout_marginTop="10dp"
+        android:layout_marginLeft="15dp"
+        android:layout_marginRight="15dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/cardHeader">
+        app:layout_constraintTop_toBottomOf="@+id/cardHeader"
+        >
 
         <androidx.appcompat.widget.SearchView
             android:id="@+id/searchView"
@@ -182,13 +208,126 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="65dp"
-            android:layout_marginBottom="65dp"
+            android:layout_marginBottom="200dp"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             tools:listitem="@layout/users_item"/>
     </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/blackBackground"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:backgroundTint="#99000000"
+
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+
+        </LinearLayout>
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/notify"
+        android:layout_width="match_parent"
+        android:layout_height="650dp"
+        android:backgroundTint="@color/white"
+        app:cardCornerRadius="15dp"
+        app:cardElevation="20dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="-100dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        android:animateLayoutChanges="true"
+        android:visibility="gone"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="お支払いのお知らせ"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="25sp"
+                android:textStyle="bold"
+                android:backgroundTint="#d62828"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="20dp">
+            </TextView>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="内容："
+                android:textSize="20sp"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                >
+            </TextView>
+            <EditText
+                android:id="@+id/textNotify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Quy khach chua dong tien thang 12
+                            Neu khong dong tien dung hen, se phat sinh them phi phat "
+                android:drawableRight="@drawable/ic_baseline_edit_16"
+                android:padding="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_gravity="center_horizontal">
+            </EditText>
+
+            <Button
+                android:id="@+id/setDay"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="日付設定"
+                android:textColor="@color/white"
+                android:backgroundTint="#2a9d8f"
+                android:layout_marginLeft="20dp"
+                 >
+
+            </Button>
+
+            <Button
+                android:id="@+id/sendNotify"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="送信"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="@color/white"
+                android:backgroundTint="#d62828"
+                android:layout_gravity="center_horizontal">
+            </Button>
+
+        </LinearLayout>
+
+
+
+
+    </com.google.android.material.card.MaterialCardView>
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
