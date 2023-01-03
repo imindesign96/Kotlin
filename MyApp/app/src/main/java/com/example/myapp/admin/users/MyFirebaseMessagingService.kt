@@ -9,6 +9,8 @@ import android.os.Build
 import android.util.Log
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
+import androidx.core.content.ContextCompat.getSystemService
+import com.example.myapp.MainActivity
 import com.example.myapp.R
 import com.google.firebase.messaging.FirebaseMessagingService
 import com.google.firebase.messaging.RemoteMessage
@@ -18,14 +20,16 @@ const val channelId = "notification_channel"
 const val channelName = "package com.example.myapp.admin.users"
 class MyFirebaseMessagingService : FirebaseMessagingService() {
 
-
     override fun onNewToken(token: String) {
-        Log.d("token", token)
+        Log.d("TAG", "Refreshed token: $token")
+
+        // If you want to send messages to this application instance or
+        // manage this apps subscriptions on the server side, send the
+        // FCM registration token to your app server.
     }
 
     override fun onMessageReceived(remoteMessage: RemoteMessage) {
-        Log.d("receive", remoteMessage.toString())
-        if(remoteMessage.data.isNotEmpty()){
+        if (remoteMessage.data.isNotEmpty()) {
             generationNotification(remoteMessage)
 
         }
@@ -35,8 +39,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
         val intent = Intent(this, FragmentUsers::class.java)
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
         val pendingIntent = PendingIntent.getActivity(this, 0, intent, PendingIntent.FLAG_ONE_SHOT)
-
-        val builder: NotificationCompat.Builder =
+        var builder: NotificationCompat.Builder =
             NotificationCompat.Builder(applicationContext, channelId)
                 .setSmallIcon(R.drawable.icons8_user_male)
                 .setContentTitle(remoteMessage.notification?.title)
@@ -48,7 +51,7 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
 
         val notificationManager =
             getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
             val notificationChannel =
                 NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_HIGH)
             notificationManager.createNotificationChannel((notificationChannel))
@@ -59,6 +62,4 @@ class MyFirebaseMessagingService : FirebaseMessagingService() {
             notify(0, builder.build())
         }
     }
-
-
 }

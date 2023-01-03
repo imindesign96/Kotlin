@@ -1,5 +1,7 @@
 package com.example.myapp.admin.users
 
+import android.icu.text.DateFormat
+import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -16,7 +18,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
 import com.google.firebase.database.*
-import com.google.firebase.messaging.FirebaseMessaging.getInstance
+
 
 
 class FragmentUsers : Fragment(R.layout.fragment_users) {
@@ -26,7 +28,7 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
     private lateinit var usersRecyclerView: RecyclerView
     private lateinit var adapter: UsersAdapter
     private lateinit var today: Calendar
-
+    private lateinit var current : String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -95,7 +97,7 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setStyle(
                     NotificationCompat.BigTextStyle()
-                        .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc , Ngay gui: ${today}")
+                        .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc , Ngay gui: ${current}")
                 )
 
             with(NotificationManagerCompat.from(it.context)) {
@@ -116,7 +118,12 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
                 if (view.findViewById<View>(R.id.datePicker1).visibility == View.GONE) View.VISIBLE else View.GONE
         }
         val datePicker = view.findViewById<DatePicker>(R.id.datePicker1)
+
         today = Calendar.getInstance()
+        val time = today.time
+        val formatter = SimpleDateFormat("yyyy-MM-dd")
+        current = formatter.format(time)
+
         datePicker.init(
             today.get(Calendar.YEAR), today.get(Calendar.MONTH),
             today.get(Calendar.DAY_OF_MONTH)

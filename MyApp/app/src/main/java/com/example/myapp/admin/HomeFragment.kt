@@ -81,7 +81,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         savedInstanceState: Bundle?
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
-        val pieChart: PieChart = view.findViewById(R.id.chart1)
+        val pieChart: PieChart = view.findViewById(R.id.chart)
 
         val pieEntries = ArrayList<PieEntry>()
         pieEntries.add(PieEntry(90f, "GB"))

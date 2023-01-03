@@ -8,8 +8,8 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Spinner
+import android.widget.Toast
 import androidx.fragment.app.Fragment
-
 import com.example.myapp.R
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
@@ -23,6 +23,9 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
     private lateinit var pieChart1 : PieChart
     private lateinit var pieChart2 : PieChart
     private lateinit var pieChart3 : PieChart
+    private lateinit var pieChart4 : PieChart
+    private lateinit var pieChart5 : PieChart
+    private lateinit var pieChart6 : PieChart
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,6 +35,9 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
         pieChart1 = view.findViewById(R.id.chart1)
         pieChart2 = view.findViewById(R.id.chart2)
         pieChart3 = view.findViewById(R.id.chart3)
+        pieChart4 = view.findViewById(R.id.chart4)
+        pieChart5 = view.findViewById(R.id.chart5)
+        pieChart6 = view.findViewById(R.id.chart6)
 
         val items = arrayOf("本日", "月次")
         val adapter = context?.let { ArrayAdapter(it, android.R.layout.simple_spinner_item, items) }
@@ -39,23 +45,37 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
         spinner.adapter = adapter
 
         spinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
-                showShinki()
-                showKeiyaku()
-                showSales()
-            }
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View,
+                position: Int,
+                id: Long
+            ) {
+              if(items[position] == "本日"){
+                  showShinki()
+                  showKeiyaku()
+                  showSales()
+              }
+              else{
+                  showShinkiMonth()
+                  showKeiyakuMonth()
+                  showSalesMonth()
+              }
 
-            override fun onNothingSelected(parent: AdapterView<*>) {
-
             }
+                override fun onNothingSelected(parent: AdapterView<*>) {
+
+                }
+
         }
-
 
 
         return view
     }
 
-    private fun showShinki(){
+    private fun showShinki() {
+        pieChart1.visibility = View.VISIBLE
+        pieChart4.visibility = View.GONE
 
         val pieEntries = ArrayList<PieEntry>()
         pieEntries.add(PieEntry(90f, "GB"))
@@ -67,17 +87,18 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
         colors.add(ColorTemplate.COLORFUL_COLORS[1])
         colors.add(ColorTemplate.COLORFUL_COLORS[2])
         colors.add(ColorTemplate.COLORFUL_COLORS[3])
-        pieDataSet.setColors(Color.parseColor("#2979FF"))
+        pieDataSet.setColors(Color.parseColor("#e76f51"))
 
         val pieData = PieData(pieDataSet)
 
-        pieChart1.data = pieData
+        this.pieChart1.data = pieData
 
         pieData.setValueTextColor(Color.WHITE)
         pieData.setValueTextSize(14f)
     }
     private fun showKeiyaku(){
-
+        pieChart2.visibility = View.VISIBLE
+        pieChart5.visibility = View.GONE
         val pieEntries = ArrayList<PieEntry>()
         pieEntries.add(PieEntry(90f, "GB"))
 
@@ -88,7 +109,7 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
         colors.add(ColorTemplate.COLORFUL_COLORS[1])
         colors.add(ColorTemplate.COLORFUL_COLORS[2])
         colors.add(ColorTemplate.COLORFUL_COLORS[3])
-        pieDataSet.setColors(Color.parseColor("#2979FF"))
+        pieDataSet.setColors(Color.parseColor("#f4a261"))
 
         val pieData = PieData(pieDataSet)
 
@@ -99,6 +120,8 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
     }
     private fun showSales(){
 
+        pieChart3.visibility = View.VISIBLE
+        pieChart6.visibility = View.GONE
         val pieEntries = ArrayList<PieEntry>()
         pieEntries.add(PieEntry(90f, "GB"))
 
@@ -109,7 +132,7 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
         colors.add(ColorTemplate.COLORFUL_COLORS[1])
         colors.add(ColorTemplate.COLORFUL_COLORS[2])
         colors.add(ColorTemplate.COLORFUL_COLORS[3])
-        pieDataSet.setColors(Color.parseColor("#2979FF"))
+        pieDataSet.setColors(Color.parseColor("#e9c46a"))
 
         val pieData = PieData(pieDataSet)
 
@@ -118,4 +141,71 @@ class FragmentSales : Fragment(R.layout.fragment_sales) {
         pieData.setValueTextColor(Color.WHITE)
         pieData.setValueTextSize(14f)
     }
+    private fun showShinkiMonth() {
+        pieChart4.visibility = View.VISIBLE
+
+        val pieEntries = ArrayList<PieEntry>()
+        pieEntries.add(PieEntry(90f, "GB"))
+
+        val colors: ArrayList<Int> = ArrayList()
+        val pieDataSet = PieDataSet(pieEntries, "データ")
+
+        colors.add(ColorTemplate.COLORFUL_COLORS[0])
+        colors.add(ColorTemplate.COLORFUL_COLORS[1])
+        colors.add(ColorTemplate.COLORFUL_COLORS[2])
+        colors.add(ColorTemplate.COLORFUL_COLORS[3])
+        pieDataSet.setColors(Color.parseColor("#5e548e"))
+
+        val pieData = PieData(pieDataSet)
+
+        this.pieChart4.data = pieData
+
+        pieData.setValueTextColor(Color.WHITE)
+        pieData.setValueTextSize(14f)
+    }
+    private fun showKeiyakuMonth(){
+        pieChart5.visibility = View.VISIBLE
+        val pieEntries = ArrayList<PieEntry>()
+        pieEntries.add(PieEntry(90f, "GB"))
+
+        val colors: ArrayList<Int> = ArrayList()
+        val pieDataSet = PieDataSet(pieEntries, "データ")
+
+        colors.add(ColorTemplate.COLORFUL_COLORS[0])
+        colors.add(ColorTemplate.COLORFUL_COLORS[1])
+        colors.add(ColorTemplate.COLORFUL_COLORS[2])
+        colors.add(ColorTemplate.COLORFUL_COLORS[3])
+        pieDataSet.setColors(Color.parseColor("#9f86c0"))
+
+        val pieData = PieData(pieDataSet)
+
+        pieChart5.data = pieData
+
+        pieData.setValueTextColor(Color.WHITE)
+        pieData.setValueTextSize(14f)
+    }
+    private fun showSalesMonth(){
+
+        pieChart6.visibility = View.VISIBLE
+        val pieEntries = ArrayList<PieEntry>()
+        pieEntries.add(PieEntry(90f, "GB"))
+
+        val colors: ArrayList<Int> = ArrayList()
+        val pieDataSet = PieDataSet(pieEntries, "データ")
+
+        colors.add(ColorTemplate.COLORFUL_COLORS[0])
+        colors.add(ColorTemplate.COLORFUL_COLORS[1])
+        colors.add(ColorTemplate.COLORFUL_COLORS[2])
+        colors.add(ColorTemplate.COLORFUL_COLORS[3])
+        pieDataSet.setColors(Color.parseColor("#be95c4"))
+
+        val pieData = PieData(pieDataSet)
+
+        pieChart6.data = pieData
+
+        pieData.setValueTextColor(Color.WHITE)
+        pieData.setValueTextSize(14f)
+    }
+
+
 }

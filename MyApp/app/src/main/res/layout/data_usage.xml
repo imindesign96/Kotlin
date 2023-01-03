@@ -45,7 +45,7 @@
                     android:textStyle="bold" />
 
                 <com.github.mikephil.charting.charts.PieChart
-                    android:id="@+id/chart1"
+                    android:id="@+id/chart"
                     android:layout_width="250dp"
                     android:layout_height="250dp"
                     android:padding="10dp"
