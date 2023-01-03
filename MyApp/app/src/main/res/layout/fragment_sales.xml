@@ -41,19 +41,6 @@
 <!--        app:layout_constraintTop_toTopOf="parent"-->
 <!--        tools:layout_editor_absoluteY="20dp" />-->
 
-    <SearchView
-        android:id="@+id/search_view_inventory"
-        android:layout_width="150dp"
-        android:layout_height="30dp"
-        android:queryHint="Search Sim card number"
-        android:layout_marginTop="5dp"
-        android:layout_marginEnd="5dp"
-        android:autofillHints="Search"
-        android:background="#4BFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-
-        />
 
     <com.google.android.material.card.MaterialCardView
         android:id="@+id/cardHeader"
@@ -63,15 +50,9 @@
         android:layout_marginEnd="10dp"
         app:cardBackgroundColor="@color/sales_card_background"
         app:cardCornerRadius="10dp"
-        tools:ignore="MissingConstraints"
         app:layout_constraintTop_toBottomOf="@+id/viewHeaderBackground"
         app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBackground"
         >
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="15dp">
 
             <TextView
                 android:id="@+id/textViews"
@@ -80,149 +61,79 @@
                 android:text="Shot Views"
                 android:textColor="@color/sales_primary_text"
                 android:textStyle="bold"
+                android:layout_margin="15dp"
+                android:layout_marginBottom="30dp"/>
 
 
+            <Spinner
+                android:id="@+id/spinner"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:paddingTop="10dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginBottom="20dp"
                 />
-
-            <LinearLayout
-                android:id="@+id/layoutClients"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/layoutClients2"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textViews">
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/icons8_user_male" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total Clients"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/totalOders"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="471"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutClients2"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toStartOf="@+id/layoutClients3"
-                app:layout_constraintStart_toEndOf="@+id/layoutClients"
-                app:layout_constraintTop_toBottomOf="@+id/textViews"
-
-                >
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/icons8_user_male" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total Sales"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/sellerTotal"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="$529K"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:id="@+id/layoutClients3"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:gravity="center"
-                android:orientation="vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/layoutClients2"
-                app:layout_constraintTop_toBottomOf="@+id/textViews"
-
-                >
-
-                <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="36dp"
-                    android:layout_height="36dp"
-                    android:src="@drawable/icons8_user_male" />
-
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Total Oders"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="10sp" />
-
-                <TextView
-                    android:id="@+id/CLientsCount"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="1200"
-                    android:textColor="@color/sales_secondary_text"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-            </LinearLayout>
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </com.google.android.material.card.MaterialCardView>
 
+
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="0dp"
-        android:clipToPadding="false"
-        android:overScrollMode="never"
-        android:padding="16sp"
-        android:scrollbars="none"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardHeader"
         >
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="40dp"
+        android:orientation="vertical"
+        app:cardCornerRadius="10dp"
+        android:layout_marginRight="10dp"
+        android:layout_marginLeft="10dp"
+        >
 
-            <include layout="@layout/sales_item_1"/>
 
-            <include layout="@layout/sales_item_2"/>
 
-            <include layout="@layout/sales_item_3"/>
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart1"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="15dp"
+                />
 
-            <include layout="@layout/sales_item_4"/>
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart2"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="250dp"
 
-            <include layout="@layout/sales_item_1"/>
+                />
 
-            <include layout="@layout/sales_item_2"/>
+            <com.github.mikephil.charting.charts.PieChart
+                android:id="@+id/chart3"
+                android:layout_width="250dp"
+                android:layout_height="250dp"
+                android:layout_gravity="center_horizontal"
+                android:padding="10dp"
+                android:layout_marginTop="500dp"
+                />
 
-            <include layout="@layout/sales_item_3"/>
+    </com.google.android.material.card.MaterialCardView>
 
-            <include layout="@layout/sales_item_4"/>
-        </LinearLayout>
     </ScrollView>
+
+
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

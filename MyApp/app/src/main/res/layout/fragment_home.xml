@@ -467,7 +467,8 @@
                             android:layout_height="110dp"
                             android:layout_marginLeft="4dp"
                             android:layout_marginEnd="8dp"
-                            android:src="@drawable/promotion1" />
+                            android:src="@drawable/promotion1"
+                            android:contentDescription="TODO" />
 
                     </LinearLayout>
 

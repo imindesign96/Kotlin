@@ -1,18 +1,18 @@
 package com.example.myapp.admin
 
-
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapp.R
 import com.example.myapp.admin.total.FragmentSimTotal
 import com.example.myapp.admin.users.FragmentUsers
-
+import com.example.myapp.databinding.ActivityAdminBinding
+import com.google.firebase.messaging.FirebaseMessaging
 
 
 class AdminActivity : AppCompatActivity() {
 
-    private lateinit var binding: com.example.myapp.databinding.ActivityAdminBinding
+    private lateinit var binding : ActivityAdminBinding
     private fun replaceFragment(fragment : Fragment){
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().apply {
@@ -27,13 +27,12 @@ class AdminActivity : AppCompatActivity() {
         setContentView(binding.root)
 
 
+        FirebaseMessaging.getInstance().getToken()
 
-       replaceFragment(FragmentUsers())
+        replaceFragment(FragmentUsers())
 
-//        binding.frame1.findViewById<Button>(R.id.updateUserDetail).setOnClickListener{
-//            replaceFragment(FragmentUserDetail())
-//
-//        }
+
+
        binding.bottomNavigationView.setOnItemSelectedListener {
            when(it.itemId){
                R.id.navi_home -> replaceFragment(HomeFragment())
