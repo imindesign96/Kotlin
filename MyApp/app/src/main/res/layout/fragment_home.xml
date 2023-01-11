@@ -7,6 +7,8 @@
     android:background="#f7f7f7"
     android:layout_marginBottom="80dp"
     tools:viewBindingIgnore="true"
+    android:clickable="true"
+    android:focusable="true"
     tools:context="com.example.myapp.admin.AdminActivity">
 
     <com.google.android.material.appbar.AppBarLayout

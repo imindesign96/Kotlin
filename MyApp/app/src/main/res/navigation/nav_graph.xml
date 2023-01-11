@@ -23,7 +23,9 @@
         android:label="HomeFragment" >
         <action
             android:id="@+id/action_homeFragment_to_fragmentDetailData"
-            app:destination="@id/fragmentDetailData" />
+            app:destination="@id/fragmentDetailData"
+            app:popUpTo="@id/fragmentDetailData"
+            app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_homeFragment_to_fragmentDetailData6gb"
             app:destination="@id/fragmentDetailData6gb" />

@@ -1,7 +1,7 @@
 package com.example.myapp
 
-import android.app.PendingIntent.getActivity
 import android.os.Bundle
+import android.view.Menu
 import android.widget.Button
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -28,6 +28,7 @@ class MainActivity : AppCompatActivity() {
         val fragmentManager = supportFragmentManager
         fragmentManager.beginTransaction().apply {
             replace(R.id.frame, fragment)
+                .addToBackStack(null)
             commit()
         }
     }
@@ -38,15 +39,12 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
         auth = FirebaseAuth.getInstance()
 
-        binding.bottomNavigationViewMain.setOnItemSelectedListener {
+        binding.bottomNavigationViewMain.setOnNavigationItemSelectedListener {
             when(it.itemId){
                 R.id.navi_home ->  replaceFragment(HomeFragment())
                 R.id.navi_smile -> replaceFragment(FragmentSimTotal())
                 R.id.navi_pets -> replaceFragment(FragmentSales())
                 R.id.navi_sun -> replaceFragment(FragmentUsers())
-                else -> {
-
-                }
             }
             true
         }
@@ -74,7 +72,10 @@ class MainActivity : AppCompatActivity() {
         return navController.navigateUp() || super.onSupportNavigateUp()
     }
 
-
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.bottom_navigation_menu, menu)
+        return true
+    }
 
 
     }

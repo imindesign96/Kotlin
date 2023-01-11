@@ -34,18 +34,18 @@ class AdminActivity : AppCompatActivity() {
 
 
 
-       binding.bottomNavigationView.setOnItemSelectedListener {
-           when(it.itemId){
-               R.id.navi_home -> replaceFragment(HomeFragment())
-               R.id.navi_smile -> replaceFragment(FragmentSimTotal())
-               R.id.navi_pets -> replaceFragment(FragmentSales())
-               R.id.navi_sun -> replaceFragment(FragmentUsers())
-               else -> {
-
-               }
-           }
-           true
-       }
+//       binding.bottomNavigationView.setOnItemSelectedListener {
+//           when(it.itemId){
+//               R.id.navi_home -> replaceFragment(HomeFragment())
+//               R.id.navi_smile -> replaceFragment(FragmentSimTotal())
+//               R.id.navi_pets -> replaceFragment(FragmentSales())
+//               R.id.navi_sun -> replaceFragment(FragmentUsers())
+//               else -> {
+//
+//               }
+//           }
+//           true
+//       }
 
 
     }

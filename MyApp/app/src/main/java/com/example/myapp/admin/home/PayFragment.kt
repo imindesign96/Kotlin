@@ -1,6 +1,7 @@
 package com.example.myapp.admin.home
 
-import android.graphics.*
+import android.graphics.Bitmap
+import android.graphics.Color
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.MenuItem
@@ -55,14 +56,18 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         backToHomeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_payFragment_to_homeFragment)
         }
-
-        val activity = activity as AppCompatActivity?
-        if (activity != null) {
-            activity.supportActionBar!!.hide()
-        }
-
         return view
 
+    }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

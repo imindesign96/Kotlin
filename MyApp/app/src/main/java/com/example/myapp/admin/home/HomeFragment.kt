@@ -33,7 +33,7 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 
 
-class HomeFragment : Fragment(com.example.myapp.R.layout.fragment_home) {
+class HomeFragment : Fragment(R.layout.fragment_home) {
 
     private lateinit var signOutBtn: TextView
     private lateinit var auth: FirebaseAuth
@@ -125,7 +125,7 @@ class HomeFragment : Fragment(com.example.myapp.R.layout.fragment_home) {
 
         //Detail
         detailData1.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData)
+                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFragmentDetailData())
         }
         detailData2.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData6gb)
@@ -231,6 +231,17 @@ class HomeFragment : Fragment(com.example.myapp.R.layout.fragment_home) {
         return view
 
     }
+
+    override fun onResume() {
+        super.onResume()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
+    }
+
 
 
 
