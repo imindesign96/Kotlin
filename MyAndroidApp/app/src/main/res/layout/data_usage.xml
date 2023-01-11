@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="10dp"
+    >
+
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="300dp"
+        android:layout_height="wrap_content"
+        app:cardCornerRadius="4dp"
+        app:cardElevation="4dp"
+        app:cardUseCompatPadding="true"
+        app:contentPadding="16dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="8dp"
+                android:orientation="vertical"
+                android:weightSum="100">
+
+
+                <TextView
+                    android:layout_width="231dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="90"
+                    android:fontFamily="@font/calibri"
+                    android:drawableLeft="@drawable/ic_baseline_pie_chart_24"
+                    android:drawableTint="#2979FF"
+                    android:text="DATA USAGE"
+                    android:textColor="#2979FF"
+                    android:textSize="30sp"
+                    android:textStyle="bold" />
+
+                <com.github.mikephil.charting.charts.PieChart
+                    android:id="@+id/chart"
+                    android:layout_width="250dp"
+                    android:layout_height="250dp"
+                    android:padding="10dp"
+
+                    />
+
+            </LinearLayout>
+
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:layout_marginBottom="10dp"
+                android:src="@drawable/super_offer" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="300"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/outlinedButton"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="1GB                      ￥660"
+                    style="?attr/materialButtonOutlinedStyle"
+
+                    />
+                <Button
+                    android:id="@+id/outlinedButton2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="2GB                      ￥1,320"
+                    style="?attr/materialButtonOutlinedStyle"
+
+
+                    />
+                <Button
+                    android:id="@+id/outlinedButton3"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="3GB                      ￥1,980"
+                    style="?attr/materialButtonOutlinedStyle"
+                    />
+                <Button
+                    android:id="@+id/outlinedButton4"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="4GB                      ￥2,640"
+                    style="?attr/materialButtonOutlinedStyle"
+                    />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="注: [チャージ] ボタンをクリックするとすぐにデータが追加されます"/>
+
+
+                <Button
+                    android:layout_width="100dp"
+                    android:layout_height="wrap_content"
+                    android:text="チャージ"
+                    android:layout_gravity="center_horizontal"
+                    />
+
+                </LinearLayout>
+
+        </LinearLayout>
+
+
+    </androidx.cardview.widget.CardView>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

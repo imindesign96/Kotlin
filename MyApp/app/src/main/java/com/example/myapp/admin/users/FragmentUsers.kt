@@ -97,7 +97,7 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
                 .setVisibility(NotificationCompat.VISIBILITY_PUBLIC)
                 .setStyle(
                     NotificationCompat.BigTextStyle()
-                        .bigText("Quy khach vui long dong tien cuoc thang nay, Neu khong dong se phat sinh them phi cuoc , Ngay gui: ${current}")
+                        .bigText( "$textNotify $current")
                 )
 
             with(NotificationManagerCompat.from(it.context)) {

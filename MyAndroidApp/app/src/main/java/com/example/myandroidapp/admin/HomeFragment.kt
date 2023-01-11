@@ -1,4 +1,4 @@
-package com.example.myapp.admin
+package com.example.myandroidapp.admin
 
 
 import android.content.Intent
@@ -13,13 +13,16 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import com.example.myapp.R
-import com.example.myapp.UserInfo
+import com.example.myandroidapp.MainActivity
+import com.example.myandroidapp.R
+import com.example.myandroidapp.SignInActivity
+import com.example.myandroidapp.UserInfo
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
 import com.github.mikephil.charting.data.PieEntry
 import com.github.mikephil.charting.utils.ColorTemplate
+import com.google.firebase.auth.FirebaseAuth
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -27,6 +30,9 @@ import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
+
+    private lateinit var signOutBtn: TextView
+    private lateinit var auth: FirebaseAuth
 
     private fun createBarcode(
         contents: String
@@ -81,6 +87,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         savedInstanceState: Bundle?
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
+
+
+        signOutBtn = view.findViewById(R.id.logOut)
+        auth = FirebaseAuth.getInstance()
+
+        signOutBtn.setOnClickListener {
+            auth.signOut()
+            val intent = Intent(activity, SignInActivity::class.java)
+            startActivity(intent)
+        }
+
+
         val pieChart: PieChart = view.findViewById(R.id.chart)
 
         val pieEntries = ArrayList<PieEntry>()
@@ -126,5 +144,13 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         return view
 
     }
+
+    override fun onStart() {
+        super.onStart()
+        if(auth.currentUser != null) {
+            startActivity(Intent(activity, MainActivity::class.java))
+        }
+    }
+
 }
 

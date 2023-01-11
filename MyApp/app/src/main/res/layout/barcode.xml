@@ -4,82 +4,137 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_marginTop="10dp"
     >
 
 
     <androidx.cardview.widget.CardView
-        android:layout_width="300dp"
-        android:layout_height="wrap_content"
+        android:layout_width="350dp"
+        android:layout_height="match_parent"
         app:cardCornerRadius="4dp"
         app:cardElevation="4dp"
         app:cardUseCompatPadding="true"
         app:contentPadding="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginBottom="20dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="310dp"
-            android:orientation="vertical"
-            android:background="@drawable/background_card">
+            android:layout_height="match_parent"
+            android:background="@drawable/background_card"
+            android:orientation="vertical">
 
             <TextView
                 android:id="@+id/kingaku"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="3,280￥"
-                android:textColor="@color/btn_color"
-                android:textStyle="bold"
-                android:textSize="40sp"
+                android:layout_marginTop="120dp"
                 android:gravity="center"
-                />
+                android:text="3,280￥"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="40sp"
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="ご精算ください"
-                android:textColor="@color/btn_color"
                 android:gravity="center"
-                android:textStyle="bold"
+                android:text="お客様の金額でございます。\nご精算ください"
+                android:textColor="@color/colorPrimaryDark"
                 android:textSize="20sp"
-                />
-         <ImageView
-             android:id="@+id/imageViewBarcode"
-             android:layout_width="match_parent"
-             android:layout_height="wrap_content"
-             android:background="#FFFFFF"
-             />
+                android:textStyle="bold" />
+
+            <ImageView
+                android:id="@+id/imageViewBarcode"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:background="#FFFFFF" />
+
             <TextView
                 android:id="@+id/barcode_number"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=""
                 android:gravity="center"
-                android:textColor="@color/white"
-                android:textSize="10sp"
-                />
+                android:text="123456789101234567890"
+                android:textColor="@color/colorPrimaryDark"
+                android:textStyle="bold"
+                android:textSize="10sp" />
 
             <ImageView
                 android:id="@+id/imageViewQRcode"
+                android:layout_marginTop="10dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal" />
+
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
-                />
+                android:orientation="horizontal">
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="支払期限:"
+                    android:textColor="#d90429"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="2022/12/12"
+                    android:paddingLeft="10dp"
+                    android:textColor="#d90429"
+                    android:textSize="20sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+                <Button
+                    android:id="@+id/backToHomeBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="戻り"
+                    android:backgroundTint="@color/white"
+                    android:textColor="@color/colorPrimaryDark"
+                    android:textStyle="bold"
+                    android:layout_marginRight="10dp">
+                </Button>
+                <Button
+                    android:id="@+id/cancelBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="キャンセル"
+                    android:backgroundTint="@color/colorPrimaryDark"
+                    android:textColor="@color/colorPrimary"
+                    android:textStyle="bold">
+                </Button>
+
+            </LinearLayout>
+
+
 
             <TextView
                 android:id="@+id/payHelp"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                android:background="@color/btn_color"
-                android:textStyle="bold"
-                android:text="お支払い案内はこちらです！！"
-                android:gravity="center_horizontal"
-                android:layout_marginTop="5dp"
                 android:layout_gravity="center_horizontal"
-
-
+                android:layout_marginTop="50dp"
+                android:background="@color/colorPrimaryDark"
+                android:text="お支払い案内はこちらです！！"
+                android:textSize="20sp"
+                android:textColor="@color/white"
+                android:textStyle="bold"
                 />
 
         </LinearLayout>

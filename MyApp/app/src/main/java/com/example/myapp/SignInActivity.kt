@@ -6,7 +6,6 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
-import com.example.myapp.admin.AdminActivity
 import androidx.activity.result.contract.ActivityResultContracts
 import com.example.myapp.databinding.ActivitySignInBinding
 import com.google.android.gms.auth.api.signin.GoogleSignIn
@@ -52,7 +51,7 @@ class SignInActivity : AppCompatActivity() {
             if (email.isNotEmpty() && pass.isNotEmpty()) {
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val intent = Intent(this, AdminActivity::class.java)
+                        val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
@@ -94,6 +93,7 @@ class SignInActivity : AppCompatActivity() {
         if (task.isSuccessful) {
             val account: GoogleSignInAccount? = task.result
             if (account != null) {
+                Log.d("TAG LOI GI DAY", "LOGIN GOOGLE OK")
                 updateUI(account)
             }
         } else {
@@ -105,13 +105,21 @@ class SignInActivity : AppCompatActivity() {
         val credential = GoogleAuthProvider.getCredential(account.idToken, null)
         firebaseAuth.signInWithCredential(credential).addOnCompleteListener {
             if(it.isSuccessful){
+                Log.d("TAG LOI GI DAY", "LOGIN GOOGLE OK")
                 val intent = Intent(this, MainActivity::class.java)
-                intent.putExtra("name",account.email)
-                intent.putExtra("email", account.displayName)
                 startActivity(intent)
             }else {
                 Toast.makeText(this,it.exception.toString(),Toast.LENGTH_SHORT).show()
             }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
         }
     }
 

@@ -4,6 +4,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import com.example.myapp.R
+import com.example.myapp.admin.home.HomeFragment
 import com.example.myapp.admin.total.FragmentSimTotal
 import com.example.myapp.admin.users.FragmentUsers
 import com.example.myapp.databinding.ActivityAdminBinding

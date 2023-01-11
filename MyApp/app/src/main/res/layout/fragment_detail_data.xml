@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".admin.home.FragmentDetailData">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:paddingTop="3dp"
+        android:padding="8dp">
+
+        <androidx.cardview.widget.CardView
+
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:cardCornerRadius="4dp"
+            app:cardElevation="4dp"
+            app:cardUseCompatPadding="true"
+            app:contentPadding="10dp"
+
+            >
+
+            <LinearLayout
+                android:id="@+id/cardView1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                >
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_weight="60"
+                        android:fontFamily="@font/calibri"
+                        android:text="Rakuten UN-LIMIT 3G"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="34sp"
+                        android:textStyle="bold" />
+
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    >
+                    <RadioGroup
+                        android:id="@+id/radioBtnGroup"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true">
+                        <RadioButton
+                            android:id="@+id/radioDataOnly"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="true"
+                            android:text="データのみ" />
+                        <RadioButton
+                            android:id="@+id/radioDataAndCall"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:checked="false"
+                            android:text="データと通話" />
+                    </RadioGroup>
+
+
+                </LinearLayout>
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    android:orientation="vertical"
+                    >
+                    <TextView
+                        android:id="@+id/tvPriceData1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/calibri"
+                        android:text="500円/月"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30sp"
+                        android:textStyle="bold" />
+                    <TextView
+                        android:id="@+id/tvPriceDataAndCall1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="@font/calibri"
+                        android:text="1000円/月"
+                        android:textColor="@color/colorPrimaryDark"
+                        android:textSize="30sp"
+                        android:textStyle="bold"
+                        android:visibility="gone"/>
+
+
+                </LinearLayout>
+
+
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="100"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/buy3GbBtn1"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="申し込み"
+                        android:gravity="center"
+                        android:textSize="24sp"
+                        android:backgroundTint="@color/colorPrimaryDark"
+                        android:textColor="@color/colorPrimary"
+                        android:textStyle="bold"/>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+
+        </androidx.cardview.widget.CardView>
+
+
+
+
+
+    </LinearLayout>
+
+</FrameLayout>

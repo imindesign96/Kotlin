@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F1EFEF"
+    tools:context=".admin.AdminActivity">
+
+
+    <View
+        android:id="@+id/viewHeaderBackground"
+        android:layout_width="match_parent"
+        android:layout_height="125dp"
+        android:background="@color/sales_primary"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+    <TextView
+        android:id="@+id/textTitle"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:drawableLeft="@drawable/ic_baseline_star_24"
+        android:drawableTint="@color/white"
+        android:drawablePadding="2dp"
+        android:text="Welcome"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:padding="10dp"
+        android:textColor="@color/white"
+        tools:ignore="MissingConstraints" />
+
+    <!--    <androidx.appcompat.widget.AppCompatImageView-->
+    <!--        android:layout_width="40dp"-->
+    <!--        android:layout_height="40dp"-->
+    <!--        android:paddingTop="10dp"-->
+    <!--        android:src="@drawable/ic_round_search_24"-->
+    <!--        android:tint="@color/white"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintTop_toTopOf="parent"-->
+    <!--        tools:layout_editor_absoluteY="20dp" />-->
+
+    <SearchView
+        android:id="@+id/search_view_inventory"
+        android:layout_width="150dp"
+        android:layout_height="30dp"
+        android:queryHint="Search Sim card number"
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:autofillHints="Search"
+        android:background="#4BFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+
+        />
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/cardHeader"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        app:cardBackgroundColor="@color/sales_card_background"
+        app:cardCornerRadius="10dp"
+        tools:ignore="MissingConstraints"
+        app:layout_constraintTop_toBottomOf="@+id/viewHeaderBackground"
+        app:layout_constraintBottom_toBottomOf="@+id/viewHeaderBackground"
+        >
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="15dp">
+
+
+
+            <LinearLayout
+                android:id="@+id/layoutG1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                >
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/icons8_user_male" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="申し込み履歴"
+                    android:textColor="@color/sales_secondary_text"
+                    android:textSize="10sp"
+                    android:layout_gravity="center_vertical"/>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="50dp"
+                    >
+
+                    <Button
+                        android:layout_width="match_parent"
+                        android:layout_height="40dp"
+                        android:text="未精算金額を見る"
+                        android:textStyle="bold"
+                        android:backgroundTint="@color/btn_color">
+
+
+                    </Button>
+                </LinearLayout>
+
+
+
+            </LinearLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:clipToPadding="false"
+        android:overScrollMode="never"
+        android:padding="16sp"
+        android:scrollbars="none"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/cardHeader"
+        >
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <include layout="@layout/oder_item_1"/>
+
+            <include layout="@layout/oder_item_1"/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

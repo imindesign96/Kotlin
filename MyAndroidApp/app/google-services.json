@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "689528397098",
+    "firebase_url": "https://teak-digit-371103-default-rtdb.asia-southeast1.firebasedatabase.app",
+    "project_id": "teak-digit-371103",
+    "storage_bucket": "teak-digit-371103.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:689528397098:android:d463a87c4b19ce06139253",
+        "android_client_info": {
+          "package_name": "com.example.myapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "689528397098-pdf8e3pnd51136cvdnvhng6dredkb5i2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB4XU_w85HemcMPrIMqZCLOn8bcxfyYPoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "689528397098-pdf8e3pnd51136cvdnvhng6dredkb5i2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

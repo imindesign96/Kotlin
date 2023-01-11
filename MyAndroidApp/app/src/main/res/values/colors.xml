@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#ffd60a</color>
+    <color name="colorAccent">#ffc300</color>
+    <color name="colorDark">#000814</color>
+    <color name="colorPrimaryDark">#003566</color>
+    <color name="teal_200">#FF03DAC5</color>
+    <color name="teal_700">#FF018786</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="yellow">#FFC801</color>
+    <color name="btn_color">#FF735C</color>
+    <color name="edit_text_color">#FFD6CF</color>
+    <color name="hint_text_color">#D4D4D4</color>
+
+    <color name="bgBottomNavigation">#F0F0F0</color>
+
+    <!-- Sales layout color -->
+    <color name="sales_primary">#ffd60a</color>
+    <color name="sales_background">#FFFFFF</color>
+    <color name="sales_primary_text">#001d3d</color>
+    <color name="sales_card_background">#FFFFFF</color>
+    <color name="sales_secondary_text">#9B9A9D</color>
+    <color name="sales_item_1">#2CC2EA</color>
+    <color name="sales_item_2">#4DE9C9</color>
+    <color name="sales_item_3">#72A4FF</color>
+    <color name="sales_item_4">#8B72FF</color>
+</resources>
