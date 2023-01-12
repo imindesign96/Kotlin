@@ -15,7 +15,11 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.navigation.NavController
+import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.ui.NavigationUI.setupActionBarWithNavController
+import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapp.R
 import com.example.myapp.SignInActivity
 import com.example.myapp.UserInfo
@@ -43,6 +47,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var buy3GbBtn : Button
     private lateinit var buy6GbBtn : Button
     private lateinit var buy12GbBtn : Button
+    private lateinit var navController: NavController
 
     //create barcode
     private fun createBarcode(
@@ -125,7 +130,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         //Detail
         detailData1.setOnClickListener {
-                findNavController().navigate(HomeFragmentDirections.actionHomeFragmentToFragmentDetailData())
+                findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData)
         }
         detailData2.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData6gb)
@@ -232,15 +237,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.hide()
-    }
-
-    override fun onStop() {
-        super.onStop()
-        (activity as AppCompatActivity?)!!.supportActionBar!!.show()
-    }
 
 
 

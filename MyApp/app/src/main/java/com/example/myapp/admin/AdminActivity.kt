@@ -15,37 +15,37 @@ class AdminActivity : AppCompatActivity() {
 
     private lateinit var binding : ActivityAdminBinding
     private fun replaceFragment(fragment : Fragment){
-        val fragmentManager = supportFragmentManager
-        fragmentManager.beginTransaction().apply {
-            replace(R.id.frame1, fragment)
-            commit()
+        if (onSaveInstanceState(Bundle()) == null){
+            val fragmentManager = supportFragmentManager
+            fragmentManager.beginTransaction().apply {
+                replace(R.id.frame1, fragment)
+                commit()
+            }
         }
+
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = com.example.myapp.databinding.ActivityAdminBinding.inflate(layoutInflater)
+        binding = ActivityAdminBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
-
-        FirebaseMessaging.getInstance().getToken()
 
         replaceFragment(FragmentUsers())
 
 
 
-//       binding.bottomNavigationView.setOnItemSelectedListener {
-//           when(it.itemId){
-//               R.id.navi_home -> replaceFragment(HomeFragment())
-//               R.id.navi_smile -> replaceFragment(FragmentSimTotal())
-//               R.id.navi_pets -> replaceFragment(FragmentSales())
-//               R.id.navi_sun -> replaceFragment(FragmentUsers())
-//               else -> {
-//
-//               }
-//           }
-//           true
-//       }
+       binding.bottomNavigationView.setOnItemSelectedListener {
+           when(it.itemId){
+               R.id.navi_home -> replaceFragment(HomeFragment())
+               R.id.navi_smile -> replaceFragment(FragmentSimTotal())
+               R.id.navi_pets -> replaceFragment(FragmentSales())
+               R.id.navi_sun -> replaceFragment(FragmentUsers())
+               else -> {
+
+               }
+           }
+           true
+       }
 
 
     }

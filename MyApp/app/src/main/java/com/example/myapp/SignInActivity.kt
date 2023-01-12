@@ -43,6 +43,10 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.loginWithGoogle.setOnClickListener {
+            signInGoogle()
+        }
+
         // Dang nhap bang email
         binding.button.setOnClickListener {
             val email = binding.emailEt.text.toString()
@@ -70,9 +74,7 @@ class SignInActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
-        binding.loginWithGoogle.setOnClickListener {
-            signInGoogle()
-        }
+
 
     }
     private fun signInGoogle() {

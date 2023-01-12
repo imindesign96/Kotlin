@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".admin.total.FragmentSimTotal"
+    android:background="#F1EFEF"
+    android:clickable="true"
+    android:focusable="true"
    >
 
     <com.google.android.material.card.MaterialCardView

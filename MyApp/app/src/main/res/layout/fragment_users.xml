@@ -6,6 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:orientation="vertical"
     android:background="#F1EFEF"
+    android:clickable="true"
+    android:focusable="true"
     tools:context=".admin.AdminActivity">
 
 
