@@ -47,56 +47,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     private lateinit var buy3GbBtn : Button
     private lateinit var buy6GbBtn : Button
     private lateinit var buy12GbBtn : Button
-    private lateinit var navController: NavController
 
-    //create barcode
-    private fun createBarcode(
-        contents: String
-    ): Bitmap? {
-        val writer = MultiFormatWriter()
-        return try {
-            val bitMatrix: BitMatrix = writer.encode(contents, BarcodeFormat.CODE_128, 1000, 190)
-            val width = bitMatrix.width
-            val height = bitMatrix.height
-            val barcodeBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            for (x in 0 until width) {
-                for (y in 0 until height) {
-                    barcodeBitmap.setPixel(
-                        x,
-                        y,
-                        if (bitMatrix.get(x, y)) BLACK else WHITE
-                    )
-                }
-            }
-            barcodeBitmap
-        } catch (e: WriterException) {
-            e.printStackTrace()
-            null
-        }
-    }
 
-    // crate qr code
-    private fun generateQRCode(data: String): Bitmap? {
-        val qrCodeWriter = QRCodeWriter()
-        try {
-            val bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 300, 300)
-            val width = bitMatrix.width
-            val height = bitMatrix.height
-            val pixels = IntArray(width * height)
-            for (y in 0 until height) {
-                val offset = y * width
-                for (x in 0 until width) {
-                    pixels[offset + x] = if (bitMatrix.get(x, y)) BLACK else WHITE
-                }
-            }
-            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
-            bitmap.setPixels(pixels, 0, width, 0, 0, width, height)
-            return bitmap
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-        return null
-    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -131,6 +83,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //Detail
         detailData1.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData)
+
         }
         detailData2.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData6gb)
@@ -238,7 +191,54 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     }
 
 
+    //create barcode
+    private fun createBarcode(
+        contents: String
+    ): Bitmap? {
+        val writer = MultiFormatWriter()
+        return try {
+            val bitMatrix: BitMatrix = writer.encode(contents, BarcodeFormat.CODE_128, 1000, 190)
+            val width = bitMatrix.width
+            val height = bitMatrix.height
+            val barcodeBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            for (x in 0 until width) {
+                for (y in 0 until height) {
+                    barcodeBitmap.setPixel(
+                        x,
+                        y,
+                        if (bitMatrix.get(x, y)) BLACK else WHITE
+                    )
+                }
+            }
+            barcodeBitmap
+        } catch (e: WriterException) {
+            e.printStackTrace()
+            null
+        }
+    }
 
+    // crate qr code
+    private fun generateQRCode(data: String): Bitmap? {
+        val qrCodeWriter = QRCodeWriter()
+        try {
+            val bitMatrix = qrCodeWriter.encode(data, BarcodeFormat.QR_CODE, 300, 300)
+            val width = bitMatrix.width
+            val height = bitMatrix.height
+            val pixels = IntArray(width * height)
+            for (y in 0 until height) {
+                val offset = y * width
+                for (x in 0 until width) {
+                    pixels[offset + x] = if (bitMatrix.get(x, y)) BLACK else WHITE
+                }
+            }
+            val bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888)
+            bitmap.setPixels(pixels, 0, width, 0, 0, width, height)
+            return bitmap
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return null
+    }
 
 
 }

@@ -12,6 +12,7 @@ import com.example.myapp.admin.FragmentSales
 import com.example.myapp.admin.home.HomeFragment
 import com.example.myapp.admin.total.FragmentSimTotal
 import com.example.myapp.databinding.ActivityMainBinding
+import com.github.mikephil.charting.utils.Utils.init
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -75,6 +76,8 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
+
+
     }
 
     /**
