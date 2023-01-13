@@ -14,6 +14,7 @@ import com.example.myapp.admin.total.FragmentSimTotal
 import com.example.myapp.databinding.ActivityMainBinding
 import com.github.mikephil.charting.utils.Utils.init
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 
 
 class MainActivity : AppCompatActivity() {
@@ -78,7 +79,10 @@ class MainActivity : AppCompatActivity() {
         }
 
 
+
+
     }
+
 
     /**
      * Enables back button support. Simply navigates one element up on the stack.

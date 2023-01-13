@@ -2,16 +2,21 @@ package com.example.myapp.admin.home
 
 import android.os.Bundle
 import android.view.LayoutInflater
-import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapp.R
 import com.google.android.material.bottomnavigation.BottomNavigationView
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.firestore.FirebaseFirestore
 
 
 class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
@@ -34,22 +39,43 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
         val view: View = inflater.inflate(R.layout.fragment_detail_data, container, false)
 
         val buy3GbBtn = view.findViewById<Button>(R.id.buy3GbBtn1)
+        val tvOnlyData1 = view.findViewById<TextView>(R.id.tvPriceData1)
+        val tvDataAndView1 = view.findViewById<TextView>(R.id.tvPriceDataAndCall1)
+        //save data btn
+        val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
+        val radioDataOnlyBtn = view.findViewById<RadioButton>(R.id.radioDataOnly)
+        val radioDataAndCallBtn = view.findViewById<RadioButton>(R.id.radioDataAndCall)
+
+        sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
+
+            if (radioDataOnlyBtn.text == selected) {
+                radioDataOnlyBtn.isChecked = true
+                val selectedValue = tvOnlyData1.text
+                tvOnlyData1.visibility = View.VISIBLE
+                tvDataAndView1.visibility = View.GONE
+                sharedViewModel?.data?.value = selectedValue as String?
+            }
+            if (radioDataAndCallBtn.text == selected) {
+                radioDataAndCallBtn.isChecked = true
+                val selectedValue = tvDataAndView1.text
+                tvOnlyData1.visibility = View.GONE
+                tvDataAndView1.visibility = View.VISIBLE
+                sharedViewModel?.data?.value = selectedValue as String?
+            }
+        })
+
+
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("selectedValue3")
+        sharedViewModel?.data?.observe(viewLifecycleOwner, Observer { data ->
+            myRef.setValue(data)
+        })
+
 
         buy3GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentDetailData_to_fragmentHomeBuy)
         }
-        val radioDataOnlyBtn = view.findViewById<Button>(R.id.radioDataOnly)
-        val radioDataAndCallBtn = view.findViewById<Button>(R.id.radioDataAndCall)
 
-        radioDataOnlyBtn.setOnClickListener{
-            view.findViewById<TextView>(R.id.tvPriceData1).visibility = View.VISIBLE
-            view.findViewById<TextView>(R.id.tvPriceDataAndCall1).visibility = View.GONE
-        }
-
-        radioDataAndCallBtn.setOnClickListener{
-            view.findViewById<TextView>(R.id.tvPriceData1).visibility = View.GONE
-            view.findViewById<TextView>(R.id.tvPriceDataAndCall1).visibility = View.VISIBLE
-        }
 
 
         hideBottomNav()
