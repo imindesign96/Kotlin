@@ -7,7 +7,12 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContentProviderCompat.requireContext
+import com.example.myapp.admin.AdminActivity
+import com.example.myapp.Users
+import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.ActivitySignInBinding
+import com.example.myapp.SignUpActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -15,7 +20,8 @@ import com.google.android.gms.auth.api.signin.GoogleSignInOptions
 import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
-
+import com.google.firebase.database.*
+import java.security.AccessController.getContext
 
 
 class SignInActivity : AppCompatActivity() {
@@ -23,7 +29,8 @@ class SignInActivity : AppCompatActivity() {
     private lateinit var binding: ActivitySignInBinding
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var googleSignInClient: GoogleSignInClient
-
+    private lateinit var dbRef: DatabaseReference
+    private lateinit var user : UsersData
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivitySignInBinding.inflate(layoutInflater)
@@ -43,10 +50,6 @@ class SignInActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
-        binding.loginWithGoogle.setOnClickListener {
-            signInGoogle()
-        }
-
         // Dang nhap bang email
         binding.button.setOnClickListener {
             val email = binding.emailEt.text.toString()
@@ -55,8 +58,19 @@ class SignInActivity : AppCompatActivity() {
             if (email.isNotEmpty() && pass.isNotEmpty()) {
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
+                        val savedEmail = email.replace(".",",")
+                        Log.d("savedemail", "Email: $savedEmail")
+                        dbRef = FirebaseDatabase.getInstance("https://my-android-app-7f2c4-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("User")
+                        dbRef.child("UsersData").child(savedEmail).addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(snapshot: DataSnapshot) {
+                                user = snapshot.getValue(UsersData::class.java)!!
+                                Log.d("savedemail", "Role: " +user.role)
+                                user.role?.let { it1 -> moveToActivity(it1) }
+                            }
+                            override fun onCancelled(error: DatabaseError) {
+                            }
+                        })
+
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
                     }
@@ -74,8 +88,22 @@ class SignInActivity : AppCompatActivity() {
 
         googleSignInClient = GoogleSignIn.getClient(this, gso)
 
+        binding.loginWithGoogle.setOnClickListener {
+            signInGoogle()
+        }
 
+    }
 
+    private fun moveToActivity(role : Users) {
+        if (role == Users.ADMIN) {
+            val intent = Intent(this, AdminActivity::class.java)
+            intent.putExtra("user", user)
+            startActivity(intent)
+        } else {
+            val intent = Intent(this, MainActivity::class.java)
+            intent.putExtra("user", user)
+            startActivity(intent)
+        }
     }
     private fun signInGoogle() {
         val signInIntent = googleSignInClient.signInIntent
@@ -118,8 +146,8 @@ class SignInActivity : AppCompatActivity() {
 
     override fun onStart() {
         super.onStart()
-
-        if(firebaseAuth.currentUser != null){
+        val status = intent.getStringExtra("signupFinished")
+        if(status == null && firebaseAuth.currentUser != null){
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
         }

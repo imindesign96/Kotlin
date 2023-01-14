@@ -1,9 +1,14 @@
 package com.example.myapp
 
+import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.widget.Button
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
 import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.fragment.NavHostFragment
@@ -11,10 +16,12 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import com.example.myapp.admin.FragmentSales
 import com.example.myapp.admin.home.HomeFragment
 import com.example.myapp.admin.total.FragmentSimTotal
+import com.example.myapp.Users
+import com.example.myapp.admin.users.UsersAdapter
+import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.ActivityMainBinding
-import com.github.mikephil.charting.utils.Utils.init
 import com.google.firebase.auth.FirebaseAuth
-import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.*
 
 
 class MainActivity : AppCompatActivity() {
@@ -23,7 +30,10 @@ class MainActivity : AppCompatActivity() {
     private lateinit var auth: FirebaseAuth
     private lateinit var signOutBtn: Button
     private lateinit var navController: NavController
+    private lateinit var user : UsersData
 
+
+    @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -37,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         // Make sure actions in the ActionBar get propagated to the NavController
         supportActionBar?.setDisplayShowHomeEnabled(true)
-        supportActionBar?.setLogo(R.drawable.logomobile)
+        //supportActionBar?.setLogo(R.drawable.logomobile)
         supportActionBar?.setDisplayUseLogoEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
 
@@ -77,12 +87,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-
-
-
-
     }
-
 
     /**
      * Enables back button support. Simply navigates one element up on the stack.
