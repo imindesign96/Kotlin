@@ -8,6 +8,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat.startActivity
 import com.example.myapp.admin.AdminActivity
 import com.example.myapp.Users
 import com.example.myapp.admin.users.UsersData
@@ -100,9 +101,15 @@ class SignInActivity : AppCompatActivity() {
             intent.putExtra("user", user)
             startActivity(intent)
         } else {
-            val intent = Intent(this, MainActivity::class.java)
-            intent.putExtra("user", user)
-            startActivity(intent)
+            if (user.phoneNumber == "") {
+                val intent = Intent(this, GetInfoUser::class.java)
+                intent.putExtra("user", user)
+                startActivity(intent)
+            } else {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.putExtra("user", user)
+                startActivity(intent)
+            }
         }
     }
     private fun signInGoogle() {
@@ -144,14 +151,14 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-    override fun onStart() {
-        super.onStart()
-        val status = intent.getStringExtra("signupFinished")
-        if(status == null && firebaseAuth.currentUser != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
-    }
+//    override fun onStart() {
+//        super.onStart()
+//        val status = intent.getStringExtra("signupFinished")
+//        if(status == null && firebaseAuth.currentUser != null){
+//            val intent = Intent(this, GetInfoUser::class.java)
+//            startActivity(intent)
+//        }
+//    }
 
 }
 

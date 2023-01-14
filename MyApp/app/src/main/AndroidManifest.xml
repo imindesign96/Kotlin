@@ -23,6 +23,13 @@
         android:theme="@style/Theme.LoginAndSignUp"
         tools:targetApi="33">
         <activity
+            android:name=".GetInfoUser"
+            android:exported="false">
+            <meta-data
+                android:name="android.app.lib_name"
+                android:value="" />
+        </activity>
+        <activity
             android:name=".ActionBar"
             android:exported="false">
             <meta-data
@@ -60,7 +67,7 @@
         </activity>
         <activity
             android:name=".admin.total.SimActivity"
-            android:exported="false"></activity>
+            android:exported="false" />
         <activity
             android:name=".admin.AdminActivity"
             android:exported="false" />

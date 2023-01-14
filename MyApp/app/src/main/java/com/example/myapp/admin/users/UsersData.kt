@@ -12,4 +12,6 @@ data class UsersData(
     val simCode:String? = null,
     var status: String? = null,
     val role: Users? = null,
+    val email: String? = null,
+    val phoneNumber : String? = null
 ) : Parcelable
