@@ -87,6 +87,9 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentHomeBuy_to_payFragment2"
+            app:destination="@id/payFragment" />
     </fragment>
     <fragment
         android:id="@+id/payFragment"
@@ -165,5 +168,13 @@
         <action
             android:id="@+id/action_fragmentSimTotal_self"
             app:destination="@id/fragmentSimTotal" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentInfoInBuy"
+        android:name="com.example.myapp.admin.home.FragmentInfoInBuy"
+        android:label="FragmentInfoInBuy" >
+        <action
+            android:id="@+id/action_fragmentInfoInBuy_to_payFragment"
+            app:destination="@id/payFragment" />
     </fragment>
 </navigation>

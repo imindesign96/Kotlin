@@ -7,13 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.core.content.ContextCompat.startActivity
 import com.example.myapp.admin.AdminActivity
-import com.example.myapp.Users
 import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.ActivitySignInBinding
-import com.example.myapp.SignUpActivity
 import com.google.android.gms.auth.api.signin.GoogleSignIn
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount
 import com.google.android.gms.auth.api.signin.GoogleSignInClient
@@ -22,7 +18,6 @@ import com.google.android.gms.tasks.Task
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.GoogleAuthProvider
 import com.google.firebase.database.*
-import java.security.AccessController.getContext
 
 
 class SignInActivity : AppCompatActivity() {
@@ -95,7 +90,7 @@ class SignInActivity : AppCompatActivity() {
 
     }
 
-    private fun moveToActivity(role : Users) {
+    private fun moveToActivity(role: Users) {
         if (role == Users.ADMIN) {
             val intent = Intent(this, AdminActivity::class.java)
             intent.putExtra("user", user)
@@ -151,14 +146,14 @@ class SignInActivity : AppCompatActivity() {
         }
     }
 
-//    override fun onStart() {
-//        super.onStart()
-//        val status = intent.getStringExtra("signupFinished")
-//        if(status == null && firebaseAuth.currentUser != null){
-//            val intent = Intent(this, GetInfoUser::class.java)
-//            startActivity(intent)
-//        }
-//    }
+    override fun onStart() {
+        super.onStart()
+        val status = intent.getStringExtra("signupFinished")
+        if(status == null && firebaseAuth.currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
+    }
 
 }
 

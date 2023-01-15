@@ -14,7 +14,10 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapp.R
+import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.FragmentPayBinding
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.*
 import com.google.zxing.BarcodeFormat
 import com.google.zxing.MultiFormatWriter
 import com.google.zxing.WriterException
@@ -24,6 +27,11 @@ import com.google.zxing.qrcode.QRCodeWriter
 
 class PayFragment : Fragment(R.layout.fragment_pay) {
 
+    private lateinit var dbRef : DatabaseReference
+    private lateinit var user : ArrayList<UsersData>
+    private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var simPrice : String
+
     private lateinit var binding: FragmentPayBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -31,7 +39,7 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
     ): View {
 
         binding = FragmentPayBinding.inflate(inflater, container, false)
-        val view: View = binding.getRoot()
+        val view: View = binding.root
 
         val barcodeBitmap = createBarcode("1234567891234567891234567")
 
@@ -47,6 +55,37 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
 
         val cancelBtn = view.findViewById<Button>(R.id.cancelBtn)
         val backToHomeBtn = view.findViewById<Button>(R.id.backToHomeBtn)
+        val kindaku = view.findViewById<TextView>(R.id.kingaku)
+
+        firebaseAuth = FirebaseAuth.getInstance()
+        dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
+        dbRef.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                val email = firebaseAuth.currentUser?.email
+                val saveEmail = email?.replace(".",",")
+                this@PayFragment.simPrice = saveEmail?.let {
+                    dataSnapshot.child(it).child("simPrice").getValue(String::class.java)
+                        .toString()
+                }.toString()
+
+                when(simPrice){
+                    "500円/月" -> kindaku.text = "500￥"
+                    "1000円/月" -> kindaku.text = "1000￥"
+                    "800円/月" -> kindaku.text = "800￥"
+                    "1600円/月" -> kindaku.text = "1600￥"
+                    "1000円/月" -> kindaku.text = "1000￥"
+                    "2000円/月" -> kindaku.text = "2000￥"
+                }
+
+            }
+
+            override fun onCancelled(error: DatabaseError) {
+                // Failed to read value
+            }
+        })
+
+
+
 
         cancelBtn.setOnClickListener {
             findNavController().navigate(R.id.action_payFragment_to_homeFragment)
@@ -77,6 +116,9 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         }
         return super.onOptionsItemSelected(item)
     }
+
+
+
 
 
     //create barcode

@@ -3,12 +3,7 @@ package com.example.myapp
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.util.Log
-import android.widget.TextView
 import android.widget.Toast
-import androidx.core.content.ContextCompat.startActivity
-import com.example.myapp.admin.users.UsersAdapter
 import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.ActivityGetDataUsersBinding
 import com.google.firebase.auth.FirebaseAuth
@@ -56,7 +51,7 @@ class GetInfoUser : AppCompatActivity() {
 
 
                     val savedEmail = email.replace(".", ",")
-                    val data = UsersData(0,userName,address,null,null,null,Users.POTENTIAL_USER,email,phoneNumber)
+                    val data = UsersData(0,"name",userName,address,"SimPrice",null,null,null,Users.POTENTIAL_USER,email,phoneNumber)
                     database.child(savedEmail).setValue(data).addOnSuccessListener {
 
                         Toast.makeText(this, "Successfuly Updated", Toast.LENGTH_SHORT).show()
