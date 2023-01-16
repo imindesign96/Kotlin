@@ -66,7 +66,7 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
 
 
         val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("selectedValue3")
+        val myRef = database.getReference("DataPackage")
         sharedViewModel?.data?.observe(viewLifecycleOwner, Observer { data ->
             myRef.setValue(data)
         })

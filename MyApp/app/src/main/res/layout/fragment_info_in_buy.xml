@@ -19,24 +19,6 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/nameLayout"
-            style="@style/LoginTextInputOuterFieldStyle"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            app:boxStrokeColor="@color/yellow"
-            app:hintTextColor="@color/yellow">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userFullName"
-                style="@style/LoginTextInputInnerFieldStyle"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="氏名をご入力ください"
-                android:inputType="textPersonName" />
-        </com.google.android.material.textfield.TextInputLayout>
-
-        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/emailLayout"
             style="@style/LoginTextInputOuterFieldStyle"
             android:layout_width="match_parent"
@@ -55,9 +37,8 @@
                 android:inputType="textEmailAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 
-
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/userPhoneNumberLayout"
+            android:id="@+id/nameLayout"
             style="@style/LoginTextInputOuterFieldStyle"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -66,29 +47,35 @@
             app:hintTextColor="@color/yellow">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/userPhoneNumber"
+                android:id="@+id/userFullName"
                 style="@style/LoginTextInputInnerFieldStyle"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="電話番号をご入力ください"
+                android:hint="氏名をご入力ください"
                 android:inputType="textPersonName" />
         </com.google.android.material.textfield.TextInputLayout>
 
+
+
+
+
+
         <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/userAddressLayout"
-            style="@style/LoginTextInputOuterFieldStyle"
+            style="@style/addressTextFieldStyleOutline"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="100dp"
             android:layout_marginHorizontal="16dp"
             app:boxStrokeColor="@color/yellow"
             app:hintTextColor="@color/yellow">
 
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/userAddress"
-                style="@style/LoginTextInputInnerFieldStyle"
+                style="@style/addressTextFieldStyle"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="住所をご入力ください"
+                android:layout_height="90dp"
+                android:gravity="start"
+                android:hint="住所をご入力ください : "
                 android:inputType="textPostalAddress" />
         </com.google.android.material.textfield.TextInputLayout>
 

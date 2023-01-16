@@ -17,6 +17,7 @@ import com.example.myapp.admin.FragmentSales
 import com.example.myapp.admin.home.HomeFragment
 import com.example.myapp.admin.total.FragmentSimTotal
 import com.example.myapp.Users
+import com.example.myapp.admin.home.PayFragment
 import com.example.myapp.admin.users.UsersAdapter
 import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.ActivityMainBinding
@@ -31,6 +32,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var signOutBtn: Button
     private lateinit var navController: NavController
     private lateinit var user : UsersData
+    private lateinit var dbRef : DatabaseReference
 
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
@@ -54,6 +56,26 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController)
 
+        val email = auth.currentUser?.email
+        val saveEmail = email?.replace(".",",")
+
+        dbRef =
+            saveEmail?.let {
+                FirebaseDatabase.getInstance().getReference("User").child("UsersData").child(
+                    it
+                ).child("status")
+            }!!
+
+        dbRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                when(task.result?.getValue(String::class.java)){
+                    "未支払い" -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_payFragment)
+                    "支払済み" -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_self)
+                    else -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_self)
+                }            } else {
+                // handle error
+            }
+        }
         binding.bottomNavigationViewMain.setOnNavigationItemSelectedListener(){
             val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
             if (currentFragment is HomeFragment) {

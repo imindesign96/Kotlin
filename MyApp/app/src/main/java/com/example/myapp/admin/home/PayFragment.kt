@@ -10,12 +10,14 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
 import com.example.myapp.R
 import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.FragmentPayBinding
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import com.google.zxing.BarcodeFormat
@@ -58,35 +60,29 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         val kindaku = view.findViewById<TextView>(R.id.kingaku)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
-        dbRef.addValueEventListener(object : ValueEventListener {
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                val email = firebaseAuth.currentUser?.email
-                val saveEmail = email?.replace(".",",")
-                this@PayFragment.simPrice = saveEmail?.let {
-                    dataSnapshot.child(it).child("simPrice").getValue(String::class.java)
-                        .toString()
-                }.toString()
+        val email = firebaseAuth.currentUser?.email
+        val saveEmail = email?.replace(".",",")
 
-                when(simPrice){
+        dbRef =
+            saveEmail?.let {
+                FirebaseDatabase.getInstance().getReference("User").child("UsersData").child(
+                    it
+                ).child("simPrice")
+            }!!
+
+        dbRef.get().addOnCompleteListener { task ->
+            if (task.isSuccessful) {
+                when(task.result?.getValue(String::class.java)){
                     "500円/月" -> kindaku.text = "500￥"
                     "1000円/月" -> kindaku.text = "1000￥"
                     "800円/月" -> kindaku.text = "800￥"
                     "1600円/月" -> kindaku.text = "1600￥"
                     "1000円/月" -> kindaku.text = "1000￥"
                     "2000円/月" -> kindaku.text = "2000￥"
-                }
-
+                }            } else {
+                // handle error
             }
-
-            override fun onCancelled(error: DatabaseError) {
-                // Failed to read value
-            }
-        })
-
-
-
-
+        }
         cancelBtn.setOnClickListener {
             findNavController().navigate(R.id.action_payFragment_to_homeFragment)
 
@@ -95,6 +91,13 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         backToHomeBtn.setOnClickListener {
             findNavController().navigate(R.id.action_payFragment_to_homeFragment)
         }
+        val activity = activity as AppCompatActivity?
+
+        // Get the bottom navigation view
+        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigationViewMain)
+        // Hide the bottom navigation view
+        bottomNav.visibility = View.GONE
+
         return view
 
     }

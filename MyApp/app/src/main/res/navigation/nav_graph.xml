@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_homeFragment_self"
             app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_payFragment"
+            app:destination="@id/payFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentDetailData6gb"
@@ -101,6 +104,9 @@
             app:destination="@id/homeFragment"
             app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_payFragment_self"
+            app:destination="@id/payFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSales"

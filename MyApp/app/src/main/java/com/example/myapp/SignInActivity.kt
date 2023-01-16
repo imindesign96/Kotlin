@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.ContextCompat.startActivity
 import com.example.myapp.admin.AdminActivity
 import com.example.myapp.admin.users.UsersData
 import com.example.myapp.databinding.ActivitySignInBinding
@@ -96,17 +97,12 @@ class SignInActivity : AppCompatActivity() {
             intent.putExtra("user", user)
             startActivity(intent)
         } else {
-            if (user.phoneNumber == "") {
-                val intent = Intent(this, GetInfoUser::class.java)
-                intent.putExtra("user", user)
-                startActivity(intent)
-            } else {
                 val intent = Intent(this, MainActivity::class.java)
                 intent.putExtra("user", user)
                 startActivity(intent)
             }
         }
-    }
+
     private fun signInGoogle() {
         val signInIntent = googleSignInClient.signInIntent
         launcher.launch(signInIntent)

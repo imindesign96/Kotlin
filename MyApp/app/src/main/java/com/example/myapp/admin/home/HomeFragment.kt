@@ -143,58 +143,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
 
 
-
-//        radioDataOnlyBtn.setOnClickListener{
-//            tvOnlyData1.visibility = View.VISIBLE
-//            tvDataAndView1.visibility = View.GONE
-//
-//            val selectedValue = tvOnlyData1.text
-//            sharedViewModel?.data?.value = selectedValue as String?
-//
-//        }
-//        radioDataAndCallBtn.setOnClickListener{
-//            tvOnlyData1.visibility = View.GONE
-//            tvDataAndView1.visibility = View.VISIBLE
-//
-//            val selectedValue = tvDataAndView1.text
-//            sharedViewModel?.data?.value = selectedValue as String?
-//        }
-//
-//        radioDataOnlyBtn2.setOnClickListener{
-//            tvOnlyData2.visibility = View.VISIBLE
-//            tvDataAndView2.visibility = View.GONE
-//
-//            val selectedValue = tvOnlyData2.text
-//            sharedViewModel?.data?.value = selectedValue as String?
-//
-//        }
-//
-//        radioDataAndCallBtn2.setOnClickListener{
-//            tvOnlyData2.visibility = View.GONE
-//            tvDataAndView2.visibility = View.VISIBLE
-//
-//            val selectedValue = tvDataAndView2.text
-//            sharedViewModel?.data?.value = selectedValue as String?
-//        }
-//        radioDataAndCallBtn3.setOnClickListener{
-//            tvOnlyData3.visibility = View.VISIBLE
-//            tvDataAndView3.visibility = View.GONE
-//
-//            val selectedValue = tvOnlyData3.text
-//            sharedViewModel?.data?.value = selectedValue as String?
-//        }
-//        radioDataAndCallBtn3.setOnClickListener{
-//            tvOnlyData3.visibility = View.GONE
-//            tvDataAndView3.visibility = View.VISIBLE
-//
-//            val selectedValue = tvDataAndView3.text
-//            sharedViewModel?.data?.value = selectedValue as String?
-//
-//        }
-
-
-
-
         val pieChart: PieChart = view.findViewById(R.id.chart)
 
         val pieEntries = ArrayList<PieEntry>()
@@ -232,7 +180,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         val userInfo = view.findViewById<ImageView>(R.id.userInf)
         userInfo.setOnClickListener {
             startActivity(Intent(activity, UserInfo::class.java))
-
         }
 
 
@@ -241,6 +188,11 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         // Hide the bottom navigation view
         bottomNav.visibility = View.VISIBLE
 
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("DataPackage")
+        sharedViewModel?.data?.observe(viewLifecycleOwner, Observer { data ->
+            myRef.setValue(data)
+        })
 
         return view
 
