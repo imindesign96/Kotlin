@@ -61,18 +61,18 @@
                     android:orientation="horizontal"
                     >
                     <RadioGroup
-                        android:id="@+id/radioBtnGroup"
+                        android:id="@+id/FragGroupBtn"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_centerInParent="true">
                         <RadioButton
-                            android:id="@+id/radioDataOnly"
+                            android:id="@+id/DataOnlyBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
                             android:text="データのみ" />
                         <RadioButton
-                            android:id="@+id/radioDataAndCall"
+                            android:id="@+id/DataAndCallBtn"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"

@@ -53,21 +53,18 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
         val bundle = Bundle()
-        val radioDataOnlyBtn = view.findViewById<RadioButton>(R.id.radioDataOnly1)
-        val radioDataAndCallBtn = view.findViewById<RadioButton>(R.id.radioDataAndCall1)
-        val radioDataOnlyBtn2 = view.findViewById<Button>(R.id.radioDataOnly2)
-        val radioDataAndCallBtn2 = view.findViewById<Button>(R.id.radioDataAndCall2)
-        val radioDataOnlyBtn3 = view.findViewById<Button>(R.id.radioDataOnly3)
-        val radioDataAndCallBtn3 = view.findViewById<Button>(R.id.radioDataAndCall3)
 
         val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
 
-        val radioGroup = view.findViewById<RadioGroup>(R.id.radioBtnGroup1)
-        radioGroup.setOnCheckedChangeListener { _, checkedId ->
-            val selectedRadioButton = view.findViewById<RadioButton>(checkedId)
-            val selectedValue = selectedRadioButton.text
-            sharedViewModel?.selected?.value = selectedValue as String?
-        }
+
+        val radioDataOnlyBtn = view.findViewById<RadioButton>(R.id.DataOnlyBtn1)
+        val radioDataAndCallBtn = view.findViewById<RadioButton>(R.id.DataAndCallBtn1)
+        val radioDataOnlyBtn2 = view.findViewById<RadioButton>(R.id.DataOnlyBtn2)
+        val radioDataAndCallBtn2 = view.findViewById<RadioButton>(R.id.DataAndCallBtn2)
+        val radioDataOnlyBtn3 = view.findViewById<RadioButton>(R.id.DataOnlyBtn3)
+        val radioDataAndCallBtn3 = view.findViewById<RadioButton>(R.id.DataAndCallBtn3)
+
+
 
 
         val tvOnlyData1 = view.findViewById<TextView>(R.id.tvPriceData1)
@@ -123,14 +120,36 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         }
 
 
+        val radioGroup = view.findViewById<RadioGroup>(R.id.radioBtnGr1)
+        val radioGroup2 = view.findViewById<RadioGroup>(R.id.radioBtnGr2)
+        val radioGroup3 = view.findViewById<RadioGroup>(R.id.radioBtnGr3)
+
+        radioGroup.setOnCheckedChangeListener { _, checkedId ->
+            val selectedRadioButton = view.findViewById<RadioButton>(checkedId)
+            val selectedValue = selectedRadioButton.text
+            sharedViewModel?.selected?.value = selectedValue as String?
+        }
+        radioGroup2.setOnCheckedChangeListener { _, checkedId2 ->
+            val selectedRadioButton2 = view.findViewById<RadioButton>(checkedId2)
+            val selectedValue2 = selectedRadioButton2.text
+            sharedViewModel?.selected?.value = selectedValue2 as String?
+        }
+
+        radioGroup3.setOnCheckedChangeListener { _, checkedId3 ->
+            val selectedRadioButton3 = view.findViewById<RadioButton>(checkedId3)
+            val selectedValue3 = selectedRadioButton3.text
+            sharedViewModel?.selected?.value = selectedValue3 as String?
+        }
         sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
 
             if (radioDataOnlyBtn.text == selected) {
                 radioDataOnlyBtn.isChecked = true
+                radioDataAndCallBtn.isChecked = false
                 val selectedValue = tvOnlyData1.text
                 tvOnlyData1.visibility = View.VISIBLE
                 tvDataAndView1.visibility = View.GONE
                 sharedViewModel?.data?.value = selectedValue as String?
+
             }
             if (radioDataAndCallBtn.text == selected) {
                 radioDataAndCallBtn.isChecked = true
@@ -139,7 +158,51 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 tvDataAndView1.visibility = View.VISIBLE
                 sharedViewModel?.data?.value = selectedValue as String?
             }
+            if (radioDataOnlyBtn2.text == selected) {
+                radioDataOnlyBtn2.isChecked = true
+                radioDataAndCallBtn2.isChecked = false
+                val selectedValue = tvOnlyData2.text
+                tvOnlyData2.visibility = View.VISIBLE
+                tvDataAndView2.visibility = View.GONE
+                sharedViewModel?.data?.value = selectedValue as String?
+
+            }
+            if (radioDataAndCallBtn2.text == selected) {
+                radioDataOnlyBtn2.isChecked = false
+                radioDataAndCallBtn2.isChecked = true
+                val selectedValue = tvDataAndView2.text
+                tvOnlyData2.visibility = View.GONE
+                tvDataAndView2.visibility = View.VISIBLE
+                sharedViewModel?.data?.value = selectedValue as String?
+            }
+             if (radioDataOnlyBtn3.text == selected) {
+                radioDataOnlyBtn3.isChecked = true
+                val selectedValue = tvOnlyData3.text
+                tvOnlyData3.visibility = View.VISIBLE
+                tvDataAndView3.visibility = View.GONE
+                sharedViewModel?.data?.value = selectedValue as String?
+
+            }
+            if (radioDataAndCallBtn3.text == selected) {
+                radioDataAndCallBtn3.isChecked = true
+                val selectedValue = tvDataAndView3.text
+                tvOnlyData3.visibility = View.GONE
+                tvDataAndView3.visibility = View.VISIBLE
+                sharedViewModel?.data?.value = selectedValue as String?
+            }
+
         })
+
+//        sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
+//
+
+//        })
+//
+//        sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
+//
+
+//        })
+
 
 
 

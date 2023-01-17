@@ -40,22 +40,22 @@
             >
 
             <RadioGroup
-                android:id="@+id/radioBtnGroup1"
+                android:id="@+id/radioBtnGr2"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerInParent="true">
                 <RadioButton
-                    android:id="@+id/radioDataOnly2"
+                    android:id="@+id/DataOnlyBtn2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="true"
-                    android:text="データのみ" />
+                    android:text="データのみ2" />
                 <RadioButton
-                    android:id="@+id/radioDataAndCall2"
+                    android:id="@+id/DataAndCallBtn2"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:checked="false"
-                    android:text="データと通話" />
+                    android:text="データと通話2" />
             </RadioGroup>
 
         </LinearLayout>

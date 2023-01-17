@@ -9,7 +9,7 @@ data class UsersData(
     val fullName: String ? =null,
     val userName: String ? = null,
     val userAddress: String ? = null,
-    val simPrice: String ? = null,
+    var simPrice: String ? = null,
     val startDay: String? = null,
     val simCode:String? = null,
     var status: String ?= null,

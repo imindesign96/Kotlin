@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Button
 import android.widget.RadioButton
+import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -55,10 +56,18 @@ class FragmentDetailData6gb : Fragment(R.layout.fragment_detail_data6gb) {
         val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
         val tvData1 = view.findViewById<TextView>(R.id.tvPriceData1)
         val tvData2 = view.findViewById<TextView>(R.id.tvPriceDataAndCall1)
+        val groupBtn = view.findViewById<RadioGroup>(R.id.radioBtnGroup2)
+        groupBtn.setOnCheckedChangeListener { _, checkedId ->
+            val selectedRadioButton = view.findViewById<RadioButton>(checkedId)
+            val selectedValue = selectedRadioButton.text
+            sharedViewModel?.selected?.value = selectedValue as String?
+        }
+
         sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
 
             if (radioDataOnlyBtn.text == selected) {
                 radioDataOnlyBtn.isChecked = true
+                radioDataAndCallBtn.isChecked = false
                 val selectedValue = tvData1.text
                 tvData1.visibility = View.VISIBLE
                 tvData2.visibility = View.GONE
@@ -66,6 +75,7 @@ class FragmentDetailData6gb : Fragment(R.layout.fragment_detail_data6gb) {
             }
             if (radioDataAndCallBtn.text == selected) {
                 radioDataAndCallBtn.isChecked = true
+                radioDataOnlyBtn.isChecked = false
                 val selectedValue = tvData2.text
                 tvData1.visibility = View.GONE
                 tvData2.visibility = View.VISIBLE

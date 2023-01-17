@@ -37,19 +37,27 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
         savedInstanceState: Bundle?
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_detail_data, container, false)
+        val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
 
         val buy3GbBtn = view.findViewById<Button>(R.id.buy3GbBtn1)
         val tvOnlyData1 = view.findViewById<TextView>(R.id.tvPriceData1)
         val tvDataAndView1 = view.findViewById<TextView>(R.id.tvPriceDataAndCall1)
         //save data btn
-        val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
-        val radioDataOnlyBtn = view.findViewById<RadioButton>(R.id.radioDataOnly)
-        val radioDataAndCallBtn = view.findViewById<RadioButton>(R.id.radioDataAndCall)
+        val radioDataOnlyBtn = view.findViewById<RadioButton>(R.id.DataOnlyBtn)
+        val radioDataAndCallBtn = view.findViewById<RadioButton>(R.id.DataAndCallBtn)
+        val groupBtn = view.findViewById<RadioGroup>(R.id.FragGroupBtn)
+
+        groupBtn.setOnCheckedChangeListener { _, checkedId ->
+            val selectedRadioButton = view.findViewById<RadioButton>(checkedId)
+            val selectedValue = selectedRadioButton.text
+            sharedViewModel?.selected?.value = selectedValue as String?
+        }
 
         sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
 
             if (radioDataOnlyBtn.text == selected) {
                 radioDataOnlyBtn.isChecked = true
+                radioDataAndCallBtn.isChecked = false
                 val selectedValue = tvOnlyData1.text
                 tvOnlyData1.visibility = View.VISIBLE
                 tvDataAndView1.visibility = View.GONE
@@ -57,6 +65,7 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
             }
             if (radioDataAndCallBtn.text == selected) {
                 radioDataAndCallBtn.isChecked = true
+                radioDataOnlyBtn.isChecked = false
                 val selectedValue = tvDataAndView1.text
                 tvOnlyData1.visibility = View.GONE
                 tvDataAndView1.visibility = View.VISIBLE

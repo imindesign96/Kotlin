@@ -70,13 +70,13 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="true"
-                            android:text="データのみ" />
+                            android:text="データのみ3" />
                         <RadioButton
                             android:id="@+id/radioDataAndCall3"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:checked="false"
-                            android:text="データと通話" />
+                            android:text="データと通話3" />
                     </RadioGroup>
 
 

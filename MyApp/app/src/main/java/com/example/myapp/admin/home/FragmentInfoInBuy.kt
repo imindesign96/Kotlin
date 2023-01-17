@@ -31,9 +31,10 @@ class FragmentInfoInBuy : Fragment(R.layout.fragment_info_in_buy) {
     ): View {
         binding = FragmentInfoInBuyBinding.inflate(inflater,container,false)
         val view: View = binding.root
+        val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
+
         firebaseAuth = FirebaseAuth.getInstance()
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
-        val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
         email = firebaseAuth.currentUser?.email.toString() // lay duoc email
         val simPrice = sharedViewModel?.data?.value.toString() // lay gia tri sim dang chon
         binding.emailEt.setText(email) //set email cho input text
@@ -42,9 +43,10 @@ class FragmentInfoInBuy : Fragment(R.layout.fragment_info_in_buy) {
         binding.updateInfoUserBtn.setOnClickListener {
             val address = binding.userAddress.text.toString()
             val name = binding.userFullName.text.toString()
-
-                updateData(name, address,simPrice,email)
-
+            updateData(name, address,simPrice,email)
+            UsersData().fullName
+            UsersData().userName
+            UsersData().userAddress
         }
 
 

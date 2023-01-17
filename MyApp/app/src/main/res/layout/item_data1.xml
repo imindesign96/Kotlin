@@ -40,18 +40,18 @@
                 >
 
                 <RadioGroup
-                    android:id="@+id/radioBtnGroup1"
+                    android:id="@+id/radioBtnGr1"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true">
                     <RadioButton
-                        android:id="@+id/radioDataOnly1"
+                        android:id="@+id/DataOnlyBtn1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="true"
                         android:text="データのみ" />
                     <RadioButton
-                        android:id="@+id/radioDataAndCall1"
+                        android:id="@+id/DataAndCallBtn1"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:checked="false"

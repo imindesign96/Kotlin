@@ -88,8 +88,7 @@
         <action
             android:id="@+id/action_fragmentHomeBuy_to_homeFragment"
             app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            app:popUpToInclusive="false" />
         <action
             android:id="@+id/action_fragmentHomeBuy_to_payFragment2"
             app:destination="@id/payFragment" />
