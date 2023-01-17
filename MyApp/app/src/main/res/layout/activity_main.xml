@@ -68,7 +68,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:menu="@menu/present_user_bottomnav"
         android:visibility="gone">
     </com.google.android.material.bottomnavigation.BottomNavigationView>
 

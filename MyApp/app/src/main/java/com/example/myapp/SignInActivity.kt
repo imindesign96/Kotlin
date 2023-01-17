@@ -63,6 +63,7 @@ class SignInActivity : AppCompatActivity() {
                                 Users.ADMIN -> Intent(this, AdminActivity::class.java)
                                 else -> Intent(this, MainActivity::class.java)
                             }
+                            intent.putExtra("UsersData",it)
                             startActivity(intent)
                         }
                     }

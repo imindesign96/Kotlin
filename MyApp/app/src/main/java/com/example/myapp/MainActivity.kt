@@ -19,6 +19,8 @@ import com.example.myapp.admin.FragmentSales
 import com.example.myapp.admin.home.HomeFragment
 import com.example.myapp.admin.total.FragmentSimTotal
 import com.example.myapp.Users
+import com.example.myapp.admin.FragmentInventory
+import com.example.myapp.admin.home.FragmentHomeAdmin
 import com.example.myapp.admin.home.PayFragment
 import com.example.myapp.admin.users.UsersAdapter
 import com.example.myapp.admin.users.UsersData
@@ -29,7 +31,7 @@ import com.google.firebase.database.*
 
 class MainActivity : AppCompatActivity() {
 
-    private val firebaseConnection: FirebaseConnection by viewModels()
+    private lateinit var usersData : UsersData
     private lateinit var binding: ActivityMainBinding
     private lateinit var signOutBtn: Button
     private lateinit var navController: NavController
@@ -41,6 +43,7 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        usersData = intent.getParcelableExtra("UsersData")!!
         // Get the navigation host fragment from this Activity
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
@@ -55,13 +58,11 @@ class MainActivity : AppCompatActivity() {
 
         setupActionBarWithNavController(navController)
 
-        firebaseConnection.user.observe(this) {
-            when (it.status) {
-                "未支払い" -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_payFragment)
-                "支払済み" -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_self)
-                else -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_self)
-            }
-        }
+//        when (usersData.status) {
+//            "未支払い" -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_to_payFragment)
+//            "支払済み" -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_self)
+//            else -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_homeFragment_self)
+//        }
     }
 
     /**
@@ -72,14 +73,15 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        firebaseConnection.user.observe(this) {
-            if (it.role == Users.POTENTIAL_USER) {
-                binding.potentialBottomNav.isVisible = true
-                menuInflater.inflate(R.menu.potential_user_bottomnav, menu)
-            } else {
-                binding.presentBottomNav.isVisible = true
-                menuInflater.inflate(R.menu.present_user_bottomnav, menu)
-            }
+        Log.d("USERROLE", usersData.role.toString())
+        if (usersData.role == Users.POTENTIAL_USER) {
+            binding.potentialBottomNav.isVisible = true
+            binding.presentBottomNav.isVisible = false
+            menuInflater.inflate(R.menu.potential_user_bottomnav, menu)
+        } else {
+            binding.potentialBottomNav.isVisible = false
+            binding.presentBottomNav.isVisible = true
+            menuInflater.inflate(R.menu.present_user_bottomnav, menu)
         }
         return true
     }

@@ -23,7 +23,6 @@ import com.google.firebase.messaging.FirebaseMessaging
 class AdminActivity : AppCompatActivity() {
 
     private lateinit var navController: NavController
-    private val firebaseConnection: FirebaseConnection by viewModels()
     private lateinit var binding : ActivityAdminBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
