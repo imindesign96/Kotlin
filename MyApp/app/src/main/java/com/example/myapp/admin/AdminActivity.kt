@@ -37,30 +37,30 @@ class AdminActivity : AppCompatActivity() {
 
         binding.bottomNavigationView.setOnNavigationItemSelectedListener() {
             val currentFragment = navHostFragment?.childFragmentManager?.fragments?.get(0)
-            if (currentFragment is FragmentHomeAdmin) {
+            if (currentFragment is FragmentSimTotal) {
                 when (it.itemId) {
-                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentHomeAdmin_self)
-                    R.id.navi_smile -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentHomeAdmin_to_fragmentInventory)
-                    R.id.navi_pets -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentHomeAdmin_to_fragmentSales)
-                    R.id.navi_sun -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentHomeAdmin_to_fragmentUsers)
+                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSimTotal_self)
+                    R.id.navi_smile -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSimTotal_to_fragmentInventory)
+                    R.id.navi_pets -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSimTotal_to_fragmentSales)
+                    R.id.navi_sun -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSimTotal_to_fragmentUsers)
                 }
             } else if (currentFragment is FragmentInventory) {
                 when (it.itemId) {
-                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentInventory_to_fragmentHomeAdmin)
+                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentInventory_to_fragmentSimTotal)
                     R.id.navi_smile -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentInventory_self)
                     R.id.navi_pets -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentInventory_to_fragmentSales)
                     R.id.navi_sun -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentInventory_to_fragmentUsers)
                 }
             } else if (currentFragment is FragmentSales) {
                 when (it.itemId) {
-                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSales_to_fragmentHomeAdmin)
+                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSales_to_fragmentSimTotal)
                     R.id.navi_smile -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSales_to_fragmentInventory)
                     R.id.navi_pets -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSales_self)
                     R.id.navi_sun -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentSales_to_fragmentUsers)
                 }
             } else {
                 when (it.itemId) {
-                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentUsers_to_fragmentHomeAdmin)
+                    R.id.navi_home -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentUsers_to_fragmentSimTotal)
                     R.id.navi_smile -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentUsers_to_fragmentInventory)
                     R.id.navi_pets -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentUsers_to_fragmentSales)
                     R.id.navi_sun -> findNavController(R.id.nav_host_fragment).navigate(R.id.action_fragmentUsers_self)

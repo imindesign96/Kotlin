@@ -36,9 +36,6 @@
             android:id="@+id/action_homeFragment_to_fragmentHomeBuy"
             app:destination="@id/fragmentHomeBuy" />
         <action
-            android:id="@+id/action_homeFragment_to_fragmentSimTotal"
-            app:destination="@id/fragmentSimTotal" />
-        <action
             android:id="@+id/action_homeFragment_self"
             app:destination="@id/homeFragment" />
         <action
@@ -101,21 +98,6 @@
         <action
             android:id="@+id/action_payFragment_self"
             app:destination="@id/payFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentSimTotal"
-        android:name="com.example.myapp.admin.total.FragmentSimTotal"
-        android:label="fragment_sim_total"
-        tools:layout="@layout/fragment_sim_total" >
-        <action
-            android:id="@+id/action_fragmentSimTotal_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_fragmentSimTotal_to_homeFragment2"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_fragmentSimTotal_self"
-            app:destination="@id/fragmentSimTotal" />
     </fragment>
     <fragment
         android:id="@+id/fragmentInfoInBuy"

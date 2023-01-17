@@ -3,33 +3,12 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/fragmentHomeAdmin">
+    app:startDestination="@id/fragmentSales">
 
-    <fragment
-        android:id="@+id/fragmentHomeAdmin"
-        android:name="com.example.myapp.admin.home.FragmentHomeAdmin"
-        android:label="fragment_home_admin"
-        tools:layout="@layout/fragment_home_admin" >
-        <action
-            android:id="@+id/action_fragmentHomeAdmin_to_fragmentInventory"
-            app:destination="@id/fragmentInventory" />
-        <action
-            android:id="@+id/action_fragmentHomeAdmin_to_fragmentSales"
-            app:destination="@id/fragmentSales" />
-        <action
-            android:id="@+id/action_fragmentHomeAdmin_self"
-            app:destination="@id/fragmentHomeAdmin" />
-        <action
-            android:id="@+id/action_fragmentHomeAdmin_to_fragmentUsers"
-            app:destination="@id/fragmentUsers" />
-    </fragment>
     <fragment
         android:id="@+id/fragmentInventory"
         android:name="com.example.myapp.admin.FragmentInventory"
         android:label="FragmentInventory" >
-        <action
-            android:id="@+id/action_fragmentInventory_to_fragmentHomeAdmin"
-            app:destination="@id/fragmentHomeAdmin" />
         <action
             android:id="@+id/action_fragmentInventory_to_fragmentSales"
             app:destination="@id/fragmentSales" />
@@ -39,14 +18,14 @@
         <action
             android:id="@+id/action_fragmentInventory_to_fragmentUsers"
             app:destination="@id/fragmentUsers" />
+        <action
+            android:id="@+id/action_fragmentInventory_to_fragmentSimTotal"
+            app:destination="@id/fragmentSimTotal" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSales"
         android:name="com.example.myapp.admin.FragmentSales"
         android:label="FragmentSales" >
-        <action
-            android:id="@+id/action_fragmentSales_to_fragmentHomeAdmin"
-            app:destination="@id/fragmentHomeAdmin" />
         <action
             android:id="@+id/action_fragmentSales_to_fragmentInventory"
             app:destination="@id/fragmentInventory" />
@@ -56,14 +35,14 @@
         <action
             android:id="@+id/action_fragmentSales_to_fragmentUsers"
             app:destination="@id/fragmentUsers" />
+        <action
+            android:id="@+id/action_fragmentSales_to_fragmentSimTotal"
+            app:destination="@id/fragmentSimTotal" />
     </fragment>
     <fragment
         android:id="@+id/fragmentUsers"
         android:name="com.example.myapp.admin.users.FragmentUsers"
         android:label="FragmentUsers" >
-        <action
-            android:id="@+id/action_fragmentUsers_to_fragmentHomeAdmin"
-            app:destination="@id/fragmentHomeAdmin" />
         <action
             android:id="@+id/action_fragmentUsers_to_fragmentInventory"
             app:destination="@id/fragmentInventory" />
@@ -72,6 +51,27 @@
             app:destination="@id/fragmentSales" />
         <action
             android:id="@+id/action_fragmentUsers_self"
+            app:destination="@id/fragmentUsers" />
+        <action
+            android:id="@+id/action_fragmentUsers_to_fragmentSimTotal"
+            app:destination="@id/fragmentSimTotal" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentSimTotal"
+        android:name="com.example.myapp.admin.total.FragmentSimTotal"
+        android:label="fragment_sim_total"
+        tools:layout="@layout/fragment_sim_total" >
+        <action
+            android:id="@+id/action_fragmentSimTotal_self"
+            app:destination="@id/fragmentSimTotal" />
+        <action
+            android:id="@+id/action_fragmentSimTotal_to_fragmentSales"
+            app:destination="@id/fragmentSales" />
+        <action
+            android:id="@+id/action_fragmentSimTotal_to_fragmentInventory"
+            app:destination="@id/fragmentInventory" />
+        <action
+            android:id="@+id/action_fragmentSimTotal_to_fragmentUsers"
             app:destination="@id/fragmentUsers" />
     </fragment>
 </navigation>
