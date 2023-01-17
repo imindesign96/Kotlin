@@ -3,184 +3,75 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/homeFragment">
+    app:startDestination="@id/fragmentHomeAdmin">
+
     <fragment
-        android:id="@+id/fragmentDetailData"
-        android:name="com.example.myapp.admin.home.FragmentDetailData"
-        android:label="fragment_detail_data"
-        tools:layout="@layout/fragment_detail_data" >
+        android:id="@+id/fragmentHomeAdmin"
+        android:name="com.example.myapp.admin.home.FragmentHomeAdmin"
+        android:label="fragment_home_admin"
+        tools:layout="@layout/fragment_home_admin" >
         <action
-            android:id="@+id/action_fragmentDetailData_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpToInclusive="false" />
+            android:id="@+id/action_fragmentHomeAdmin_to_fragmentInventory"
+            app:destination="@id/fragmentInventory" />
         <action
-            android:id="@+id/action_fragmentDetailData_to_fragmentHomeBuy"
-            app:destination="@id/fragmentHomeBuy" />
-    </fragment>
-    <fragment
-        android:id="@+id/homeFragment"
-        android:name="com.example.myapp.admin.home.HomeFragment"
-        android:label="HomeFragment" >
-        <action
-            android:id="@+id/action_homeFragment_to_fragmentDetailData"
-            app:destination="@id/fragmentDetailData"
-            app:popUpTo="@id/fragmentDetailData"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_homeFragment_to_fragmentDetailData6gb"
-            app:destination="@id/fragmentDetailData6gb" />
-        <action
-            android:id="@+id/action_homeFragment_to_fragmentDetailData12gb"
-            app:destination="@id/fragmentDetailData12gb" />
-        <action
-            android:id="@+id/action_homeFragment_to_fragmentHomeBuy"
-            app:destination="@id/fragmentHomeBuy" />
-        <action
-            android:id="@+id/action_homeFragment_to_fragmentSales"
+            android:id="@+id/action_fragmentHomeAdmin_to_fragmentSales"
             app:destination="@id/fragmentSales" />
         <action
-            android:id="@+id/action_homeFragment_to_fragmentUsers"
+            android:id="@+id/action_fragmentHomeAdmin_self"
+            app:destination="@id/fragmentHomeAdmin" />
+        <action
+            android:id="@+id/action_fragmentHomeAdmin_to_fragmentUsers"
             app:destination="@id/fragmentUsers" />
-        <action
-            android:id="@+id/action_homeFragment_to_fragmentSimTotal"
-            app:destination="@id/fragmentSimTotal" />
-        <action
-            android:id="@+id/action_homeFragment_self"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_homeFragment_to_payFragment"
-            app:destination="@id/payFragment" />
     </fragment>
     <fragment
-        android:id="@+id/fragmentDetailData6gb"
-        android:name="com.example.myapp.admin.home.FragmentDetailData6gb"
-        android:label="FragmentDetailData6gb" >
+        android:id="@+id/fragmentInventory"
+        android:name="com.example.myapp.admin.FragmentInventory"
+        android:label="FragmentInventory" >
         <action
-            android:id="@+id/action_fragmentDetailData6gb_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_fragmentInventory_to_fragmentHomeAdmin"
+            app:destination="@id/fragmentHomeAdmin" />
         <action
-            android:id="@+id/action_fragmentDetailData6gb_to_fragmentHomeBuy"
-            app:destination="@id/fragmentHomeBuy" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentDetailData12gb"
-        android:name="com.example.myapp.admin.home.FragmentDetailData12gb"
-        android:label="FragmentDetailData12gb" >
+            android:id="@+id/action_fragmentInventory_to_fragmentSales"
+            app:destination="@id/fragmentSales" />
         <action
-            android:id="@+id/action_fragmentDetailData12gb_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
+            android:id="@+id/action_fragmentInventory_self"
+            app:destination="@id/fragmentInventory" />
         <action
-            android:id="@+id/action_fragmentDetailData12gb_to_fragmentHomeBuy"
-            app:destination="@id/fragmentHomeBuy" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentHomeBuy"
-        android:name="com.example.myapp.admin.home.FragmentHomeBuy"
-        android:label="fragment_home_buy"
-        tools:layout="@layout/fragment_home_buy" >
-        <action
-            android:id="@+id/action_fragmentHomeBuy_to_payFragment"
-            app:destination="@id/payFragment" />
-        <action
-            android:id="@+id/action_fragmentHomeBuy_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_fragmentHomeBuy_to_payFragment2"
-            app:destination="@id/payFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/payFragment"
-        android:name="com.example.myapp.admin.home.PayFragment"
-        android:label="payFragment"
-        tools:layout="@layout/fragment_pay" >
-        <action
-            android:id="@+id/action_payFragment_to_homeFragment"
-            app:destination="@id/homeFragment"
-            app:popUpTo="@id/homeFragment"
-            app:popUpToInclusive="true" />
-        <action
-            android:id="@+id/action_payFragment_self"
-            app:destination="@id/payFragment" />
+            android:id="@+id/action_fragmentInventory_to_fragmentUsers"
+            app:destination="@id/fragmentUsers" />
     </fragment>
     <fragment
         android:id="@+id/fragmentSales"
         android:name="com.example.myapp.admin.FragmentSales"
         android:label="FragmentSales" >
         <action
-            android:id="@+id/action_fragmentSales_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_fragmentSales_to_fragmentHomeAdmin"
+            app:destination="@id/fragmentHomeAdmin" />
         <action
-            android:id="@+id/action_fragmentSales_to_fragmentUsers"
-            app:destination="@id/fragmentUsers" />
-        <action
-            android:id="@+id/action_fragmentSales_to_fragmentSimTotal"
-            app:destination="@id/fragmentSimTotal" />
-        <action
-            android:id="@+id/action_fragmentSales_to_fragmentUsers2"
-            app:destination="@id/fragmentUsers" />
-        <action
-            android:id="@+id/action_fragmentSales_to_fragmentSimTotal2"
-            app:destination="@id/fragmentSimTotal" />
+            android:id="@+id/action_fragmentSales_to_fragmentInventory"
+            app:destination="@id/fragmentInventory" />
         <action
             android:id="@+id/action_fragmentSales_self"
             app:destination="@id/fragmentSales" />
+        <action
+            android:id="@+id/action_fragmentSales_to_fragmentUsers"
+            app:destination="@id/fragmentUsers" />
     </fragment>
     <fragment
         android:id="@+id/fragmentUsers"
         android:name="com.example.myapp.admin.users.FragmentUsers"
         android:label="FragmentUsers" >
         <action
-            android:id="@+id/action_fragmentUsers_to_homeFragment"
-            app:destination="@id/homeFragment" />
+            android:id="@+id/action_fragmentUsers_to_fragmentHomeAdmin"
+            app:destination="@id/fragmentHomeAdmin" />
+        <action
+            android:id="@+id/action_fragmentUsers_to_fragmentInventory"
+            app:destination="@id/fragmentInventory" />
         <action
             android:id="@+id/action_fragmentUsers_to_fragmentSales"
             app:destination="@id/fragmentSales" />
         <action
-            android:id="@+id/action_fragmentUsers_to_fragmentSimTotal"
-            app:destination="@id/fragmentSimTotal" />
-        <action
-            android:id="@+id/action_fragmentUsers_to_fragmentSimTotal2"
-            app:destination="@id/fragmentSimTotal" />
-        <action
             android:id="@+id/action_fragmentUsers_self"
             app:destination="@id/fragmentUsers" />
-        <action
-            android:id="@+id/action_fragmentUsers_self2"
-            app:destination="@id/fragmentUsers" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentSimTotal"
-        android:name="com.example.myapp.admin.total.FragmentSimTotal"
-        android:label="fragment_sim_total"
-        tools:layout="@layout/fragment_sim_total" >
-        <action
-            android:id="@+id/action_fragmentSimTotal_to_homeFragment"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_fragmentSimTotal_to_fragmentSales"
-            app:destination="@id/fragmentSales" />
-        <action
-            android:id="@+id/action_fragmentSimTotal_to_fragmentUsers"
-            app:destination="@id/fragmentUsers" />
-        <action
-            android:id="@+id/action_fragmentSimTotal_to_homeFragment2"
-            app:destination="@id/homeFragment" />
-        <action
-            android:id="@+id/action_fragmentSimTotal_self"
-            app:destination="@id/fragmentSimTotal" />
-    </fragment>
-    <fragment
-        android:id="@+id/fragmentInfoInBuy"
-        android:name="com.example.myapp.admin.home.FragmentInfoInBuy"
-        android:label="FragmentInfoInBuy" >
-        <action
-            android:id="@+id/action_fragmentInfoInBuy_to_payFragment"
-            app:destination="@id/payFragment" />
     </fragment>
 </navigation>
