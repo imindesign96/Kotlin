@@ -76,6 +76,7 @@ class FirebaseConnection : ViewModel() {
             if (key.isNotEmpty() && !phoneNumberExisted) {
                 simData = SimData(key.toLong(), phoneNumber.toLong(), simCode, price.toLong())
                 dbRef.child("SimData").child(key).setValue(simData)
+                addSimResult.value = "Success"
                 Log.d("ADDSIM", "Add Sim done" + key)
             }
 
