@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/user_nav_graph"
+    xmlns:tools="http://schemas.android.com/tools"
+    app:startDestination="@id/homeFragment">
+    <fragment
+        android:id="@+id/fragmentDetailData"
+        android:name="com.example.myapp.admin.home.FragmentDetailData"
+        android:label="fragment_detail_data"
+        tools:layout="@layout/fragment_detail_data" >
+        <action
+            android:id="@+id/action_fragmentDetailData_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpToInclusive="false" />
+        <action
+            android:id="@+id/action_fragmentDetailData_to_fragmentHomeBuy"
+            app:destination="@id/fragmentHomeBuy" />
+    </fragment>
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.example.myapp.admin.home.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentDetailData"
+            app:destination="@id/fragmentDetailData"
+            app:popUpTo="@id/fragmentDetailData"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentDetailData6gb"
+            app:destination="@id/fragmentDetailData6gb" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentDetailData12gb"
+            app:destination="@id/fragmentDetailData12gb" />
+        <action
+            android:id="@+id/action_homeFragment_to_fragmentHomeBuy"
+            app:destination="@id/fragmentHomeBuy" />
+        <action
+            android:id="@+id/action_homeFragment_self"
+            app:destination="@id/homeFragment" />
+        <action
+            android:id="@+id/action_homeFragment_to_payFragment"
+            app:destination="@id/payFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetailData6gb"
+        android:name="com.example.myapp.admin.home.FragmentDetailData6gb"
+        android:label="FragmentDetailData6gb" >
+        <action
+            android:id="@+id/action_fragmentDetailData6gb_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentDetailData6gb_to_fragmentHomeBuy"
+            app:destination="@id/fragmentHomeBuy" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentDetailData12gb"
+        android:name="com.example.myapp.admin.home.FragmentDetailData12gb"
+        android:label="FragmentDetailData12gb" >
+        <action
+            android:id="@+id/action_fragmentDetailData12gb_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentDetailData12gb_to_fragmentHomeBuy"
+            app:destination="@id/fragmentHomeBuy" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentHomeBuy"
+        android:name="com.example.myapp.admin.home.FragmentHomeBuy"
+        android:label="fragment_home_buy"
+        tools:layout="@layout/fragment_home_buy" >
+        <action
+            android:id="@+id/action_fragmentHomeBuy_to_payFragment"
+            app:destination="@id/payFragment" />
+        <action
+            android:id="@+id/action_fragmentHomeBuy_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_fragmentHomeBuy_to_payFragment2"
+            app:destination="@id/payFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/payFragment"
+        android:name="com.example.myapp.admin.home.PayFragment"
+        android:label="payFragment"
+        tools:layout="@layout/fragment_pay" >
+        <action
+            android:id="@+id/action_payFragment_to_homeFragment"
+            app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_payFragment_self"
+            app:destination="@id/payFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentInfoInBuy"
+        android:name="com.example.myapp.admin.home.FragmentInfoInBuy"
+        android:label="FragmentInfoInBuy" >
+        <action
+            android:id="@+id/action_fragmentInfoInBuy_to_payFragment"
+            app:destination="@id/payFragment" />
+    </fragment>
+
+</navigation>

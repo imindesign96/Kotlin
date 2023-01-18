@@ -12,13 +12,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.example.myapp.R
-import com.example.myapp.SignInActivity
-import com.example.myapp.UserInfo
+import com.example.myapp.*
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -36,6 +36,7 @@ import com.google.zxing.qrcode.QRCodeWriter
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+    private val firebaseConnection : FirebaseConnection by activityViewModels()
     private lateinit var signOutBtn: TextView
     private lateinit var auth: FirebaseAuth
     private lateinit var detailData1 : Button
@@ -244,12 +245,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         userInfo.setOnClickListener {
             startActivity(Intent(activity, UserInfo::class.java))
         }
-
-
-        // Get the bottom navigation view
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigationViewMain)
-        // Hide the bottom navigation view
-        bottomNav.visibility = View.VISIBLE
 
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("DataPackage")
