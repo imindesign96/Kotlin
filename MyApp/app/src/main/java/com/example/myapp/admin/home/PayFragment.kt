@@ -15,6 +15,8 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.example.myapp.R
 import com.example.myapp.Users
@@ -29,17 +31,17 @@ import com.google.zxing.WriterException
 import com.google.zxing.common.BitMatrix
 import com.google.zxing.qrcode.QRCodeWriter
 import java.util.*
-import kotlin.collections.ArrayList
 
 
 class PayFragment : Fragment(R.layout.fragment_pay) {
 
-    private lateinit var dbRef : DatabaseReference
-    private lateinit var user : ArrayList<UsersData>
+    private lateinit var dbRef: DatabaseReference
+    private var user = MutableLiveData<UsersData>()
     private lateinit var firebaseAuth: FirebaseAuth
-    private lateinit var simPrice : String
-
+    private lateinit var simPrice: String
     private lateinit var binding: FragmentPayBinding
+    private lateinit var saveEmail: String
+    private lateinit var email: String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -48,33 +50,29 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         binding = FragmentPayBinding.inflate(inflater, container, false)
         val view: View = binding.root
 
-
-
-
         val cancelBtn = view.findViewById<Button>(R.id.cancelBtn)
         val backToHomeBtn = view.findViewById<Button>(R.id.backToHomeBtn)
         val kindaku = view.findViewById<TextView>(R.id.kingaku)
 
         firebaseAuth = FirebaseAuth.getInstance()
-        val email = firebaseAuth.currentUser?.email
-        val name = UsersData().fullName
-        val userName = UsersData().userName
-        val address = UsersData().userAddress
-        val saveEmail = email?.replace(".",",")
+        email = firebaseAuth.currentUser?.email.toString()
+
+        saveEmail = email?.replace(".", ",").toString()
 
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
 
         if (saveEmail != null) {
             dbRef.child(saveEmail).child("simPrice").get().addOnCompleteListener { task ->
                 if (task.isSuccessful) {
-                    when(task.result?.getValue(String::class.java)){
+                    when (task.result?.getValue(String::class.java)) {
                         "500円/月" -> kindaku.text = "500￥"
                         "1000円/月" -> kindaku.text = "1000￥"
                         "800円/月" -> kindaku.text = "800￥"
                         "1600円/月" -> kindaku.text = "1600￥"
                         "1000円/月" -> kindaku.text = "1000￥"
                         "2000円/月" -> kindaku.text = "2000￥"
-                    }            } else {
+                    }
+                } else {
                     // handle error
                 }
             }
@@ -107,18 +105,11 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         val formattedDate = dateFormat.format(deadline)
 
         view.findViewById<TextView>(R.id.deadline).text = formattedDate.toString()
+       val name = UsersData().fullName
+        val address = UsersData().userAddress
 
         cancelBtn.setOnClickListener {
-
-            if (email != null) {
-                if (name != null) {
-                    if (userName != null) {
-                        if (address != null) {
-                            updateData(name, email, userName, address)
-                        }
-                    }
-                }
-            }
+            updateData(name,address,email)
             findNavController().navigate(R.id.action_payFragment_to_homeFragment)
 
         }
@@ -129,9 +120,11 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         val activity = activity as AppCompatActivity?
 
         // Get the bottom navigation view
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigationViewMain)
+        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.potentialBottomNav)
+        val bottomNav2 = activity!!.findViewById<BottomNavigationView>(R.id.presentBottomNav)
         // Hide the bottom navigation view
         bottomNav.visibility = View.GONE
+        bottomNav2.visibility = View.GONE
 
         return view
 
@@ -189,21 +182,16 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
     //Update lai data khi cancel
 
     private fun updateData(
-        name : String,
-        email : String,
-        userName: String,
-        address : String
+        name: String?,
+        address: String?,
+        email: String,
     ) {
         val savedEmail = email.replace(".", ",")
-        val data = UsersData(0,name,userName,address,"",null,null,"",
+        val data = UsersData(0,name,"userName",address,null,null,null,null,
             Users.POTENTIAL_USER,email,null)
-        dbRef.child(savedEmail).setValue(data).addOnSuccessListener {
-            Toast.makeText(context, "Successfuly Cancel", Toast.LENGTH_SHORT).show()
+        dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
 
-        }.addOnFailureListener {
-            Toast.makeText(context, "Failed to Update", Toast.LENGTH_SHORT).show()
-
-        }
+        dbRef.child(savedEmail).setValue(data)
     }
 
     // crate qr code

@@ -74,15 +74,12 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
         })
 
 
-        val database = FirebaseDatabase.getInstance()
-        val myRef = database.getReference("DataPackage")
-        sharedViewModel?.data?.observe(viewLifecycleOwner, Observer { data ->
-            myRef.setValue(data)
-        })
+
 
 
         buy3GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentDetailData_to_fragmentHomeBuy)
+            getPrice()
         }
 
 
@@ -93,14 +90,24 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
         return view
     }
 
+    private fun getPrice(){
+        val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
+        val database = FirebaseDatabase.getInstance()
+        val myRef = database.getReference("DataPackage")
+        sharedViewModel?.data?.observe(viewLifecycleOwner, Observer { data ->
+            myRef.setValue(data)
+        })
+    }
+
     private fun hideBottomNav(){
         // Get the activity
         val activity = activity as AppCompatActivity?
 
         // Get the bottom navigation view
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigationViewMain)
-
+        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.potentialBottomNav)
+        val bottomNav2 = activity!!.findViewById<BottomNavigationView>(R.id.presentBottomNav)
         // Hide the bottom navigation view
         bottomNav.visibility = View.GONE
+        bottomNav2.visibility = View.GONE
     }
 }

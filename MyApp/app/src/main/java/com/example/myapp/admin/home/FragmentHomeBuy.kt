@@ -67,10 +67,11 @@ class FragmentHomeBuy : Fragment(R.layout.fragment_home_buy) {
         val activity = activity as AppCompatActivity?
 
         // Get the bottom navigation view
-        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.bottomNavigationViewMain)
-
+        val bottomNav = activity!!.findViewById<BottomNavigationView>(R.id.potentialBottomNav)
+        val bottomNav2 = activity!!.findViewById<BottomNavigationView>(R.id.presentBottomNav)
         // Hide the bottom navigation view
         bottomNav.visibility = View.GONE
+        bottomNav2.visibility = View.GONE
     }
 
 

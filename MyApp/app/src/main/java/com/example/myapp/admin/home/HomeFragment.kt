@@ -53,7 +53,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         savedInstanceState: Bundle?
     ): View {
         val view: View = inflater.inflate(R.layout.fragment_home, container, false)
-        val bundle = Bundle()
 
         val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
 
@@ -102,22 +101,27 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         //Detail
         detailData1.setOnClickListener {
                 findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData)
-
+            getPrice()
         }
         detailData2.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData6gb)
+            getPrice()
         }
         detailData3.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData12gb)
+            getPrice()
         }
         buy3GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentHomeBuy)
+            getPrice()
         }
         buy6GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentHomeBuy)
+            getPrice()
         }
         buy12GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentHomeBuy)
+            getPrice()
         }
 
 
@@ -194,18 +198,6 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         })
 
-//        sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
-//
-
-//        })
-//
-//        sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
-//
-
-//        })
-
-
-
 
         val pieChart: PieChart = view.findViewById(R.id.chart)
 
@@ -246,14 +238,19 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
             startActivity(Intent(activity, UserInfo::class.java))
         }
 
+
+
+        return view
+
+    }
+
+    private fun getPrice(){
+        val sharedViewModel = activity?.let { ViewModelProvider(it).get(SharedViewModel::class.java) }
         val database = FirebaseDatabase.getInstance()
         val myRef = database.getReference("DataPackage")
         sharedViewModel?.data?.observe(viewLifecycleOwner, Observer { data ->
             myRef.setValue(data)
         })
-
-        return view
-
     }
 
 

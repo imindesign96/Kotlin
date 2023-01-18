@@ -46,7 +46,7 @@ class MainActivity : AppCompatActivity() {
         usersData = intent.getParcelableExtra("UsersData")!!
         // Get the navigation host fragment from this Activity
         val navHostFragment = supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+            .findFragmentById(R.id.nav_host_fragment_main) as NavHostFragment
         // Instantiate the navController using the NavHostFragment
         navController = navHostFragment.navController
         // Make sure actions in the ActionBar get propagated to the NavController
@@ -54,7 +54,7 @@ class MainActivity : AppCompatActivity() {
         //supportActionBar?.setLogo(R.drawable.logomobile)
         supportActionBar?.setDisplayUseLogoEnabled(true)
         supportActionBar?.setDisplayShowTitleEnabled(false)
-
+        supportActionBar?.hide()
 
         setupActionBarWithNavController(navController)
 

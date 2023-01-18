@@ -40,7 +40,7 @@ class SignUpActivity : AppCompatActivity() {
                         if (it.isSuccessful){
                             dbRef = FirebaseDatabase.getInstance("https://my-android-app-7f2c4-default-rtdb.asia-southeast1.firebasedatabase.app/").getReference("User")
                             val savedEmail = email.replace(".",",")
-                            val user = UsersData(0,"name", username,null,"simPrice",null,null,null,Users.POTENTIAL_USER,email)
+                            val user = UsersData(0,"name", username,null,null,null,null,null,Users.POTENTIAL_USER,email)
                             dbRef.child("UsersData").child(savedEmail).setValue(user)
                             val intent = Intent(this, SignInActivity::class.java)
                             intent.putExtra("signupFinished","finished")
