@@ -35,7 +35,6 @@
         <action
             android:id="@+id/action_homeFragment_to_fragmentHomeBuy"
             app:destination="@id/fragmentHomeBuy" />
-
         <action
             android:id="@+id/action_homeFragment_self"
             app:destination="@id/homeFragment" />
@@ -80,6 +79,7 @@
         <action
             android:id="@+id/action_fragmentHomeBuy_to_homeFragment"
             app:destination="@id/homeFragment"
+            app:popUpTo="@id/homeFragment"
             app:popUpToInclusive="true" />
         <action
             android:id="@+id/action_fragmentHomeBuy_to_payFragment2"
