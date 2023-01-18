@@ -2,6 +2,7 @@ package com.example.myapp.admin.total
 
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,6 +26,7 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
     private lateinit var binding: FragmentSimTotalBinding
     private lateinit var dbRef: DatabaseReference
     private lateinit var simArrayList: ArrayList<SimData>
+    private lateinit var filteredList: ArrayList<SimData>
     private lateinit var simRecyclerView: RecyclerView
     private lateinit var adapter: SimAdapter
 
@@ -56,7 +58,7 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
         simRecyclerView.setHasFixedSize(true)
 
         simArrayList = mutableListOf<SimData>() as ArrayList<SimData>
-
+        filteredList = mutableListOf<SimData>() as ArrayList<SimData>
         binding.addSim.setOnClickListener {
             val action = FragmentSimTotalDirections.actionFragmentSimTotalToFragmentAddSim()
             findNavController().navigate(action)
@@ -65,22 +67,9 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
         adapter = SimAdapter(simArrayList)
         simRecyclerView.adapter = adapter
 
-        binding.simSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
-            override fun onQueryTextSubmit(query: String?): Boolean {
-                return false
-            }
-
-            override fun onQueryTextChange(newText: String?): Boolean {
-                filterList(newText)
-                return true
-            }
-
-        })
-
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("SimData")
 
         dbRef.addValueEventListener(object : ValueEventListener {
-
 
             override fun onDataChange(snapshot: DataSnapshot) {
                 simArrayList.clear()
@@ -92,6 +81,34 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
                         }
                         val adapter = SimAdapter(simArrayList)
                         simRecyclerView.adapter = adapter
+                        binding.simSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                return false
+                            }
+
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                filteredList.clear()
+                                Log.d("SEARCHVIEW",newText.toString())
+                                if (newText != null) {
+                                    for (simInfo in simArrayList) {
+                                        if (simInfo.phoneNumber.toString().contains(newText) || simInfo.simCode?.contains(newText) == true) {
+                                            filteredList.add(simInfo)
+                                        }
+                                    }
+                                    if (filteredList.isEmpty()) {
+                                        Toast.makeText(context, "No Data found", Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        Log.d("SEARCHVIEW","FilterList")
+                                        for (i in filteredList) {
+                                            Log.d("SEARCHVIEW",i.toString())
+                                        }
+                                        adapter.setFilteredList(filteredList)
+                                    }
+                                }
+                                return true
+                            }
+
+                        })
                     }
                 }
 
