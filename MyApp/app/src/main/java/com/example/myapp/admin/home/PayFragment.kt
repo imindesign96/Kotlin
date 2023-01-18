@@ -187,7 +187,7 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         email: String,
     ) {
         val savedEmail = email.replace(".", ",")
-        val data = UsersData(0,name,"userName",address,null,null,null,null,
+        val data = UsersData(name,"userName",address,null,null,null,null,
             Users.POTENTIAL_USER,email,null)
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
 
