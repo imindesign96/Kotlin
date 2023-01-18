@@ -7,10 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.appcompat.widget.SearchView
+import androidx.databinding.DataBindingUtil.setContentView
 import androidx.fragment.app.Fragment
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
+import com.example.myapp.databinding.ActivityAdminBinding
+import com.example.myapp.databinding.FragmentSimTotalBinding
 import com.google.firebase.database.*
 import java.util.*
 import kotlin.collections.ArrayList
@@ -18,10 +22,10 @@ import kotlin.collections.ArrayList
 
 class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
 
-
-    private lateinit var dbRef : DatabaseReference
-    private lateinit var simArrayList : ArrayList<SimData>
-    private lateinit var simRecyclerView : RecyclerView
+    private lateinit var binding: FragmentSimTotalBinding
+    private lateinit var dbRef: DatabaseReference
+    private lateinit var simArrayList: ArrayList<SimData>
+    private lateinit var simRecyclerView: RecyclerView
     private lateinit var adapter: SimAdapter
 
     private fun filterList(query: String?) {
@@ -41,29 +45,27 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
         }
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_sim_total, container, false)
+        binding = FragmentSimTotalBinding.inflate(inflater, container, false)
 
-       simRecyclerView = view.findViewById(R.id.simList)
+        simRecyclerView = binding.simList
         simRecyclerView.layoutManager = LinearLayoutManager(this.context)
         simRecyclerView.setHasFixedSize(true)
 
         simArrayList = mutableListOf<SimData>() as ArrayList<SimData>
 
+        binding.addSim.setOnClickListener {
+            val action = FragmentSimTotalDirections.actionFragmentSimTotalToFragmentAddSim()
+            findNavController().navigate(action)
+        }
+
         adapter = SimAdapter(simArrayList)
         simRecyclerView.adapter = adapter
 
-        view.findViewById<SearchView>(R.id.simSearchView).
-        setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+        binding.simSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String?): Boolean {
                 return false
             }
@@ -77,31 +79,27 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
 
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("SimData")
 
-        dbRef.addValueEventListener(object: ValueEventListener {
+        dbRef.addValueEventListener(object : ValueEventListener {
 
 
-                override fun onDataChange(snapshot: DataSnapshot) {
-                    simArrayList.clear()
-                    if (snapshot.exists()) {
-                        for (childSnapshot in snapshot.children) {
-                            val data = childSnapshot.getValue(SimData::class.java)
-                            if (data != null) {
-                                simArrayList.add(data)
-                            }
-                            val adapter = SimAdapter(simArrayList)
-                            simRecyclerView.adapter = adapter
+            override fun onDataChange(snapshot: DataSnapshot) {
+                simArrayList.clear()
+                if (snapshot.exists()) {
+                    for (childSnapshot in snapshot.children) {
+                        val data = childSnapshot.getValue(SimData::class.java)
+                        if (data != null) {
+                            simArrayList.add(data)
                         }
+                        val adapter = SimAdapter(simArrayList)
+                        simRecyclerView.adapter = adapter
                     }
-
                 }
-                    override fun onCancelled(error: DatabaseError) {
-                    }
-                })
 
+            }
 
-
-
-                return view
+            override fun onCancelled(error: DatabaseError) {
+            }
+        })
+        return binding.root
     }
-
 }
