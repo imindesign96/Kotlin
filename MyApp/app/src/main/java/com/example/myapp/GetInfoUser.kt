@@ -51,7 +51,7 @@ class GetInfoUser : AppCompatActivity() {
 
 
                     val savedEmail = email.replace(".", ",")
-                    val data = UsersData(0,"name",userName,address,"SimPrice",null,null,null,Users.POTENTIAL_USER,email,phoneNumber)
+                    val data = UsersData("name",userName,address,"SimPrice",null,null,null,Users.POTENTIAL_USER,email,phoneNumber)
                     database.child(savedEmail).setValue(data).addOnSuccessListener {
 
                         Toast.makeText(this, "Successfuly Updated", Toast.LENGTH_SHORT).show()

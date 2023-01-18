@@ -31,7 +31,7 @@ class UsersAdapter(private var usersList : ArrayList<UsersData>) : RecyclerView.
         holder.usersName.text = currentItem.userName
         holder.simCode.text = currentItem.simCode
         holder.status.text = currentItem.status.toString()
-        holder.startDay.text = currentItem.startDay
+        holder.startDay.text = currentItem.email
         holder.address.text = currentItem.userAddress
 
         holder.button.setOnClickListener {
@@ -49,6 +49,7 @@ class UsersAdapter(private var usersList : ArrayList<UsersData>) : RecyclerView.
         //    searchView
         fun setFilteredList(usersList: ArrayList<UsersData>) {
             this.usersList = usersList
+            notifyDataSetChanged()
         }
 
 

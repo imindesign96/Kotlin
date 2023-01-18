@@ -4,19 +4,24 @@ import android.icu.text.DateFormat
 import android.icu.text.SimpleDateFormat
 import android.icu.util.Calendar
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
+import android.view.View.GONE
+import android.view.View.VISIBLE
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.DatePicker
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.SearchView
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.myapp.R
+import com.example.myapp.databinding.FragmentUsersBinding
 import com.google.firebase.database.*
 
 
@@ -25,38 +30,39 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
 
     private lateinit var dbRef: DatabaseReference
     private lateinit var usersArrayList: ArrayList<UsersData>
+    private lateinit var searchList: ArrayList<UsersData>
     private lateinit var usersRecyclerView: RecyclerView
     private lateinit var adapter: UsersAdapter
+    private lateinit var binding: FragmentUsersBinding
     private lateinit var today: Calendar
     private lateinit var current : String
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        val view: View = inflater.inflate(R.layout.fragment_users, container, false)
+        binding = FragmentUsersBinding.inflate(inflater, container, false)
 
-        usersRecyclerView = view.findViewById(R.id.userList)
+        usersRecyclerView = binding.userList
         usersRecyclerView.layoutManager = LinearLayoutManager(this.context)
         usersRecyclerView.setHasFixedSize(true)
         usersArrayList = mutableListOf<UsersData>() as ArrayList<UsersData>
+        searchList = mutableListOf<UsersData>() as ArrayList<UsersData>
         adapter = UsersAdapter(usersArrayList)
         usersRecyclerView.adapter = adapter
 
 
 
-        view.findViewById<Button>(R.id.notifyBtn).setOnClickListener {
-            view.findViewById<View>(R.id.notify).visibility =
-                if (view.findViewById<View>(R.id.notify).visibility == View.GONE) View.VISIBLE else View.GONE
-            view.findViewById<View>(R.id.blackBackground).visibility =
-                if (view.findViewById<View>(R.id.blackBackground).visibility == View.GONE) View.VISIBLE else View.GONE
+        binding.notifyBtn.setOnClickListener {
+            binding.notify.visibility =
+                if (binding.notify.visibility == GONE) VISIBLE else GONE
+            binding.blackBackground.visibility =
+                if (binding.blackBackground.visibility == View.GONE) View.VISIBLE else View.GONE
 
         }
 
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
 
         dbRef.addValueEventListener(object : ValueEventListener {
-
-
             override fun onDataChange(snapshot: DataSnapshot) {
                 usersArrayList.clear()
                 if (snapshot.exists()) {
@@ -65,16 +71,39 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
                         if (data != null) {
                             usersArrayList.add(data)
                             usersArrayList.size
-                            view.findViewById<TextView>(R.id.G1Count).text =
+                            binding.G1Count.text =
                                 usersArrayList.size.toString()
                             val unPaidCount = usersArrayList.count { it.status == "未支払い" }
-                            view.findViewById<TextView>(R.id.unPaidCount).text =
+                            binding.unPaidCount.text =
                                 unPaidCount.toString()
                             val paidCount = usersArrayList.count { it.status == "支払完了" }
-                            view.findViewById<TextView>(R.id.paidCount).text = paidCount.toString()
+                            binding.paidCount.text = paidCount.toString()
                         }
                         val adapter = UsersAdapter(usersArrayList)
                         usersRecyclerView.adapter = adapter
+                        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+                            override fun onQueryTextSubmit(query: String?): Boolean {
+                                return false
+                            }
+
+                            override fun onQueryTextChange(newText: String?): Boolean {
+                                searchList.clear()
+                                if (newText != null) {
+                                    for (userInfo in usersArrayList) {
+                                        if (userInfo.userName.toString().contains(newText) || userInfo.email.toString().contains(newText)) {
+                                            searchList.add(userInfo)
+                                        }
+                                    }
+                                    if (searchList.isEmpty()) {
+                                        Toast.makeText(context, "No Data found", Toast.LENGTH_SHORT).show()
+                                    } else {
+                                        adapter.setFilteredList(searchList)
+                                    }
+                                }
+                                return true
+                            }
+
+                        })
                     }
                 }
 
@@ -84,10 +113,10 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
             }
         })
 
-        val textNotify = view.findViewById<TextView>(R.id.textNotify).editableText
+        val textNotify = binding.textNotify.editableText
 
         ///When lick to send a notify
-        view.findViewById<Button>(R.id.sendNotify).setOnClickListener {
+        binding.sendNotify.setOnClickListener {
             // Create the notification
             val builder = NotificationCompat.Builder(it.context, "ID")
                 .setSmallIcon(R.drawable.filter_icon)
@@ -105,19 +134,19 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
                 notify(0, builder.build())
 
 
-                view.findViewById<View>(R.id.notify).visibility =
-                    if (view.findViewById<View>(R.id.notify).visibility == View.VISIBLE) View.GONE else View.VISIBLE
-                view.findViewById<View>(R.id.blackBackground).visibility =
-                    if (view.findViewById<View>(R.id.blackBackground).visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                binding.notify.visibility =
+                    if (binding.notify.visibility == View.VISIBLE) View.GONE else View.VISIBLE
+                binding.blackBackground.visibility =
+                    if (binding.blackBackground.visibility == View.VISIBLE) View.GONE else View.VISIBLE
 
             }
         }
-        view.findViewById<Button>(R.id.setDay).setOnClickListener {
+        binding.setDay.setOnClickListener {
 
-            view.findViewById<DatePicker>(R.id.datePicker1).visibility =
-                if (view.findViewById<View>(R.id.datePicker1).visibility == View.GONE) View.VISIBLE else View.GONE
+            binding.datePicker1.visibility =
+                if (binding.datePicker1.visibility == View.GONE) View.VISIBLE else View.GONE
         }
-        val datePicker = view.findViewById<DatePicker>(R.id.datePicker1)
+        val datePicker = binding.datePicker1
 
         today = Calendar.getInstance()
         val time = today.time
@@ -134,6 +163,6 @@ class FragmentUsers : Fragment(R.layout.fragment_users) {
             Toast.makeText(context, pickedDay, Toast.LENGTH_SHORT).show()
         }
 
-        return view
+        return binding.root
     }
 }

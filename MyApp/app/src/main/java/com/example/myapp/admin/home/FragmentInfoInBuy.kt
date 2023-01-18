@@ -60,7 +60,7 @@ class FragmentInfoInBuy : Fragment(R.layout.fragment_info_in_buy) {
     ) {
         val status = "未支払い"
         val savedEmail = email.replace(".", ",")
-        val data = UsersData(0,name,null,address,simPrice,null,null,status,
+        val data = UsersData(name,null,address,simPrice,null,null,status,
             Users.POTENTIAL_USER,email,null)
         dbRef.child(savedEmail).setValue(data).addOnSuccessListener {
             findNavController().navigate(R.id.action_fragmentHomeBuy_to_payFragment)
