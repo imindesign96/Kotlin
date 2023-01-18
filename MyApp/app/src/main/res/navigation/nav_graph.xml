@@ -73,5 +73,17 @@
         <action
             android:id="@+id/action_fragmentSimTotal_to_fragmentUsers"
             app:destination="@id/fragmentUsers" />
+        <action
+            android:id="@+id/action_fragmentSimTotal_to_fragmentAddSim"
+            app:destination="@id/fragmentAddSim" />
+    </fragment>
+    <fragment
+        android:id="@+id/fragmentAddSim"
+        android:name="com.example.myapp.admin.total.FragmentAddSim"
+        android:label="fragment_add_sim"
+        tools:layout="@layout/fragment_add_sim" >
+        <action
+            android:id="@+id/action_fragmentAddSim_to_fragmentSimTotal"
+            app:destination="@id/fragmentSimTotal" />
     </fragment>
 </navigation>
