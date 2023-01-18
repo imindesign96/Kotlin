@@ -5,7 +5,6 @@ import kotlinx.parcelize.Parcelize
 
 @Parcelize
 data class UsersData(
-    val key: Long? = null,
     val fullName: String ? =null,
     val userName: String ? = null,
     val userAddress: String ? = null,

@@ -118,7 +118,7 @@
                 android:id="@+id/userStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="登録日："
+                android:text="メール："
                 android:textColor="@color/sales_primary_text"
                 android:textSize="20sp"
                 android:textStyle="bold" />
@@ -127,7 +127,7 @@
                 android:id="@+id/tvUserStart"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:hint="登録日をご入力ください"
+                android:hint="メールをご入力ください"
                 android:inputType="textPersonName"
 
                 android:clickable="true"

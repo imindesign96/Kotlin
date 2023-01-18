@@ -30,23 +30,6 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
     private lateinit var simRecyclerView: RecyclerView
     private lateinit var adapter: SimAdapter
 
-    private fun filterList(query: String?) {
-
-        if (query != null) {
-            val filteredList = ArrayList<SimData>()
-            for (i in simArrayList) {
-                if (i.phoneNumber.toString().contains(query) == true) {
-                    filteredList.add(i)
-                }
-            }
-            if (filteredList.isEmpty()) {
-                Toast.makeText(context, "No Data found", Toast.LENGTH_SHORT).show()
-            } else {
-                adapter.setFilteredList(filteredList)
-            }
-        }
-    }
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -88,7 +71,6 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
 
                             override fun onQueryTextChange(newText: String?): Boolean {
                                 filteredList.clear()
-                                Log.d("SEARCHVIEW",newText.toString())
                                 if (newText != null) {
                                     for (simInfo in simArrayList) {
                                         if (simInfo.phoneNumber.toString().contains(newText) || simInfo.simCode?.contains(newText) == true) {
@@ -98,10 +80,6 @@ class FragmentSimTotal : Fragment(R.layout.fragment_sim_total) {
                                     if (filteredList.isEmpty()) {
                                         Toast.makeText(context, "No Data found", Toast.LENGTH_SHORT).show()
                                     } else {
-                                        Log.d("SEARCHVIEW","FilterList")
-                                        for (i in filteredList) {
-                                            Log.d("SEARCHVIEW",i.toString())
-                                        }
                                         adapter.setFilteredList(filteredList)
                                     }
                                 }
