@@ -15,7 +15,7 @@
     <color name="hint_text_color">#D4D4D4</color>
 
     <color name="bgBottomNavigation">#F0F0F0</color>
-
+    <color name="red">#F44336</color>
     <!-- Sales layout color -->
     <color name="sales_primary">#ffd60a</color>
     <color name="sales_background">#FFFFFF</color>

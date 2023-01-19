@@ -120,10 +120,22 @@
                     android:textColor="@color/colorPrimary"
                     android:textStyle="bold">
                 </Button>
-
             </LinearLayout>
 
-
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal">
+                <Button
+                    android:id="@+id/payBtn"
+                    android:layout_width="120dp"
+                    android:layout_height="wrap_content"
+                    android:text="購入"
+                    android:backgroundTint="@color/black"
+                    android:textColor="@color/colorAccent"
+                    android:textStyle="bold">
+                </Button>
+            </LinearLayout>
 
             <TextView
                 android:id="@+id/payHelp"

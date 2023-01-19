@@ -2,17 +2,22 @@ package com.example.myapp
 
 import android.util.Log
 import android.widget.Toast
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.navigation.fragment.findNavController
 import com.example.myapp.admin.total.SimAdapter
 import com.example.myapp.admin.total.SimData
+import com.example.myapp.admin.total.SimService
 import com.example.myapp.admin.users.UsersData
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 
 class FirebaseConnection : ViewModel() {
     private val firebaseAuth = FirebaseAuth.getInstance()
+    val selectedSim = MutableLiveData<SimData>()
     val result = MutableLiveData<String>()
+    val getSimResult = MutableLiveData<String>()
     val addSimResult = MutableLiveData<String>()
     val user = MutableLiveData<UsersData>()
     private lateinit var simData: SimData
@@ -24,7 +29,9 @@ class FirebaseConnection : ViewModel() {
     init {
         result.value = ""
         addSimResult.value = ""
+        getSimResult.value = ""
     }
+
 
     fun login(email: String, pass: String) {
         firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
@@ -74,7 +81,7 @@ class FirebaseConnection : ViewModel() {
                 }
             }
             if (key.isNotEmpty() && !phoneNumberExisted) {
-                simData = SimData(key.toLong(), phoneNumber.toLong(), simCode, price.toLong())
+                simData = SimData(key.toLong(), phoneNumber.toLong(), simCode, price.toLong(), "未購入")
                 dbRef.child("SimData").child(key).setValue(simData)
                 addSimResult.value = "Success"
                 Log.d("ADDSIM", "Add Sim done" + key)
@@ -109,5 +116,46 @@ class FirebaseConnection : ViewModel() {
         return (1..length)
             .map { charset.random() }
             .joinToString("")
+    }
+
+    fun getRandomSim() {
+        dbRef.child("SimData").get().addOnSuccessListener {
+            for (child in it.children) {
+                val data = child.getValue(SimData::class.java)!!
+                if (data.status.isNullOrEmpty() || data.status == "未購入") {
+                    selectedSim.value = data
+                    updateSimStatus(data)
+                    Log.d("BUYSIM"," SIM SELECTED SUCCESSFULLY${data.key}")
+                    break
+                }
+            }
+        }
+    }
+
+    fun updateSimStatus(selectedSimData: SimData) {
+        val sim = SimData(selectedSimData.key, selectedSimData.phoneNumber, selectedSimData.simCode, selectedSimData.simPrice, "購入中")
+        dbRef.child("SimData").child(selectedSimData.key.toString()).setValue(sim).addOnSuccessListener {
+            Log.d("BUYSIM","UPDATE SIM STATUS SUCCESSFULLY${selectedSimData.key}")
+        }
+    }
+
+    fun cancel(selectedSimData: SimData) {
+        dbRef.child("SimData").child(selectedSimData.key.toString()).child("status").setValue("未購入").addOnSuccessListener {
+            Log.d("BUYSIM","CANCEL SIM SUCCESSFULLY${selectedSimData.key}")
+        }
+    }
+
+    fun upgradeUser(email : String) {
+        val savedEmail = email.replace(".", ",")
+        dbRef.child("UsersData").child(savedEmail).child("role").setValue(Users.PRESENT_USER).addOnSuccessListener {
+            Log.d("BUYSIM","UPGRADE USER SUCCESSFULLY")
+        }
+    }
+
+    fun setSim(email: String, simService: SimService) {
+        val savedEmail = email.replace(".", ",")
+        dbRef.child("SimService").child(savedEmail).setValue(simService).addOnSuccessListener {
+            Log.d("BUYSIM","Set SIM SUCCESSFULLY${savedEmail}")
+        }
     }
 }

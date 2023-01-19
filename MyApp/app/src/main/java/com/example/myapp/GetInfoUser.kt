@@ -4,7 +4,9 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
+import androidx.fragment.app.activityViewModels
 import com.example.myapp.admin.users.UsersData
+import com.example.myapp.admin.users.UsersViewModel
 import com.example.myapp.databinding.ActivityGetDataUsersBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
@@ -26,22 +28,17 @@ class GetInfoUser : AppCompatActivity() {
 
 
             binding.updateInfoUserBtn.setOnClickListener {
-
-                val phoneNumber = binding.userPhoneNumber.text.toString()
                 val address = binding.userAddress.text.toString()
-                val userName = binding.userFullName.text.toString()
+                val fullName = binding.userFullName.text.toString()
                 val email = binding.emailEt.text.toString()
 
-                updateData(userName, phoneNumber, address, email)
+                updateData(fullName, address, email)
 
             }
         }
-
-
-
+    
                 private fun updateData(
-                    userName: String,
-                    phoneNumber: String,
+                    fullName: String,
                     address: String,
                     email: String
                 ) {
@@ -51,18 +48,19 @@ class GetInfoUser : AppCompatActivity() {
 
 
                     val savedEmail = email.replace(".", ",")
-                    val data = UsersData("name",userName,address,"SimPrice",null,null,null,Users.POTENTIAL_USER,email,phoneNumber)
-                    database.child(savedEmail).setValue(data).addOnSuccessListener {
 
-                        Toast.makeText(this, "Successfuly Updated", Toast.LENGTH_SHORT).show()
-                        val intent = Intent(this, MainActivity::class.java)
-                        startActivity(intent)
-
-                    }.addOnFailureListener {
-
-                        Toast.makeText(this, "Failed to Update", Toast.LENGTH_SHORT).show()
-
-                    }
+//                    val data = UsersData(fullName,,address,"SimPrice",null,null,null,Users.POTENTIAL_USER,email)
+//                    database.child(savedEmail).setValue(data).addOnSuccessListener {
+//
+//                        Toast.makeText(this, "Successfuly Updated", Toast.LENGTH_SHORT).show()
+//                        val intent = Intent(this, MainActivity::class.java)
+//                        startActivity(intent)
+//
+//                    }.addOnFailureListener {
+//
+//                        Toast.makeText(this, "Failed to Update", Toast.LENGTH_SHORT).show()
+//
+//                    }
                 }
 
             }

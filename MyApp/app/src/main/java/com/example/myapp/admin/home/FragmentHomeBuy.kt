@@ -10,9 +10,12 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
 import androidx.fragment.app.findFragment
 import androidx.navigation.fragment.findNavController
+import com.example.myapp.FirebaseConnection
 import com.example.myapp.R
+import com.example.myapp.admin.users.UsersViewModel
 import com.example.myapp.databinding.FragmentHomeBuyBinding
 import com.example.myapp.databinding.FragmentPayBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
@@ -20,6 +23,8 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class FragmentHomeBuy : Fragment(R.layout.fragment_home_buy) {
 
+    private val firebaseConnection : FirebaseConnection by activityViewModels()
+    private val userViewModel : UsersViewModel by activityViewModels()
     private lateinit var binding: FragmentHomeBuyBinding
     private fun replaceFragment(fragment : Fragment){
         val childFragment: Fragment = fragment
@@ -46,7 +51,7 @@ class FragmentHomeBuy : Fragment(R.layout.fragment_home_buy) {
         }
 
         binding.nextBtn.setOnClickListener {
-            findNavController().navigate(R.id.action_fragmentHomeBuy_to_payFragment)
+            findNavController().navigate(R.id.action_fragmentHomeBuy_to_confirmationFragment)
         }
 
         val activity = activity as AppCompatActivity?

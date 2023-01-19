@@ -3,6 +3,11 @@
     <item
         android:id="@+id/navi_home"
         android:icon="@drawable/ic_baseline_star_24"
-        android:title="Potential"
+        android:title="Home"
+        />
+    <item
+        android:id="@+id/navi_user"
+        android:icon="@drawable/icons8_user_male"
+        android:title="User"
         />
 </menu>

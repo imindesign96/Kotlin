@@ -15,12 +15,15 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.example.myapp.FirebaseConnection
 import com.example.myapp.R
 import com.example.myapp.Users
 import com.example.myapp.admin.users.UsersData
+import com.example.myapp.admin.users.UsersViewModel
 import com.example.myapp.databinding.FragmentPayBinding
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.auth.FirebaseAuth
@@ -35,6 +38,8 @@ import java.util.*
 
 class PayFragment : Fragment(R.layout.fragment_pay) {
 
+    private val firebaseConnection: FirebaseConnection by activityViewModels()
+    private val userViewModel : UsersViewModel by activityViewModels()
     private lateinit var dbRef: DatabaseReference
     private var user = MutableLiveData<UsersData>()
     private lateinit var firebaseAuth: FirebaseAuth
@@ -51,6 +56,7 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         val view: View = binding.root
 
         val cancelBtn = view.findViewById<Button>(R.id.cancelBtn)
+        val payBtn = view.findViewById<Button>(R.id.payBtn)
         val backToHomeBtn = view.findViewById<Button>(R.id.backToHomeBtn)
         val kindaku = view.findViewById<TextView>(R.id.kingaku)
 
@@ -61,21 +67,8 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
 
         dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
 
-        if (saveEmail != null) {
-            dbRef.child(saveEmail).child("simPrice").get().addOnCompleteListener { task ->
-                if (task.isSuccessful) {
-                    when (task.result?.getValue(String::class.java)) {
-                        "500円/月" -> kindaku.text = "500￥"
-                        "1000円/月" -> kindaku.text = "1000￥"
-                        "800円/月" -> kindaku.text = "800￥"
-                        "1600円/月" -> kindaku.text = "1600￥"
-                        "1000円/月" -> kindaku.text = "1000￥"
-                        "2000円/月" -> kindaku.text = "2000￥"
-                    }
-                } else {
-                    // handle error
-                }
-            }
+        userViewModel.totalPrice.observe(viewLifecycleOwner) {
+            kindaku.setText(it.toString()+ "JPY")
         }
 
         // create barcode
@@ -109,14 +102,28 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
         val address = UsersData().userAddress
 
         cancelBtn.setOnClickListener {
-            updateData(name,address,email)
+            userViewModel.cancel()
+            userViewModel.simInfo.observe(viewLifecycleOwner) {
+                firebaseConnection.cancel(it)
+            }
             findNavController().navigate(R.id.action_payFragment_to_homeFragment)
 
         }
 
         backToHomeBtn.setOnClickListener {
+            findNavController().navigate(R.id.action_payFragment_to_confirmationFragment)
+        }
+
+        payBtn.setOnClickListener {
+            userViewModel.userInfo.observe(viewLifecycleOwner) {usersData->
+                usersData.email?.let { it1 -> firebaseConnection.upgradeUser(it1) }
+                userViewModel.chosenSimService.observe(viewLifecycleOwner) {
+                    firebaseConnection.setSim(usersData.email!!, it)
+                }
+            }
             findNavController().navigate(R.id.action_payFragment_to_homeFragment)
         }
+
         val activity = activity as AppCompatActivity?
 
         // Get the bottom navigation view
@@ -181,18 +188,6 @@ class PayFragment : Fragment(R.layout.fragment_pay) {
 
     //Update lai data khi cancel
 
-    private fun updateData(
-        name: String?,
-        address: String?,
-        email: String,
-    ) {
-        val savedEmail = email.replace(".", ",")
-        val data = UsersData(name,"userName",address,null,null,null,null,
-            Users.POTENTIAL_USER,email,null)
-        dbRef = FirebaseDatabase.getInstance().getReference("User").child("UsersData")
-
-        dbRef.child(savedEmail).setValue(data)
-    }
 
     // crate qr code
     private fun generateQRCode(data: String): Bitmap? {

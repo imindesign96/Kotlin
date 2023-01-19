@@ -10,10 +10,16 @@ import android.widget.RadioGroup
 import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.myapp.FirebaseConnection
 import com.example.myapp.R
+import com.example.myapp.admin.total.Data
+import com.example.myapp.admin.total.DataService
+import com.example.myapp.admin.total.SimService
+import com.example.myapp.admin.users.UsersViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.firestore.FirebaseFirestore
@@ -21,7 +27,8 @@ import com.google.firebase.firestore.FirebaseFirestore
 
 class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
 
-
+    private val firebaseConnection : FirebaseConnection by activityViewModels()
+    private val userViewModel : UsersViewModel by activityViewModels()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         val activity = activity as AppCompatActivity?
@@ -56,6 +63,7 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
         sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
 
             if (radioDataOnlyBtn.text == selected) {
+                userViewModel.setService(DataService.DATA)
                 radioDataOnlyBtn.isChecked = true
                 radioDataAndCallBtn.isChecked = false
                 val selectedValue = tvOnlyData1.text
@@ -64,6 +72,7 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
                 sharedViewModel?.data?.value = selectedValue as String?
             }
             if (radioDataAndCallBtn.text == selected) {
+                userViewModel.setService(DataService.CALL_DATA)
                 radioDataAndCallBtn.isChecked = true
                 radioDataOnlyBtn.isChecked = false
                 val selectedValue = tvDataAndView1.text
@@ -79,6 +88,8 @@ class FragmentDetailData : Fragment(R.layout.fragment_detail_data) {
 
         buy3GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_fragmentDetailData_to_fragmentHomeBuy)
+            userViewModel.setData(Data.THREE)
+            firebaseConnection.getRandomSim()
             getPrice()
         }
 

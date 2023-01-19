@@ -19,6 +19,10 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.myapp.*
+import com.example.myapp.admin.total.Data
+import com.example.myapp.admin.total.DataService
+import com.example.myapp.admin.total.SimData
+import com.example.myapp.admin.users.UsersViewModel
 import com.github.mikephil.charting.charts.PieChart
 import com.github.mikephil.charting.data.PieData
 import com.github.mikephil.charting.data.PieDataSet
@@ -36,6 +40,7 @@ import com.google.zxing.qrcode.QRCodeWriter
 
 class HomeFragment : Fragment(R.layout.fragment_home) {
 
+    private val userViewModel : UsersViewModel by activityViewModels()
     private val firebaseConnection : FirebaseConnection by activityViewModels()
     private lateinit var signOutBtn: TextView
     private lateinit var auth: FirebaseAuth
@@ -100,7 +105,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
 
         //Detail
         detailData1.setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData)
+            findNavController().navigate(R.id.action_homeFragment_to_fragmentDetailData)
             getPrice()
         }
         detailData2.setOnClickListener {
@@ -114,14 +119,17 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
         buy3GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentHomeBuy)
             getPrice()
+            firebaseConnection.getRandomSim()
         }
         buy6GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentHomeBuy)
             getPrice()
+            firebaseConnection.getRandomSim()
         }
         buy12GbBtn.setOnClickListener {
             findNavController().navigate(R.id.action_homeFragment_to_fragmentHomeBuy)
             getPrice()
+            firebaseConnection.getRandomSim()
         }
 
 
@@ -154,7 +162,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 tvOnlyData1.visibility = View.VISIBLE
                 tvDataAndView1.visibility = View.GONE
                 sharedViewModel?.data?.value = selectedValue as String?
-
+                userViewModel.setData(Data.THREE)
+                userViewModel.setService(DataService.DATA)
             }
             if (radioDataAndCallBtn.text == selected) {
                 radioDataAndCallBtn.isChecked = true
@@ -162,6 +171,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 tvOnlyData1.visibility = View.GONE
                 tvDataAndView1.visibility = View.VISIBLE
                 sharedViewModel?.data?.value = selectedValue as String?
+                userViewModel.setData(Data.THREE)
+                userViewModel.setService(DataService.CALL_DATA)
             }
             if (radioDataOnlyBtn2.text == selected) {
                 radioDataOnlyBtn2.isChecked = true
@@ -170,7 +181,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 tvOnlyData2.visibility = View.VISIBLE
                 tvDataAndView2.visibility = View.GONE
                 sharedViewModel?.data?.value = selectedValue as String?
-
+                userViewModel.setData(Data.SIX)
+                userViewModel.setService(DataService.DATA)
             }
             if (radioDataAndCallBtn2.text == selected) {
                 radioDataOnlyBtn2.isChecked = false
@@ -179,6 +191,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 tvOnlyData2.visibility = View.GONE
                 tvDataAndView2.visibility = View.VISIBLE
                 sharedViewModel?.data?.value = selectedValue as String?
+                userViewModel.setData(Data.SIX)
+                userViewModel.setService(DataService.CALL_DATA)
             }
              if (radioDataOnlyBtn3.text == selected) {
                 radioDataOnlyBtn3.isChecked = true
@@ -186,7 +200,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 tvOnlyData3.visibility = View.VISIBLE
                 tvDataAndView3.visibility = View.GONE
                 sharedViewModel?.data?.value = selectedValue as String?
-
+                 userViewModel.setData(Data.TWELVE)
+                 userViewModel.setService(DataService.DATA)
             }
             if (radioDataAndCallBtn3.text == selected) {
                 radioDataAndCallBtn3.isChecked = true
@@ -194,6 +209,8 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 tvOnlyData3.visibility = View.GONE
                 tvDataAndView3.visibility = View.VISIBLE
                 sharedViewModel?.data?.value = selectedValue as String?
+                userViewModel.setData(Data.TWELVE)
+                userViewModel.setService(DataService.CALL_DATA)
             }
 
         })

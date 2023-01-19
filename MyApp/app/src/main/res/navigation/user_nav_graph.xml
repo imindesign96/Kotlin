@@ -84,6 +84,9 @@
         <action
             android:id="@+id/action_fragmentHomeBuy_to_payFragment2"
             app:destination="@id/payFragment" />
+        <action
+            android:id="@+id/action_fragmentHomeBuy_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
     </fragment>
     <fragment
         android:id="@+id/payFragment"
@@ -98,6 +101,9 @@
         <action
             android:id="@+id/action_payFragment_self"
             app:destination="@id/payFragment" />
+        <action
+            android:id="@+id/action_payFragment_to_confirmationFragment"
+            app:destination="@id/confirmationFragment" />
     </fragment>
     <fragment
         android:id="@+id/fragmentInfoInBuy"
@@ -106,6 +112,23 @@
         <action
             android:id="@+id/action_fragmentInfoInBuy_to_payFragment"
             app:destination="@id/payFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/confirmationFragment"
+        android:name="com.example.myapp.admin.home.ConfirmationFragment"
+        android:label="fragment_confirmation"
+        tools:layout="@layout/fragment_confirmation" >
+        <action
+            android:id="@+id/action_confirmationFragment_to_fragmentHomeBuy"
+            app:destination="@id/fragmentHomeBuy" />
+        <action
+            android:id="@+id/action_confirmationFragment_to_payFragment"
+            app:destination="@id/payFragment" />
+        <argument
+            android:name="user"
+            app:argType="com.example.myapp.admin.users.UsersData"
+            app:nullable="true"
+            android:defaultValue="@null" />
     </fragment>
 
 </navigation>

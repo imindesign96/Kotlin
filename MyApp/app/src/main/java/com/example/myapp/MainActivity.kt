@@ -22,20 +22,24 @@ import com.example.myapp.Users
 import com.example.myapp.admin.FragmentInventory
 import com.example.myapp.admin.home.FragmentHomeAdmin
 import com.example.myapp.admin.home.PayFragment
+import com.example.myapp.admin.home.SharedViewModel
 import com.example.myapp.admin.users.UsersAdapter
 import com.example.myapp.admin.users.UsersData
+import com.example.myapp.admin.users.UsersViewModel
 import com.example.myapp.databinding.ActivityMainBinding
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
+import com.google.firebase.firestore.remote.Datastore
+import java.util.prefs.Preferences
 
 
 class MainActivity : AppCompatActivity() {
 
+    private val userViewModel: UsersViewModel by viewModels()
     private lateinit var usersData : UsersData
     private lateinit var binding: ActivityMainBinding
     private lateinit var signOutBtn: Button
     private lateinit var navController: NavController
-
 
     @RequiresApi(Build.VERSION_CODES.TIRAMISU)
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,6 +48,7 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         usersData = intent.getParcelableExtra("UsersData")!!
+        userViewModel.setUser(usersData)
         // Get the navigation host fragment from this Activity
         val navHostFragment = supportFragmentManager
             .findFragmentById(R.id.nav_host_fragment_main) as NavHostFragment
@@ -73,7 +78,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
-        Log.d("USERROLE", usersData.role.toString())
         if (usersData.role == Users.POTENTIAL_USER) {
             binding.potentialBottomNav.isVisible = true
             binding.presentBottomNav.isVisible = false
@@ -85,4 +89,6 @@ class MainActivity : AppCompatActivity() {
         }
         return true
     }
+
 }
+

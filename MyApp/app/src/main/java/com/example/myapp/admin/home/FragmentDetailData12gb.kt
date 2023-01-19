@@ -9,17 +9,23 @@ import android.widget.TextView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentTransaction
+import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.example.myapp.FirebaseConnection
 import com.example.myapp.R
+import com.example.myapp.admin.total.Data
+import com.example.myapp.admin.total.DataService
+import com.example.myapp.admin.users.UsersViewModel
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.google.firebase.database.FirebaseDatabase
 
 
 class FragmentDetailData12gb : Fragment(R.layout.fragment_detail_data12gb) {
 
-
+    private val userViewModel : UsersViewModel by activityViewModels()
+    private val firebaseConnection : FirebaseConnection by activityViewModels()
     private lateinit var backBtn : Button
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
@@ -51,6 +57,8 @@ class FragmentDetailData12gb : Fragment(R.layout.fragment_detail_data12gb) {
         val buy12GbBtn = view.findViewById<Button>(R.id.buy12GbBtn1)
         buy12GbBtn.setOnClickListener {
             getPrice()
+            userViewModel.setData(Data.TWELVE)
+            firebaseConnection.getRandomSim()
             findNavController().navigate(R.id.action_fragmentDetailData12gb_to_fragmentHomeBuy)
         }
 
@@ -70,6 +78,7 @@ class FragmentDetailData12gb : Fragment(R.layout.fragment_detail_data12gb) {
         sharedViewModel?.selected?.observe(viewLifecycleOwner, Observer { selected ->
 
             if (radioDataOnlyBtn.text == selected) {
+                userViewModel.setService(DataService.DATA)
                 radioDataOnlyBtn.isChecked = true
                 radioDataAndCallBtn.isChecked = false
 
@@ -79,6 +88,7 @@ class FragmentDetailData12gb : Fragment(R.layout.fragment_detail_data12gb) {
                 sharedViewModel?.data?.value = selectedValue as String?
             }
             if (radioDataAndCallBtn.text == selected) {
+                userViewModel.setService(DataService.CALL_DATA)
                 radioDataAndCallBtn.isChecked = true
                 radioDataOnlyBtn.isChecked = false
 

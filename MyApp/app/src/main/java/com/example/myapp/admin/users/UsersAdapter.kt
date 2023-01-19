@@ -29,7 +29,6 @@ class UsersAdapter(private var usersList : ArrayList<UsersData>) : RecyclerView.
         val currentItem = usersList[position]
 
         holder.usersName.text = currentItem.userName
-        holder.simCode.text = currentItem.simCode
         holder.status.text = currentItem.status.toString()
         holder.startDay.text = currentItem.email
         holder.address.text = currentItem.userAddress
